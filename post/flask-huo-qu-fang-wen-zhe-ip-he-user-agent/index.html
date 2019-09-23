@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://mliank8.coding.me//favicon.ico?v=1569223498245">
+<link rel="shortcut icon" href="https://mliank8.coding.me//favicon.ico?v=1569225861231">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://mliank8.coding.me//styles/main.css">
 
@@ -30,7 +30,7 @@
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://mliank8.coding.me/">
-        <img src="https://mliank8.coding.me//images/avatar.png?v=1569223498245" class="site-logo">
+        <img src="https://mliank8.coding.me//images/avatar.png?v=1569225861231" class="site-logo">
         <h1 class="site-title">Super Lee</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -119,6 +119,28 @@ def index():
 if __name__ == '__main__':
     app.run(host=&quot;0.0.0.0&quot;,port=int(&quot;80&quot;))
 
+</code></pre>
+<p>API接口</p>
+<pre><code># -*- coding: utf8 -*-   
+
+from flask import Flask, request,Response,jsonify
+from datetime import datetime
+
+app = Flask(__name__)
+@app.route('/')
+def index():
+    now = datetime.now()
+    ua = request.headers.get('User-Agent')
+    ip = request.remote_addr
+    data={
+        'ip':ip,
+        'User-Agent':ua,
+        'time':now,
+    }
+    return jsonify(data)
+
+if __name__ == '__main__':
+    app.run(host=&quot;0.0.0.0&quot;,port=int(&quot;80&quot;),debug=True)
 </code></pre>
 
             </div>

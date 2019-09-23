@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://mliank8.coding.me/</id>
     <title>Super Lee</title>
-    <updated>2019-09-23T07:25:01.111Z</updated>
+    <updated>2019-09-23T08:04:24.681Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://mliank8.coding.me/"/>
     <link rel="self" href="https://mliank8.coding.me//atom.xml"/>
@@ -31,6 +31,28 @@ def index():
 if __name__ == '__main__':
     app.run(host=&quot;0.0.0.0&quot;,port=int(&quot;80&quot;))
 
+</code></pre>
+<p>API接口</p>
+<pre><code># -*- coding: utf8 -*-   
+
+from flask import Flask, request,Response,jsonify
+from datetime import datetime
+
+app = Flask(__name__)
+@app.route('/')
+def index():
+    now = datetime.now()
+    ua = request.headers.get('User-Agent')
+    ip = request.remote_addr
+    data={
+        'ip':ip,
+        'User-Agent':ua,
+        'time':now,
+    }
+    return jsonify(data)
+
+if __name__ == '__main__':
+    app.run(host=&quot;0.0.0.0&quot;,port=int(&quot;80&quot;),debug=True)
 </code></pre>
 ]]></content>
     </entry>
