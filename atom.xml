@@ -1,15 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>http://mliank8.coding.me/</id>
-    <title>Gridea</title>
-    <updated>2019-09-23T03:26:50.518Z</updated>
+    <title>Super Lee</title>
+    <updated>2019-09-23T04:25:31.935Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="http://mliank8.coding.me/"/>
     <link rel="self" href="http://mliank8.coding.me//atom.xml"/>
     <subtitle>温故而知新</subtitle>
     <logo>http://mliank8.coding.me//images/avatar.png</logo>
     <icon>http://mliank8.coding.me//favicon.ico</icon>
-    <rights>All rights reserved 2019, Gridea</rights>
+    <rights>All rights reserved 2019, Super Lee</rights>
+    <entry>
+        <title type="html"><![CDATA[效率工具]]></title>
+        <id>http://mliank8.coding.me//post/xiao-lu-gong-ju</id>
+        <link href="http://mliank8.coding.me//post/xiao-lu-gong-ju">
+        </link>
+        <updated>2019-09-23T04:23:40.000Z</updated>
+        <content type="html"><![CDATA[<p>万彩办公大师</p>
+<p>PDF转换、图片编辑、文档处理、录屏截取...站长推荐办公必备！<br>
+http://www.wofficebox.com/</p>
+<p>DBP-数据管理分析工具<br>
+快速搭建一站式的数据管理和分析平台<br>
+https://www.bdp.cn/home.html</p>
+<p>TRELLO项目协同<br>
+国外老牌的项目协同工具，贴纸化管理。国内大多数协同软件的鼻祖<br>
+https://trello.com/</p>
+<p>奇妙清单<br>
+与你生活同步，支持多客户端<br>
+https://www.wunderlist.com/zh/</p>
+<p>禅道<br>
+国产的开源项目管理软件,专注研发项目管理,实现软件的完整生命周期管理<br>
+http://www.zentao.net/</p>
+<p>滴答清单<br>
+轻便的待办事项应用<br>
+http://www.dida365.com/</p>
+<p>TAPD-腾讯敏捷平台<br>
+腾讯敏捷产品研发平台,它支持主流的敏捷产品研发模式和方法论<br>
+https://www.tapd.cn/</p>
+<p>TOWER<br>
+很细致的团队协作工具，支持手机端，支持钉钉应用<br>
+http://tower.im</p>
+<p>石墨文档<br>
+可多人实时协作的云端文档与表格，支持钉钉应用<br>
+http://shimo.im</p>
+<p>Teambition<br>
+支持多场景的团队协作工具，支持移动端，钉钉应用<br>
+https://www.teambition.com</p>
+<p>worktile<br>
+协同办公工具，10人以下<br>
+https://worktile.com/</p>
+<p>风车<br>
+强大的任务管理工具，支持多种客户端<br>
+https://fengche.co</p>
+<p>redmine<br>
+开源的项目管理系统，RUBY开发，无商用限制<br>
+http://www.redmine.org.cn</p>
+<p>一起写<br>
+文档协同工具，支持多种类型<br>
+https://yiqixie.com</p>
+<p>伙伴云表格<br>
+电脑手机实时同步 随时随地增删改查<br>
+https://www.huoban.com/</p>
+<p>超级表格<br>
+多人共享的&quot;在线Excel<br>
+http://chaojibiaoge.com/</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[大企业内部的交互设计团队博客]]></title>
+        <id>http://mliank8.coding.me//post/da-qi-ye-nei-bu-de-jiao-hu-she-ji-tuan-dui-bo-ke</id>
+        <link href="http://mliank8.coding.me//post/da-qi-ye-nei-bu-de-jiao-hu-she-ji-tuan-dui-bo-ke">
+        </link>
+        <updated>2019-09-23T04:21:11.000Z</updated>
+        <content type="html"><![CDATA[<p>蚂蚁金服UED</p>
+<p>Ant Design,蚂蚁金服UED团队，提供Axure元件库</p>
+<p>https://ant.design/</p>
+<p>Google谷歌设计团队官方博客（英文）</p>
+<p>Google设计团队</p>
+<p>https://design.google/</p>
+<p>Facebook非死不可官方设计团队博客（英文）</p>
+<p>Facebook设计团队</p>
+<p>http://facebook.design</p>
+<p>腾讯ISUX</p>
+<p>腾讯社交用户体验设计，简称ISUX。</p>
+<p>https://isux.tencent.com</p>
+<p>IMWEB</p>
+<p>腾讯IMWEB团队博客，目前主要负责腾讯在线教育战略产品</p>
+<p>http://imweb.io</p>
+<p>阿里妈妈MUX</p>
+<p>阿里妈妈MUX团队博客</p>
+<p>http://mux.alimama.com</p>
+<p>腾讯CDC</p>
+<p>腾讯CDC，一流的互联网设计团队</p>
+<p>http://cdc.tencent.com</p>
+<p>腾讯网前端研发中心</p>
+<p>简称FERD，前端研发中心</p>
+<p>http://qqfe.org</p>
+<p>网易UEDC</p>
+<p>网易用户体验团队UEDC官方博客</p>
+<p>http://uedc.163.com</p>
+<p>阿里UED</p>
+<p>花名U一点，阿里最为资深的用户体验设计部门之一</p>
+<p>http://www.aliued.cn</p>
+<p>腾讯TGideas</p>
+<p>腾讯游戏官方设计团队博客</p>
+<p>http://tgideas.qq.com</p>
+<p>alloyteam</p>
+<p>腾讯WEB团队技术博客</p>
+<p>http://www.alloyteam.com</p>
+<p>百度FEX</p>
+<p>FEX 是百度「Web 前端研发部」的内部名称</p>
+<p>http://fex.baidu.com</p>
+<p>凹凸实验室</p>
+<p>京东用户体验设计部团队博客</p>
+<p>https://aotu.io/index.html</p>
+<p>百度MUX</p>
+<p>百度用户体验中心，覆盖了百度85%以上的产品体验设计。</p>
+<p>http://mux.baidu.com</p>
+<p>携程设计委员会</p>
+<p>携程UED团队博客，携程设计委员会</p>
+<p>http://ued.ctrip.com</p>
+<p>360奇舞团</p>
+<p>360奇舞团（奇虎75Team）是奇虎360公司一个前端团队</p>
+<p>https://75team.com</p>
+<p>百度EUX</p>
+<p>百度企业产品用户体验中心</p>
+<p>http://eux.baidu.com</p>
+<p>网易游戏GUX</p>
+<p>网易游戏用户体验中心的博客</p>
+<p>http://gux.163.com</p>
+<p>360UXC</p>
+<p>360用户体验设计中心团队博客</p>
+<p>http://uxc.360.cn</p>
+<p>**</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[扫码登录]]></title>
+        <id>http://mliank8.coding.me//post/sao-ma-deng-lu</id>
+        <link href="http://mliank8.coding.me//post/sao-ma-deng-lu">
+        </link>
+        <updated>2019-09-23T04:19:21.000Z</updated>
+        <content type="html"><![CDATA[<p>微信扫码登录的理解，这是知乎上一篇帖子，写的可以https://www.zhihu.com/question/22991085</p>
+<p>原理其实不难，二维码表示对话的ID，手机微信扫码表示用当前账号授权这次对话，授权之后这个ID就合法绑定了一个账号</p>
+<p>具体的过程如下：<br>
+1.用户A访问微信网页版，微信为这个对话生成一个ID：session_id，此事系统并不知道访问者是谁<br>
+2.系统用session_id生成一个内容为 https://login.weixin.qq.com/l/session_id 的二维码<br>
+3.用户A打开自己的手机微信并扫描这个二维码，微信询问用户A该次网页登陆微信的操作是否是A自己的操作，如果A选择是，那么session_id就跟用户A的微信账号绑定，并自动登陆；如果A选择否，那么session_id仍然是未登陆状态</p>
+<p>微信的扫一扫功能是登录后才能使用的功能，所以用微信扫一扫可以授权，而用其他软件的扫码功能则不行。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[下载站分享]]></title>
+        <id>http://mliank8.coding.me//post/xia-zai-zhan-fen-xiang</id>
+        <link href="http://mliank8.coding.me//post/xia-zai-zhan-fen-xiang">
+        </link>
+        <updated>2019-09-23T04:07:59.000Z</updated>
+        <content type="html"><![CDATA[<p>这个站的资源还是比较好的，我经常在你们http://www.sdifenzhou.com/</p>
+<p>i tell you是我以前一直的用的一个站，下载比较好http://msdn.itellyou.cn/</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Hello Gridea]]></title>
         <id>http://mliank8.coding.me//post/hello-gridea</id>
