@@ -1,30 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://mliank8.coding.me/</id>
+    <id>https://mliank.github.io/</id>
     <title>Super Lee</title>
-    <updated>2019-09-24T09:20:23.516Z</updated>
+    <updated>2019-10-09T06:04:25.719Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://mliank8.coding.me/"/>
-    <link rel="self" href="https://mliank8.coding.me//atom.xml"/>
+    <link rel="alternate" href="https://mliank.github.io/"/>
+    <link rel="self" href="https://mliank.github.io//atom.xml"/>
     <subtitle>温故而知新</subtitle>
-    <logo>https://mliank8.coding.me//images/avatar.png</logo>
-    <icon>https://mliank8.coding.me//favicon.ico</icon>
+    <logo>https://mliank.github.io//images/avatar.png</logo>
+    <icon>https://mliank.github.io//favicon.ico</icon>
     <rights>All rights reserved 2019, Super Lee</rights>
     <entry>
+        <title type="html"><![CDATA[BootStrap笔记]]></title>
+        <id>https://mliank.github.io//post/bootstrap-bi-ji</id>
+        <link href="https://mliank.github.io//post/bootstrap-bi-ji">
+        </link>
+        <updated>2019-10-09T02:13:24.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="前言">前言</h1>
+<p>为所有开发者、所有应用场景而设计。<br>
+Bootstrap 让前端开发更快速、简单。所有开发者都能快速上手、所有设备都可以适配、所有项目都适用。</p>
+<h2 id="下载">下载</h2>
+<h3 id="使用">使用</h3>
+<p>#表格</p>
+<h1 id=""></h1>
+<p>表单</p>
+]]></content>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[优质接口分享]]></title>
-        <id>https://mliank8.coding.me//post/you-zhi-jie-kou-fen-xiang</id>
-        <link href="https://mliank8.coding.me//post/you-zhi-jie-kou-fen-xiang">
+        <id>https://mliank.github.io//post/you-zhi-jie-kou-fen-xiang</id>
+        <link href="https://mliank.github.io//post/you-zhi-jie-kou-fen-xiang">
         </link>
         <updated>2019-09-23T08:31:18.000Z</updated>
         <content type="html"><![CDATA[<p>腾讯<br>
 <a href="https://nodeapi.3g.qq.com/nodeapi/api/weather@getWeather">天气接口</a><br>
-<img src="https://mliank8.coding.me//post-images/1569227601485.png" alt=""></p>
+<img src="https://mliank.github.io//post-images/1569227601485.png" alt=""></p>
 ]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[Flask获取访问者 IP和User-Agent]]></title>
-        <id>https://mliank8.coding.me//post/flask-huo-qu-fang-wen-zhe-ip-he-user-agent</id>
-        <link href="https://mliank8.coding.me//post/flask-huo-qu-fang-wen-zhe-ip-he-user-agent">
+        <id>https://mliank.github.io//post/flask-huo-qu-fang-wen-zhe-ip-he-user-agent</id>
+        <link href="https://mliank.github.io//post/flask-huo-qu-fang-wen-zhe-ip-he-user-agent">
         </link>
         <updated>2019-09-23T07:13:49.000Z</updated>
         <content type="html"><![CDATA[<p>ip采用<code>request.remote_addr</code>获取<br>
@@ -66,22 +82,190 @@ if __name__ == '__main__':
     app.run(host=&quot;0.0.0.0&quot;,port=int(&quot;80&quot;),debug=True)
 </code></pre>
 <p>运行结果<br>
-<img src="https://mliank8.coding.me//post-images/1569225976018.png" alt="运行结果"></p>
+<img src="https://mliank.github.io//post-images/1569225976018.png" alt="运行结果"></p>
 ]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[Gridea  Markdown 语法简单教程]]></title>
-        <id>https://mliank8.coding.me//post/gridea-markdown-yu-fa-jian-dan-jiao-cheng</id>
-        <link href="https://mliank8.coding.me//post/gridea-markdown-yu-fa-jian-dan-jiao-cheng">
+        <id>https://mliank.github.io//post/gridea-markdown-yu-fa-jian-dan-jiao-cheng</id>
+        <link href="https://mliank.github.io//post/gridea-markdown-yu-fa-jian-dan-jiao-cheng">
         </link>
         <updated>2019-09-23T06:40:20.000Z</updated>
-        <content type="html"><![CDATA[<p>https://fehey.com/post/markdown-yu-fa-jian-dan-jiao-cheng/G</p>
+        <content type="html"><![CDATA[<p><a href="https://fehey.com/post/markdown-yu-fa-jian-dan-jiao-cheng">Markdown 语法参考地址</a><br>
+<a href="https://www.jianshu.com/p/b0f56b7d7ee8">简书 Markdown创建表格</a></p>
+<h3 id="1-斜体和粗体">1. 斜体和粗体</h3>
+<p>使用 * 和 **表示斜体和粗体。</p>
+<p>示例：</p>
+<p>这是 <em>斜体</em>，这是 <strong>粗体</strong>。<br>
+<code>*这是斜体的文字*</code><br>
+<code>**这是加粗的文字**</code></p>
+<h3 id="2-标题">2. 标题</h3>
+<p>使用 #加空格表示一级标题，同理，##加空格表示二级标题</p>
+<pre><code># 一级标题
+## 二级标题
+### 三级标题
+#### 四级标题
+##### 五级标题
+###### 六级标题
+</code></pre>
+<h1 id="一级标题">一级标题</h1>
+<h2 id="二级标题">二级标题</h2>
+<h3 id="三级标题">三级标题</h3>
+<h4 id="四级标题">四级标题</h4>
+<h5 id="五级标题">五级标题</h5>
+<h6 id="六级标题">六级标题</h6>
+<h3 id="3-外链接">3. 外链接</h3>
+<p>使用[描述](链接地址）为文字增加外链接。</p>
+<p>示例：</p>
+<p>这是去往 <a href="https://fehey.com">Gridea作者主页</a> 的链接。</p>
+<h3 id="4-无序列表">4. 无序列表</h3>
+<p>使用 星号*/加号+/减号- 表示无序列表。</p>
+<pre><code>星号/加号/减号 + 空格 + 列表内容
+</code></pre>
+<p>示例：</p>
+<ul>
+<li>无序列表项 一</li>
+<li>无序列表项 二</li>
+<li>无序列表项 三</li>
+</ul>
+<h3 id="5-有序列表">5. 有序列表</h3>
+<p>使用数字和点表示有序列表。</p>
+<pre><code>数字 + 英文句号 + 空格 + 列表内容
+</code></pre>
+<p>示例：</p>
+<ol>
+<li>有序列表项 一</li>
+<li>有序列表项 二</li>
+<li>有序列表项 三</li>
+</ol>
+<h3 id="6-文字引用">6. 文字引用</h3>
+<p>使用 &gt; 表示文字引用。</p>
+<p>示例：</p>
+<blockquote>
+<p>野火烧不尽，春风吹又生。</p>
+</blockquote>
+<h3 id="7-行内代码块">7. 行内代码块</h3>
+<p>使用 `代码`  表示行内代码块。</p>
+<p>示例：</p>
+<p>让我们聊聊 <code>html</code>。</p>
+<h3 id="8-代码块">8. 代码块</h3>
+<p>使用 四个缩进空格 或 ``` 表示代码块。<br>
+```这是一个代码块，此行左侧有四个不可见的空格。```<br>
+示例：</p>
+<p><code>这是一个代码块，此行左侧有四个不可见的空格。</code></p>
+<p>测试代码</p>
+<pre><code>function hello() {
+	var username = 'xiaoming';
+	var age = 18;
+	console.log('Hello World');
+}
+hello()
+</code></pre>
+<h3 id="9-插入图像">9. 插入图像</h3>
+<p>使用 ![描述](图片链接地址)插入图像。</p>
+<p><code>![我的头像](https://avatars3.githubusercontent.com/u/46315806?s=200&amp;v=4)</code><br>
+示例：</p>
+<figure data-type="image" tabindex="1"><img src="https://avatars3.githubusercontent.com/u/46315806?s=200&amp;v=4" alt="我的头像"></figure>
+<h3 id="10-表格">10. 表格</h3>
+<p>表格示例</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">一个普通标题</th>
+<th style="text-align:center">一个普通标题</th>
+<th style="text-align:center">一个普通标题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">短文本</td>
+<td style="text-align:center">中等文本</td>
+<td style="text-align:center">稍微长一点的文本</td>
+</tr>
+<tr>
+<td style="text-align:center">稍微长一点的文本</td>
+<td style="text-align:center">短文本</td>
+<td style="text-align:center">中等文本</td>
+</tr>
+</tbody>
+</table>
+<pre><code>一个普通标题	|一个普通标题	|一个普通标题
+:-: | :-: | :-: 
+短文本	|中等文本	|稍微长一点的文本
+稍微长一点的文本|	短文本	|中等文本
+</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">左对齐标题</th>
+<th style="text-align:center">右对齐标题</th>
+<th style="text-align:center">居中对齐标题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">短文本</td>
+<td style="text-align:center">中等文本</td>
+<td style="text-align:center">稍微长一点的文本</td>
+</tr>
+<tr>
+<td style="text-align:center">稍微长一点的文本</td>
+<td style="text-align:center">短文本</td>
+<td style="text-align:center">中等文本</td>
+</tr>
+</tbody>
+</table>
+<h3 id="11-嵌套列表">11. 嵌套列表</h3>
+<p>标记语法：</p>
+<pre><code>#### 嵌套列表
++ 我是第一层列表
+	+ 我是第二层列表
+		+ 我是第三层列表
+			+ 我是第四层列表
+</code></pre>
+<p>嵌套列表示例</p>
+<ul>
+<li>我是第一层列表
+<ul>
+<li>我是第二层列表
+<ul>
+<li>我是第三层列表
+<ul>
+<li>我是第四层列表</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>#### 有序列表和无需列表相互嵌套
+1. 我是第一层有序列表
+	+ 我是第二层无序列表
+		1. 我是第三层有序列表
+		2. 我也是第三层有序列表
+</code></pre>
+<h3 id="12-补充说明">12. 补充说明</h3>
+<p>在使用markdown书写博客时，有可能会出现文本中的字符是markdown语法，那么markdown翻译器就会误将这些符号也翻译成某种功能，就会出现显示错误的情况。此时需要使用反斜杠（''）来将这些字符进行转义。可以使用反斜杠（''）转义的符号如下：</p>
+<pre><code>\   反斜线
+`   反引号
+*   星号
+_   下划线
+{}  大括号
+[]  中括号
+()  小括号
+#   井号
++   加号
+-   减号（连字符）
+.   句点
+!   感叹号
+</code></pre>
 ]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[效率工具]]></title>
-        <id>https://mliank8.coding.me//post/xiao-lu-gong-ju</id>
-        <link href="https://mliank8.coding.me//post/xiao-lu-gong-ju">
+        <id>https://mliank.github.io//post/xiao-lu-gong-ju</id>
+        <link href="https://mliank.github.io//post/xiao-lu-gong-ju">
         </link>
         <updated>2019-09-23T04:23:40.000Z</updated>
         <content type="html"><![CDATA[<p>万彩办公大师</p>
@@ -136,8 +320,8 @@ http://chaojibiaoge.com/</p>
     </entry>
     <entry>
         <title type="html"><![CDATA[大企业内部的交互设计团队博客]]></title>
-        <id>https://mliank8.coding.me//post/da-qi-ye-nei-bu-de-jiao-hu-she-ji-tuan-dui-bo-ke</id>
-        <link href="https://mliank8.coding.me//post/da-qi-ye-nei-bu-de-jiao-hu-she-ji-tuan-dui-bo-ke">
+        <id>https://mliank.github.io//post/da-qi-ye-nei-bu-de-jiao-hu-she-ji-tuan-dui-bo-ke</id>
+        <link href="https://mliank.github.io//post/da-qi-ye-nei-bu-de-jiao-hu-she-ji-tuan-dui-bo-ke">
         </link>
         <updated>2019-09-23T04:21:11.000Z</updated>
         <content type="html"><![CDATA[<p>蚂蚁金服UED</p>
@@ -204,8 +388,8 @@ http://chaojibiaoge.com/</p>
     </entry>
     <entry>
         <title type="html"><![CDATA[扫码登录]]></title>
-        <id>https://mliank8.coding.me//post/sao-ma-deng-lu</id>
-        <link href="https://mliank8.coding.me//post/sao-ma-deng-lu">
+        <id>https://mliank.github.io//post/sao-ma-deng-lu</id>
+        <link href="https://mliank.github.io//post/sao-ma-deng-lu">
         </link>
         <updated>2019-09-23T04:19:21.000Z</updated>
         <content type="html"><![CDATA[<p>微信扫码登录的理解，这是知乎上一篇帖子，写的可以https://www.zhihu.com/question/22991085</p>
@@ -219,8 +403,8 @@ http://chaojibiaoge.com/</p>
     </entry>
     <entry>
         <title type="html"><![CDATA[下载站分享]]></title>
-        <id>https://mliank8.coding.me//post/xia-zai-zhan-fen-xiang</id>
-        <link href="https://mliank8.coding.me//post/xia-zai-zhan-fen-xiang">
+        <id>https://mliank.github.io//post/xia-zai-zhan-fen-xiang</id>
+        <link href="https://mliank.github.io//post/xia-zai-zhan-fen-xiang">
         </link>
         <updated>2019-09-23T04:07:59.000Z</updated>
         <content type="html"><![CDATA[<p>这个站的资源还是比较好的，我经常在你们http://www.sdifenzhou.com/</p>
@@ -229,8 +413,8 @@ http://chaojibiaoge.com/</p>
     </entry>
     <entry>
         <title type="html"><![CDATA[Hello Gridea]]></title>
-        <id>https://mliank8.coding.me//post/hello-gridea</id>
-        <link href="https://mliank8.coding.me//post/hello-gridea">
+        <id>https://mliank.github.io//post/hello-gridea</id>
+        <link href="https://mliank.github.io//post/hello-gridea">
         </link>
         <updated>2018-12-11T16:00:00.000Z</updated>
         <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
