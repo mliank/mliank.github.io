@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://mliank.github.io</id>
+    <id>https://mliank.github.io/</id>
     <title>Super Lee</title>
-    <updated>2019-10-09T06:07:56.750Z</updated>
+    <updated>2019-10-09T06:09:16.874Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://mliank.github.io"/>
-    <link rel="self" href="https://mliank.github.io/atom.xml"/>
+    <link rel="alternate" href="https://mliank.github.io/"/>
+    <link rel="self" href="https://mliank.github.io//atom.xml"/>
     <subtitle>温故而知新</subtitle>
-    <logo>https://mliank.github.io/images/avatar.png</logo>
-    <icon>https://mliank.github.io/favicon.ico</icon>
+    <logo>https://mliank.github.io//images/avatar.png</logo>
+    <icon>https://mliank.github.io//favicon.ico</icon>
     <rights>All rights reserved 2019, Super Lee</rights>
     <entry>
         <title type="html"><![CDATA[BootStrap笔记]]></title>
-        <id>https://mliank.github.io/post/bootstrap-bi-ji</id>
-        <link href="https://mliank.github.io/post/bootstrap-bi-ji">
+        <id>https://mliank.github.io//post/bootstrap-bi-ji</id>
+        <link href="https://mliank.github.io//post/bootstrap-bi-ji">
         </link>
         <updated>2019-10-09T02:13:24.000Z</updated>
         <content type="html"><![CDATA[<h1 id="前言">前言</h1>
@@ -28,19 +28,19 @@ Bootstrap 让前端开发更快速、简单。所有开发者都能快速上手�
     </entry>
     <entry>
         <title type="html"><![CDATA[优质接口分享]]></title>
-        <id>https://mliank.github.io/post/you-zhi-jie-kou-fen-xiang</id>
-        <link href="https://mliank.github.io/post/you-zhi-jie-kou-fen-xiang">
+        <id>https://mliank.github.io//post/you-zhi-jie-kou-fen-xiang</id>
+        <link href="https://mliank.github.io//post/you-zhi-jie-kou-fen-xiang">
         </link>
         <updated>2019-09-23T08:31:18.000Z</updated>
         <content type="html"><![CDATA[<p>腾讯<br>
 <a href="https://nodeapi.3g.qq.com/nodeapi/api/weather@getWeather">天气接口</a><br>
-<img src="https://mliank.github.io/post-images/1569227601485.png" alt=""></p>
+<img src="https://mliank.github.io//post-images/1569227601485.png" alt=""></p>
 ]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[Flask获取访问者 IP和User-Agent]]></title>
-        <id>https://mliank.github.io/post/flask-huo-qu-fang-wen-zhe-ip-he-user-agent</id>
-        <link href="https://mliank.github.io/post/flask-huo-qu-fang-wen-zhe-ip-he-user-agent">
+        <id>https://mliank.github.io//post/flask-huo-qu-fang-wen-zhe-ip-he-user-agent</id>
+        <link href="https://mliank.github.io//post/flask-huo-qu-fang-wen-zhe-ip-he-user-agent">
         </link>
         <updated>2019-09-23T07:13:49.000Z</updated>
         <content type="html"><![CDATA[<p>ip采用<code>request.remote_addr</code>获取<br>
@@ -82,13 +82,13 @@ if __name__ == '__main__':
     app.run(host=&quot;0.0.0.0&quot;,port=int(&quot;80&quot;),debug=True)
 </code></pre>
 <p>运行结果<br>
-<img src="https://mliank.github.io/post-images/1569225976018.png" alt="运行结果"></p>
+<img src="https://mliank.github.io//post-images/1569225976018.png" alt="运行结果"></p>
 ]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[Gridea  Markdown 语法简单教程]]></title>
-        <id>https://mliank.github.io/post/gridea-markdown-yu-fa-jian-dan-jiao-cheng</id>
-        <link href="https://mliank.github.io/post/gridea-markdown-yu-fa-jian-dan-jiao-cheng">
+        <id>https://mliank.github.io//post/gridea-markdown-yu-fa-jian-dan-jiao-cheng</id>
+        <link href="https://mliank.github.io//post/gridea-markdown-yu-fa-jian-dan-jiao-cheng">
         </link>
         <updated>2019-09-23T06:40:20.000Z</updated>
         <content type="html"><![CDATA[<p><a href="https://fehey.com/post/markdown-yu-fa-jian-dan-jiao-cheng">Markdown 语法参考地址</a><br>
@@ -264,8 +264,8 @@ _   下划线
     </entry>
     <entry>
         <title type="html"><![CDATA[效率工具]]></title>
-        <id>https://mliank.github.io/post/xiao-lu-gong-ju</id>
-        <link href="https://mliank.github.io/post/xiao-lu-gong-ju">
+        <id>https://mliank.github.io//post/xiao-lu-gong-ju</id>
+        <link href="https://mliank.github.io//post/xiao-lu-gong-ju">
         </link>
         <updated>2019-09-23T04:23:40.000Z</updated>
         <content type="html"><![CDATA[<p>万彩办公大师</p>
@@ -320,8 +320,8 @@ http://chaojibiaoge.com/</p>
     </entry>
     <entry>
         <title type="html"><![CDATA[大企业内部的交互设计团队博客]]></title>
-        <id>https://mliank.github.io/post/da-qi-ye-nei-bu-de-jiao-hu-she-ji-tuan-dui-bo-ke</id>
-        <link href="https://mliank.github.io/post/da-qi-ye-nei-bu-de-jiao-hu-she-ji-tuan-dui-bo-ke">
+        <id>https://mliank.github.io//post/da-qi-ye-nei-bu-de-jiao-hu-she-ji-tuan-dui-bo-ke</id>
+        <link href="https://mliank.github.io//post/da-qi-ye-nei-bu-de-jiao-hu-she-ji-tuan-dui-bo-ke">
         </link>
         <updated>2019-09-23T04:21:11.000Z</updated>
         <content type="html"><![CDATA[<p>蚂蚁金服UED</p>
@@ -388,8 +388,8 @@ http://chaojibiaoge.com/</p>
     </entry>
     <entry>
         <title type="html"><![CDATA[扫码登录]]></title>
-        <id>https://mliank.github.io/post/sao-ma-deng-lu</id>
-        <link href="https://mliank.github.io/post/sao-ma-deng-lu">
+        <id>https://mliank.github.io//post/sao-ma-deng-lu</id>
+        <link href="https://mliank.github.io//post/sao-ma-deng-lu">
         </link>
         <updated>2019-09-23T04:19:21.000Z</updated>
         <content type="html"><![CDATA[<p>微信扫码登录的理解，这是知乎上一篇帖子，写的可以https://www.zhihu.com/question/22991085</p>
@@ -403,8 +403,8 @@ http://chaojibiaoge.com/</p>
     </entry>
     <entry>
         <title type="html"><![CDATA[下载站分享]]></title>
-        <id>https://mliank.github.io/post/xia-zai-zhan-fen-xiang</id>
-        <link href="https://mliank.github.io/post/xia-zai-zhan-fen-xiang">
+        <id>https://mliank.github.io//post/xia-zai-zhan-fen-xiang</id>
+        <link href="https://mliank.github.io//post/xia-zai-zhan-fen-xiang">
         </link>
         <updated>2019-09-23T04:07:59.000Z</updated>
         <content type="html"><![CDATA[<p>这个站的资源还是比较好的，我经常在你们http://www.sdifenzhou.com/</p>
@@ -413,8 +413,8 @@ http://chaojibiaoge.com/</p>
     </entry>
     <entry>
         <title type="html"><![CDATA[Hello Gridea]]></title>
-        <id>https://mliank.github.io/post/hello-gridea</id>
-        <link href="https://mliank.github.io/post/hello-gridea">
+        <id>https://mliank.github.io//post/hello-gridea</id>
+        <link href="https://mliank.github.io//post/hello-gridea">
         </link>
         <updated>2018-12-11T16:00:00.000Z</updated>
         <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
