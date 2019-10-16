@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>扫码登录 | Super Lee</title>
+<title>Python模块 | Super Lee</title>
 <meta name="description" content="温故而知新" />
 <link rel="shortcut icon" href="https://mliank.github.io//favicon.ico?v=1571200762393">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -73,37 +73,63 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              扫码登录
+              Python模块
             </h2>
             <div class="post-info">
               <span>
-                2019-09-23
+                2019-10-16
               </span>
               <span>
                 2 min read
               </span>
               
-                <a href="https://mliank.github.io//tag/TwAC4gV1F" class="post-tag">
-                  # 小项目
-                </a>
-              
             </div>
-            
-              <img class="post-feature-image" src="http://imglf2.nosdn.127.net/img/UUZvR1pJU0VDakZDY0VSYjl4NXp6dVBVUnZoQUVSRWF3RzlONXY1UVRhSldEaU1XVDllTmtRPT0.png?=imageView&amp;thumbnail=500x0&amp;quality=96&amp;stripmeta=0&amp;type=jpg%7Cwatermark&amp;type=2" alt="">
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p>微信扫码登录的理解，这是知乎上一篇帖子，写的可以https://www.zhihu.com/question/22991085</p>
-<p>原理其实不难，二维码表示对话的ID，手机微信扫码表示用当前账号授权这次对话，授权之后这个ID就合法绑定了一个账号</p>
-<p>具体的过程如下：<br>
-1.用户A访问微信网页版，微信为这个对话生成一个ID：session_id，此事系统并不知道访问者是谁<br>
-2.系统用session_id生成一个内容为 https://login.weixin.qq.com/l/session_id 的二维码<br>
-3.用户A打开自己的手机微信并扫描这个二维码，微信询问用户A该次网页登陆微信的操作是否是A自己的操作，如果A选择是，那么session_id就跟用户A的微信账号绑定，并自动登陆；如果A选择否，那么session_id仍然是未登陆状态</p>
-<p>微信的扫一扫功能是登录后才能使用的功能，所以用微信扫一扫可以授权，而用其他软件的扫码功能则不行。</p>
+                <h2 id="random">random</h2>
+<pre><code>&gt;&gt;&gt; import random
+&gt;&gt;&gt; s = random.randint(1,10)
+&gt;&gt;&gt; s
+2
+</code></pre>
+<h2 id="os">os</h2>
+<p><code>os.getcwd()</code>获得当前目录<br>
+<code>os.chdir(path)</code>改变当前目录到新目录<br>
+<code>os.listdir(path='.')</code>返回path指定的文件夹包含的文件或文件夹的名字的列表<br>
+<code>os.mkdir(path)</code>创建单层目录<br>
+<code>os.makedirs(path)</code>递归创建多层目录，如果目录存在抛出异常，注意：'E:\a\b'和'E:\a\c'并不会冲突<br>
+<code>os.remove(path)</code>删除文件<br>
+<code>os.rmdir(path)</code>删除单层目录<br>
+<code>os.removedirs(path)</code>递归删除目录<br>
+<code>os.rename(old,new)</code>将文件old重新命名new<br>
+<code>os.system(command)</code>运行系统shell命令<br>
+<code>os.curdir</code>指代当前目录('.')<br>
+<code>os.pardir</code>指代上一级目录('..')</p>
+<h3 id="ospath">os.path</h3>
+<p><code>os.path.basename(path)</code>去掉目录路径，保留文件名<br>
+<code>os.path.dirname(path)</code>去掉文件名，保留路径<br>
+<code>os.path.join(path1,path2)</code>将path1，path2各部分组合成一个路径名<br>
+<code>os.path.split(path)</code>分割文件名和路径<br>
+<code>os.path.splitext(path)</code>分割文件名和扩展名</p>
+<pre><code> 
+</code></pre>
 
               </div>
               <div class="toc-container">
-                
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#random">random</a></li>
+<li><a href="#os">os</a>
+<ul>
+<li><a href="#ospath">os.path</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
               </div>
             </div>
           </article>
@@ -112,9 +138,9 @@
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://mliank.github.io//post/xia-zai-zhan-fen-xiang">
+            <a href="https://mliank.github.io//post/bootstrap-bi-ji">
               <h3 class="post-title">
-                下载站分享
+                BootStrap笔记
               </h3>
             </a>
           </div>

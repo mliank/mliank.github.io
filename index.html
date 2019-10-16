@@ -1,296 +1,366 @@
-<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" >
-
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Super Lee</title>
-<meta name="description" content="温故而知新">
-
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
+<meta name="description" content="温故而知新" />
+<link rel="shortcut icon" href="https://mliank.github.io//favicon.ico?v=1571200762393">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://mliank.github.io//favicon.ico?v=1570613946695">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://mliank.github.io//styles/main.css">
 
-
-
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-
-<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
   </head>
   <body>
-    <div id="app" class="main">
-
-      <div class="sidebar" :class="{ 'full-height': menuVisible }">
-  <div class="top-container" data-aos="fade-right">
-    <div class="top-header-container">
-      <a class="site-title-container" href="https://mliank.github.io/">
-        <img src="https://mliank.github.io//images/avatar.png?v=1570613946695" class="site-logo">
-        <h1 class="site-title">Super Lee</h1>
-      </a>
-      <div class="menu-btn" @click="menuVisible = !menuVisible">
-        <div class="line"></div>
-      </div>
-    </div>
-    <div>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://mliank.github.io/">
+  <img class="avatar" src="https://mliank.github.io//images/avatar.png?v=1571200762393" alt="">
+  </a>
+  <h1 class="site-title">
+    Super Lee
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
       
-        
-          <a href="/" class="site-nav">
-            首页
-          </a>
-        
+        <a href="/" class="menu">
+          首页
+        </a>
       
-        
-          <a href="/archives" class="site-nav">
-            归档
-          </a>
-        
+    
       
-        
-          <a href="/tags" class="site-nav">
-            标签
-          </a>
-        
+        <a href="/archives" class="menu">
+          归档
+        </a>
       
-        
-          <a href="/post/about" class="site-nav">
-            关于
-          </a>
-        
+    
       
-    </div>
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
   </div>
-  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
-    <div class="social-container">
+  <div class="social-container">
+    
       
-        
-          <a class="social-link" href="https://github.com/mliank" target="_blank">
-            <i class="fab fa-github"></i>
-          </a>
-        
+    
       
-        
+    
       
-        
-          <a class="social-link" href="https://weibo.com/lixinru7726/" target="_blank">
-            <i class="fab fa-weibo"></i>
-          </a>
-        
+    
       
-        
+    
       
-        
-      
-    </div>
-    <div class="site-description">
-      温故而知新
-    </div>
-    <div class="site-footer">
-      Powered by <a href="https://mliank8.coding.me" target="_blank">Super Lee</a> | <a class="rss" href="https://mliank.github.io//atom.xml" target="_blank">RSS</a>
-    </div>
+    
   </div>
 </div>
 
-
-      <div class="main-container">
-        <div class="content-container" data-aos="fade-up">
-          
-            <article class="post-item">
-              <div class="left">
-                <a href="https://mliank.github.io//post/bootstrap-bi-ji">
-                  <h2 class="post-title">BootStrap笔记</h2>
-                </a>
-                <div class="post-date">
-                  2019-10-09
-                </div>
-                <div class="post-abstract">
-                  
-                </div>
-              </div>
-              
-            </article>
-          
-            <article class="post-item">
-              <div class="left">
-                <a href="https://mliank.github.io//post/you-zhi-jie-kou-fen-xiang">
-                  <h2 class="post-title">优质接口分享</h2>
-                </a>
-                <div class="post-date">
-                  2019-09-23
-                </div>
-                <div class="post-abstract">
-                  
-                </div>
-              </div>
-              
-            </article>
-          
-            <article class="post-item">
-              <div class="left">
-                <a href="https://mliank.github.io//post/flask-huo-qu-fang-wen-zhe-ip-he-user-agent">
-                  <h2 class="post-title">Flask获取访问者 IP和User-Agent</h2>
-                </a>
-                <div class="post-date">
-                  2019-09-23
-                </div>
-                <div class="post-abstract">
-                  
-                </div>
-              </div>
-              
-            </article>
-          
-            <article class="post-item">
-              <div class="left">
-                <a href="https://mliank.github.io//post/gridea-markdown-yu-fa-jian-dan-jiao-cheng">
-                  <h2 class="post-title">Gridea  Markdown 语法简单教程</h2>
-                </a>
-                <div class="post-date">
-                  2019-09-23
-                </div>
-                <div class="post-abstract">
-                  
-                </div>
-              </div>
-              
-                <a class="right" href="https://mliank.github.io//post/gridea-markdown-yu-fa-jian-dan-jiao-cheng">
-                  <div class="feature-container" style="background-image: url('https://i.loli.net/2019/10/09/OeUCKvbi3AQBYpj.png')">
-                  </div>
-                </a>
-              
-            </article>
-          
-            <article class="post-item">
-              <div class="left">
-                <a href="https://mliank.github.io//post/xiao-lu-gong-ju">
-                  <h2 class="post-title">效率工具</h2>
-                </a>
-                <div class="post-date">
-                  2019-09-23
-                </div>
-                <div class="post-abstract">
-                  
-                </div>
-              </div>
-              
-                <a class="right" href="https://mliank.github.io//post/xiao-lu-gong-ju">
-                  <div class="feature-container" style="background-image: url('http://imglf3.nosdn0.126.net/img/UUZvR1pJU0VDakVXME5rV0ZuRi8xVU83cklsaFNCVXBLZXZsZmNvQkxVQWVuc1lPeW5DWjRBPT0.jpg')">
-                  </div>
-                </a>
-              
-            </article>
-          
-            <article class="post-item">
-              <div class="left">
-                <a href="https://mliank.github.io//post/da-qi-ye-nei-bu-de-jiao-hu-she-ji-tuan-dui-bo-ke">
-                  <h2 class="post-title">大企业内部的交互设计团队博客</h2>
-                </a>
-                <div class="post-date">
-                  2019-09-23
-                </div>
-                <div class="post-abstract">
-                  
-                </div>
-              </div>
-              
-                <a class="right" href="https://mliank.github.io//post/da-qi-ye-nei-bu-de-jiao-hu-she-ji-tuan-dui-bo-ke">
-                  <div class="feature-container" style="background-image: url('http://imglf6.nosdn0.126.net/img/UUZvR1pJU0VDakg0NzNTZTBxQzI5L1Z4OC9HSkh2dzNnVGc4VHpUeExTQzJRSHpWWkpGaDRRPT0.jpg')">
-                  </div>
-                </a>
-              
-            </article>
-          
-            <article class="post-item">
-              <div class="left">
-                <a href="https://mliank.github.io//post/sao-ma-deng-lu">
-                  <h2 class="post-title">扫码登录</h2>
-                </a>
-                <div class="post-date">
-                  2019-09-23
-                </div>
-                <div class="post-abstract">
-                  
-                </div>
-              </div>
-              
-                <a class="right" href="https://mliank.github.io//post/sao-ma-deng-lu">
-                  <div class="feature-container" style="background-image: url('http://imglf2.nosdn.127.net/img/UUZvR1pJU0VDakZDY0VSYjl4NXp6dVBVUnZoQUVSRWF3RzlONXY1UVRhSldEaU1XVDllTmtRPT0.png?=imageView&amp;thumbnail=500x0&amp;quality=96&amp;stripmeta=0&amp;type=jpg%7Cwatermark&amp;type=2')">
-                  </div>
-                </a>
-              
-            </article>
-          
-            <article class="post-item">
-              <div class="left">
-                <a href="https://mliank.github.io//post/xia-zai-zhan-fen-xiang">
-                  <h2 class="post-title">下载站分享</h2>
-                </a>
-                <div class="post-date">
-                  2019-09-23
-                </div>
-                <div class="post-abstract">
-                  
-                </div>
-              </div>
-              
-            </article>
-          
-            <article class="post-item">
-              <div class="left">
-                <a href="https://mliank.github.io//post/hello-gridea">
-                  <h2 class="post-title">Hello Gridea</h2>
-                </a>
-                <div class="post-date">
-                  2018-12-12
-                </div>
-                <div class="post-abstract">
-                  <p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
+    
+        <div class="post-container">
+  
+    <article class="post">
+      <a href="https://mliank.github.io//post/python-mo-kuai">
+        <h2 class="post-title">Python模块</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2019-10-16
+        </span>
+        <span>
+          2 min read
+        </span>
+        
+      </div>
+      
+      <div class="post-abstract">
+        
+      </di>
+    </article>
+  
+    <article class="post">
+      <a href="https://mliank.github.io//post/bootstrap-bi-ji">
+        <h2 class="post-title">BootStrap笔记</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2019-10-09
+        </span>
+        <span>
+          1 min read
+        </span>
+        
+      </div>
+      
+      <div class="post-abstract">
+        
+      </di>
+    </article>
+  
+    <article class="post">
+      <a href="https://mliank.github.io//post/you-zhi-jie-kou-fen-xiang">
+        <h2 class="post-title">优质接口分享</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2019-09-23
+        </span>
+        <span>
+          55 min read
+        </span>
+        
+      </div>
+      
+      <div class="post-abstract">
+        
+      </di>
+    </article>
+  
+    <article class="post">
+      <a href="https://mliank.github.io//post/flask-huo-qu-fang-wen-zhe-ip-he-user-agent">
+        <h2 class="post-title">Flask获取访问者 IP和User-Agent</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2019-09-23
+        </span>
+        <span>
+          1 min read
+        </span>
+        
+          <a href="https://mliank.github.io//tag/-uYJ9iUQJ" class="post-tag">
+            # flask
+          </a>
+        
+      </div>
+      
+      <div class="post-abstract">
+        
+      </di>
+    </article>
+  
+    <article class="post">
+      <a href="https://mliank.github.io//post/gridea-markdown-yu-fa-jian-dan-jiao-cheng">
+        <h2 class="post-title">Gridea  Markdown 语法简单教程</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2019-09-23
+        </span>
+        <span>
+          3 min read
+        </span>
+        
+          <a href="https://mliank.github.io//tag/RO6mgJbH7" class="post-tag">
+            # 分享
+          </a>
+        
+      </div>
+      
+        <a href="https://mliank.github.io//post/gridea-markdown-yu-fa-jian-dan-jiao-cheng" class="post-feature-image" style="background-image: url('https://i.loli.net/2019/10/09/OeUCKvbi3AQBYpj.png')">
+        </a>
+      
+      <div class="post-abstract">
+        
+      </di>
+    </article>
+  
+    <article class="post">
+      <a href="https://mliank.github.io//post/xiao-lu-gong-ju">
+        <h2 class="post-title">效率工具</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2019-09-23
+        </span>
+        <span>
+          2 min read
+        </span>
+        
+          <a href="https://mliank.github.io//tag/RO6mgJbH7" class="post-tag">
+            # 分享
+          </a>
+        
+      </div>
+      
+        <a href="https://mliank.github.io//post/xiao-lu-gong-ju" class="post-feature-image" style="background-image: url('http://imglf3.nosdn0.126.net/img/UUZvR1pJU0VDakVXME5rV0ZuRi8xVU83cklsaFNCVXBLZXZsZmNvQkxVQWVuc1lPeW5DWjRBPT0.jpg')">
+        </a>
+      
+      <div class="post-abstract">
+        
+      </di>
+    </article>
+  
+    <article class="post">
+      <a href="https://mliank.github.io//post/da-qi-ye-nei-bu-de-jiao-hu-she-ji-tuan-dui-bo-ke">
+        <h2 class="post-title">大企业内部的交互设计团队博客</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2019-09-23
+        </span>
+        <span>
+          2 min read
+        </span>
+        
+          <a href="https://mliank.github.io//tag/RO6mgJbH7" class="post-tag">
+            # 分享
+          </a>
+        
+      </div>
+      
+        <a href="https://mliank.github.io//post/da-qi-ye-nei-bu-de-jiao-hu-she-ji-tuan-dui-bo-ke" class="post-feature-image" style="background-image: url('http://imglf6.nosdn0.126.net/img/UUZvR1pJU0VDakg0NzNTZTBxQzI5L1Z4OC9HSkh2dzNnVGc4VHpUeExTQzJRSHpWWkpGaDRRPT0.jpg')">
+        </a>
+      
+      <div class="post-abstract">
+        
+      </di>
+    </article>
+  
+    <article class="post">
+      <a href="https://mliank.github.io//post/sao-ma-deng-lu">
+        <h2 class="post-title">扫码登录</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2019-09-23
+        </span>
+        <span>
+          2 min read
+        </span>
+        
+          <a href="https://mliank.github.io//tag/TwAC4gV1F" class="post-tag">
+            # 小项目
+          </a>
+        
+      </div>
+      
+        <a href="https://mliank.github.io//post/sao-ma-deng-lu" class="post-feature-image" style="background-image: url('http://imglf2.nosdn.127.net/img/UUZvR1pJU0VDakZDY0VSYjl4NXp6dVBVUnZoQUVSRWF3RzlONXY1UVRhSldEaU1XVDllTmtRPT0.png?=imageView&amp;thumbnail=500x0&amp;quality=96&amp;stripmeta=0&amp;type=jpg%7Cwatermark&amp;type=2')">
+        </a>
+      
+      <div class="post-abstract">
+        
+      </di>
+    </article>
+  
+    <article class="post">
+      <a href="https://mliank.github.io//post/xia-zai-zhan-fen-xiang">
+        <h2 class="post-title">下载站分享</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2019-09-23
+        </span>
+        <span>
+          1 min read
+        </span>
+        
+      </div>
+      
+      <div class="post-abstract">
+        
+      </di>
+    </article>
+  
+    <article class="post">
+      <a href="https://mliank.github.io//post/hello-gridea">
+        <h2 class="post-title">Hello Gridea</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2018-12-12
+        </span>
+        <span>
+          2 min read
+        </span>
+        
+          <a href="https://mliank.github.io//tag/POAIKWCQm" class="post-tag">
+            # Gridea
+          </a>
+        
+      </div>
+      
+        <a href="https://mliank.github.io//post/hello-gridea" class="post-feature-image" style="background-image: url('https://mliank.github.io//post-images/hello-gridea.png')">
+        </a>
+      
+      <div class="post-abstract">
+        <p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
 ✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
 
-                </div>
-              </div>
-              
-                <a class="right" href="https://mliank.github.io//post/hello-gridea">
-                  <div class="feature-container" style="background-image: url('https://mliank.github.io//post-images/hello-gridea.png')">
-                  </div>
-                </a>
-              
-            </article>
-          
+      </di>
+    </article>
+  
+</div>
 
-          <div class="pagination-container">
+    
+        <div class="pagination-container">
   
   
 </div>
 
-        </div>
-      </div>
-    </div>
+    
+        <div class="site-footer">
+  Powered by <a href="https://mliank8.coding.me" target="_blank">Super Lee</a> | 
+  <a class="rss" href="https://mliank.github.io//atom.xml" target="_blank">RSS</a>
+</div>
 
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+  hljs.initHighlightingOnLoad()
 
-<script type="application/javascript">
+  let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
 
-AOS.init();
+  // This should probably be throttled.
+  // Especially because it triggers during smooth scrolling.
+  // https://lodash.com/docs/4.17.10#throttle
+  // You could do like...
+  // window.addEventListener("scroll", () => {
+  //    _.throttle(doThatStuff, 100);
+  // });
+  // Only not doing it here to keep this Pen dependency-free.
 
-hljs.initHighlightingOnLoad()
+  window.addEventListener("scroll", event => {
+    let fromTop = window.scrollY;
 
-var app = new Vue({
-  el: '#app',
-  data: {
-    menuVisible: false,
-  },
-})
+    mainNavLinks.forEach((link, index) => {
+      let section = document.getElementById(decodeURI(link.hash).substring(1));
+      let nextSection = null
+      if (mainNavLinks[index + 1]) {
+        nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+      }
+      console.log('section.offsetHeight', section.offsetHeight);
+      if (section.offsetTop <= fromTop) {
+        if (nextSection) {
+          if (nextSection.offsetTop > fromTop) {
+            link.classList.add("current");
+          } else {
+            link.classList.remove("current");    
+          }
+        } else {
+          link.classList.add("current");
+        }
+      } else {
+        link.classList.remove("current");
+      }
+    });
+  });
 
 </script>
 
-
-
-
+      </div>
+    </div>
   </body>
 </html>
