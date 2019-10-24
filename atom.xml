@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://mliank.github.io/</id>
     <title>Super Lee</title>
-    <updated>2019-10-16T04:47:48.917Z</updated>
+    <updated>2019-10-24T06:59:57.286Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://mliank.github.io/"/>
     <link rel="self" href="https://mliank.github.io//atom.xml"/>
@@ -62,6 +62,40 @@ Bootstrap 让前端开发更快速、简单。所有开发者都能快速上手�
   &lt;button type=&quot;button&quot; class=&quot;btn btn-default&quot;&gt;Left&lt;/button&gt;
   &lt;button type=&quot;button&quot; class=&quot;btn btn-default&quot;&gt;Middle&lt;/button&gt;
   &lt;button type=&quot;button&quot; class=&quot;btn btn-default&quot;&gt;Right&lt;/button&gt;
+&lt;/div&gt;
+</code></pre>
+<h2 id="轮播">轮播</h2>
+<pre><code>&lt;div id=&quot;myCarousel&quot; class=&quot;carousel slide pad_010 b_k&quot; data-ride=&quot;carousel&quot;&gt;
+    &lt;!-- 轮播（Carousel）指标 --&gt;
+    &lt;ol class=&quot;carousel-indicators&quot;&gt;
+        &lt;li data-target=&quot;#myCarousel&quot; data-slide-to=&quot;0&quot; class=&quot;active&quot;&gt;&lt;/li&gt;
+        &lt;li data-target=&quot;#myCarousel&quot; data-slide-to=&quot;1&quot;&gt;&lt;/li&gt;
+        &lt;li data-target=&quot;#myCarousel&quot; data-slide-to=&quot;2&quot;&gt;&lt;/li&gt;
+    &lt;/ol&gt;
+    &lt;!-- 轮播（Carousel）项目 --&gt;
+    &lt;div class=&quot;carousel-inner bor_btm&quot;&gt;
+        &lt;div class=&quot;item active&quot;&gt;
+            &lt;img src=&quot;http://wx1.sinaimg.cn/mw600/0076BSS5ly1g899dgpdbyj30xc0m8juo.jpg&quot;&gt;
+            &lt;div class=&quot;carousel-caption&quot;&gt;
+                &lt;h4&gt;图一&lt;/h4&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;item&quot;&gt;
+            &lt;img src=&quot;http://wx4.sinaimg.cn/mw600/0076BSS5ly1g8996zq2w8j31900u0zoe.jpg&quot;&gt;
+            &lt;div class=&quot;carousel-caption&quot;&gt;
+                &lt;h4&gt;图二&lt;/h4&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;item&quot;&gt;
+            &lt;img src=&quot;http://wx1.sinaimg.cn/mw600/0076BSS5ly1g8986ev12zj30jg0t64fe.jpg&quot;&gt;
+            &lt;div class=&quot;carousel-caption&quot;&gt;
+                &lt;h4&gt;图三&lt;/h4&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;!-- 轮播（Carousel）导航 --&gt;
+    &lt;a class=&quot;carousel-control left&quot; href=&quot;#myCarousel&quot; data-slide=&quot;prev&quot;&gt;&amp;lsaquo;&lt;/a&gt;
+    &lt;a class=&quot;carousel-control right&quot; href=&quot;#myCarousel&quot; data-slide=&quot;next&quot;&gt;&amp;rsaquo;&lt;/a&gt;
 &lt;/div&gt;
 </code></pre>
 <p>#表格</p>
