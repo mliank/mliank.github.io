@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>标签列表 | Super Lee</title>
+<title>models模型 | Super Lee</title>
 <meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -99,18 +99,38 @@
 
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
-          <h2 class="tag-list-title">标签列表</h2>
-          <div class="tags-container">
+          <div class="post-detail">
+            <h2 class="post-title">models模型</h2>
+            <div class="post-date">2019-11-01</div>
             
-              <a class="tag" href="https://mliank.github.io//tag/-uYJ9iUQJ">flask</a>
+            <div class="post-content">
+              <p><code>models.py</code></p>
+<pre><code>class User(db.Model):
+    __tablename__='user'
+    id = db.Column(db.Integer,prinmary_key=True)
+    name = db.Column(db.String)
+    pwd = db.Column(db.String)
+    email = db.Column(db.String)
+    phone = db.Column(db.String)
+</code></pre>
+
+            </div>
             
-              <a class="tag" href="https://mliank.github.io//tag/RO6mgJbH7">分享</a>
             
-              <a class="tag" href="https://mliank.github.io//tag/TwAC4gV1F">小项目</a>
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://mliank.github.io//post/python-mo-kuai">
+                  <h3 class="post-title">
+                    Python模块
+                  </h3>
+                </a>
+              </div>
             
-              <a class="tag" href="https://mliank.github.io//tag/POAIKWCQm">Gridea</a>
+
             
+
           </div>
+
         </div>
       </div>
     </div>
