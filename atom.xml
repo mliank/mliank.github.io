@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://mliank.github.io/</id>
     <title>Super Lee</title>
-    <updated>2020-05-22T02:38:31.034Z</updated>
+    <updated>2020-05-22T04:00:01.522Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://mliank.github.io/"/>
     <link rel="self" href="https://mliank.github.io/atom.xml"/>
@@ -16,7 +16,7 @@
         <link href="https://mliank.github.io/post/links/">
         </link>
         <updated>2020-05-22T02:07:27.000Z</updated>
-        <content type="html"><![CDATA[<figure data-type="image" tabindex="1"><img src="https://mliank.github.io//post-images/1590113782557.jpg" alt="有朋自远来" loading="lazy"></figure>
+        <content type="html"><![CDATA[<figure data-type="image" tabindex="1"><img src="https://cdn.nuoea.com/2020/20200319164656.jpg" alt="有朋自远来" loading="lazy"></figure>
 <p>##<a href="https://www.v2ex.com/">V2EX</a></p>
 <p>##<a href="http://www.guanggoo.com/">光谷社区</a></p>
 ]]></content>
