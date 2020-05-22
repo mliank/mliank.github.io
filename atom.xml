@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://mliank.github.io/</id>
     <title>Super Lee</title>
-    <updated>2020-05-22T02:01:49.873Z</updated>
+    <updated>2020-05-22T02:10:01.912Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://mliank.github.io/"/>
     <link rel="self" href="https://mliank.github.io/atom.xml"/>
@@ -10,6 +10,16 @@
     <logo>https://mliank.github.io/images/avatar.png</logo>
     <icon>https://mliank.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Super Lee</rights>
+    <entry>
+        <title type="html"><![CDATA[友情链接]]></title>
+        <id>https://mliank.github.io/post/you-qing-lian-jie/</id>
+        <link href="https://mliank.github.io/post/you-qing-lian-jie/">
+        </link>
+        <updated>2020-05-22T02:07:27.000Z</updated>
+        <content type="html"><![CDATA[<p>##V2EX</p>
+<p>##光谷社区</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[视频格式]]></title>
         <id>https://mliank.github.io/post/shi-pin-ge-shi/</id>
@@ -1852,62 +1862,6 @@ _   下划线
 .   句点
 !   感叹号
 </code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[效率工具]]></title>
-        <id>https://mliank.github.io/post/xiao-lu-gong-ju/</id>
-        <link href="https://mliank.github.io/post/xiao-lu-gong-ju/">
-        </link>
-        <updated>2019-09-23T04:23:40.000Z</updated>
-        <content type="html"><![CDATA[<p>万彩办公大师</p>
-<p>PDF转换、图片编辑、文档处理、录屏截取...站长推荐办公必备！<br>
-http://www.wofficebox.com/</p>
-<p>DBP-数据管理分析工具<br>
-快速搭建一站式的数据管理和分析平台<br>
-https://www.bdp.cn/home.html</p>
-<p>TRELLO项目协同<br>
-国外老牌的项目协同工具，贴纸化管理。国内大多数协同软件的鼻祖<br>
-https://trello.com/</p>
-<p>奇妙清单<br>
-与你生活同步，支持多客户端<br>
-https://www.wunderlist.com/zh/</p>
-<p>禅道<br>
-国产的开源项目管理软件,专注研发项目管理,实现软件的完整生命周期管理<br>
-http://www.zentao.net/</p>
-<p>滴答清单<br>
-轻便的待办事项应用<br>
-http://www.dida365.com/</p>
-<p>TAPD-腾讯敏捷平台<br>
-腾讯敏捷产品研发平台,它支持主流的敏捷产品研发模式和方法论<br>
-https://www.tapd.cn/</p>
-<p>TOWER<br>
-很细致的团队协作工具，支持手机端，支持钉钉应用<br>
-http://tower.im</p>
-<p>石墨文档<br>
-可多人实时协作的云端文档与表格，支持钉钉应用<br>
-http://shimo.im</p>
-<p>Teambition<br>
-支持多场景的团队协作工具，支持移动端，钉钉应用<br>
-https://www.teambition.com</p>
-<p>worktile<br>
-协同办公工具，10人以下<br>
-https://worktile.com/</p>
-<p>风车<br>
-强大的任务管理工具，支持多种客户端<br>
-https://fengche.co</p>
-<p>redmine<br>
-开源的项目管理系统，RUBY开发，无商用限制<br>
-http://www.redmine.org.cn</p>
-<p>一起写<br>
-文档协同工具，支持多种类型<br>
-https://yiqixie.com</p>
-<p>伙伴云表格<br>
-电脑手机实时同步 随时随地增删改查<br>
-https://www.huoban.com/</p>
-<p>超级表格<br>
-多人共享的&quot;在线Excel<br>
-http://chaojibiaoge.com/</p>
 ]]></content>
     </entry>
 </feed>
