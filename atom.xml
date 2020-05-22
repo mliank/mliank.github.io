@@ -2,18 +2,57 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://mliank.github.io/</id>
     <title>Super Lee</title>
-    <updated>2019-11-15T04:50:32.387Z</updated>
+    <updated>2020-05-22T00:42:35.484Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://mliank.github.io/"/>
-    <link rel="self" href="https://mliank.github.io//atom.xml"/>
+    <link rel="self" href="https://mliank.github.io/atom.xml"/>
     <subtitle>温故而知新</subtitle>
-    <logo>https://mliank.github.io//images/avatar.png</logo>
-    <icon>https://mliank.github.io//favicon.ico</icon>
-    <rights>All rights reserved 2019, Super Lee</rights>
+    <logo>https://mliank.github.io/images/avatar.png</logo>
+    <icon>https://mliank.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2020, Super Lee</rights>
+    <entry>
+        <title type="html"><![CDATA[视频格式]]></title>
+        <id>https://mliank.github.io/post/shi-pin-ge-shi/</id>
+        <link href="https://mliank.github.io/post/shi-pin-ge-shi/">
+        </link>
+        <updated>2020-03-12T13:07:39.000Z</updated>
+        <content type="html"><![CDATA[<p>ts格式合并代码（mac）<br>
+<code>cat *.ts &gt; combine.ts</code><br>
+combine：新文件名</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Django]]></title>
+        <id>https://mliank.github.io/post/django/</id>
+        <link href="https://mliank.github.io/post/django/">
+        </link>
+        <updated>2019-11-22T01:28:53.000Z</updated>
+        <content type="html"><![CDATA[<p>admin:<br>
+django項目提供給你的一个后台数据库管理界面<br>
+数据库生成命令:<br>
+makemigrations:执行检查数据库差异，生成迁移文件<br>
+migrate :根据迁移文件生成対座的SQL悟句<br>
+django默人的自带了一些数据库内容<br>
+python manage.py migrate<br>
+创建管理界面的超級用戸:<br>
+python manage.py createsuperuser<br>
+吋区和語言没置:<br>
+LANGUAGE_ CODE = ' zh-Hans<br>
+TIME_ ZONE = ' Asia/ Shanghai<br>
+创建APP :<br>
+目录下多了一个文件央<br>
+-blog : APP文件名<br>
+-init 声明当前文件夹可以是一个模抉<br>
+- admin数据庠如果希望被后头，需要在区↑文件下迸行注册<br>
+- models 创建该APP下可能使用到的数据库<br>
+-test 实现某些測試駆幼I<br>
+-views实现対座功能的</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[API分析]]></title>
-        <id>https://mliank.github.io//post/api-fen-xi</id>
-        <link href="https://mliank.github.io//post/api-fen-xi">
+        <id>https://mliank.github.io/post/api-fen-xi/</id>
+        <link href="https://mliank.github.io/post/api-fen-xi/">
         </link>
         <updated>2019-11-15T02:21:57.000Z</updated>
         <content type="html"><![CDATA[<p>例子1：<br>
@@ -25,8 +64,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[models模型]]></title>
-        <id>https://mliank.github.io//post/models-mo-xing</id>
-        <link href="https://mliank.github.io//post/models-mo-xing">
+        <id>https://mliank.github.io/post/models-mo-xing/</id>
+        <link href="https://mliank.github.io/post/models-mo-xing/">
         </link>
         <updated>2019-11-01T02:20:21.000Z</updated>
         <content type="html"><![CDATA[<p><code>models.py</code></p>
@@ -42,8 +81,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[Python模块]]></title>
-        <id>https://mliank.github.io//post/python-mo-kuai</id>
-        <link href="https://mliank.github.io//post/python-mo-kuai">
+        <id>https://mliank.github.io/post/python-mo-kuai/</id>
+        <link href="https://mliank.github.io/post/python-mo-kuai/">
         </link>
         <updated>2019-10-16T01:25:30.000Z</updated>
         <content type="html"><![CDATA[<h2 id="random">random</h2>
@@ -77,8 +116,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[BootStrap笔记]]></title>
-        <id>https://mliank.github.io//post/bootstrap-bi-ji</id>
-        <link href="https://mliank.github.io//post/bootstrap-bi-ji">
+        <id>https://mliank.github.io/post/bootstrap-bi-ji/</id>
+        <link href="https://mliank.github.io/post/bootstrap-bi-ji/">
         </link>
         <updated>2019-10-09T02:13:24.000Z</updated>
         <content type="html"><![CDATA[<h1 id="前言">前言</h1>
@@ -135,13 +174,13 @@ Bootstrap 让前端开发更快速、简单。所有开发者都能快速上手�
     </entry>
     <entry>
         <title type="html"><![CDATA[优质接口分享]]></title>
-        <id>https://mliank.github.io//post/you-zhi-jie-kou-fen-xiang</id>
-        <link href="https://mliank.github.io//post/you-zhi-jie-kou-fen-xiang">
+        <id>https://mliank.github.io/post/you-zhi-jie-kou-fen-xiang/</id>
+        <link href="https://mliank.github.io/post/you-zhi-jie-kou-fen-xiang/">
         </link>
         <updated>2019-09-23T08:31:18.000Z</updated>
         <content type="html"><![CDATA[<p>腾讯<br>
 <a href="https://nodeapi.3g.qq.com/nodeapi/api/weather@getWeather">天气接口</a><br>
-<img src="https://mliank.github.io//post-images/1569227601485.png" alt=""></p>
+<img src="https://mliank.github.io//post-images/1569227601485.png" alt="" loading="lazy"></p>
 <p>目前接口列表：<br>
 新实时段子<br>
 <a href="https://api.apiopen.top/getJoke?page=1&amp;count=2&amp;type=video">https://api.apiopen.top/getJoke?page=1&amp;count=2&amp;type=video</a><br>
@@ -1592,8 +1631,8 @@ type=31 : 声音</p>
     </entry>
     <entry>
         <title type="html"><![CDATA[Flask获取访问者 IP和User-Agent]]></title>
-        <id>https://mliank.github.io//post/flask-huo-qu-fang-wen-zhe-ip-he-user-agent</id>
-        <link href="https://mliank.github.io//post/flask-huo-qu-fang-wen-zhe-ip-he-user-agent">
+        <id>https://mliank.github.io/post/flask-huo-qu-fang-wen-zhe-ip-he-user-agent/</id>
+        <link href="https://mliank.github.io/post/flask-huo-qu-fang-wen-zhe-ip-he-user-agent/">
         </link>
         <updated>2019-09-23T07:13:49.000Z</updated>
         <content type="html"><![CDATA[<p>ip采用<code>request.remote_addr</code>获取<br>
@@ -1635,13 +1674,13 @@ if __name__ == '__main__':
     app.run(host=&quot;0.0.0.0&quot;,port=int(&quot;80&quot;),debug=True)
 </code></pre>
 <p>运行结果<br>
-<img src="https://mliank.github.io//post-images/1569225976018.png" alt="运行结果"></p>
+<img src="https://mliank.github.io//post-images/1569225976018.png" alt="运行结果" loading="lazy"></p>
 ]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[Gridea  Markdown 语法简单教程]]></title>
-        <id>https://mliank.github.io//post/gridea-markdown-yu-fa-jian-dan-jiao-cheng</id>
-        <link href="https://mliank.github.io//post/gridea-markdown-yu-fa-jian-dan-jiao-cheng">
+        <id>https://mliank.github.io/post/gridea-markdown-yu-fa-jian-dan-jiao-cheng/</id>
+        <link href="https://mliank.github.io/post/gridea-markdown-yu-fa-jian-dan-jiao-cheng/">
         </link>
         <updated>2019-09-23T06:40:20.000Z</updated>
         <content type="html"><![CDATA[<p><a href="https://fehey.com/post/markdown-yu-fa-jian-dan-jiao-cheng">Markdown 语法参考地址</a><br>
@@ -1718,7 +1757,7 @@ hello()
 <p>使用 ![描述](图片链接地址)插入图像。</p>
 <p><code>![我的头像](https://avatars3.githubusercontent.com/u/46315806?s=200&amp;v=4)</code><br>
 示例：</p>
-<figure data-type="image" tabindex="1"><img src="https://avatars3.githubusercontent.com/u/46315806?s=200&amp;v=4" alt="我的头像"></figure>
+<figure data-type="image" tabindex="1"><img src="https://avatars3.githubusercontent.com/u/46315806?s=200&amp;v=4" alt="我的头像" loading="lazy"></figure>
 <h3 id="10-表格">10. 表格</h3>
 <p>表格示例</p>
 <table>
@@ -1817,8 +1856,8 @@ _   下划线
     </entry>
     <entry>
         <title type="html"><![CDATA[效率工具]]></title>
-        <id>https://mliank.github.io//post/xiao-lu-gong-ju</id>
-        <link href="https://mliank.github.io//post/xiao-lu-gong-ju">
+        <id>https://mliank.github.io/post/xiao-lu-gong-ju/</id>
+        <link href="https://mliank.github.io/post/xiao-lu-gong-ju/">
         </link>
         <updated>2019-09-23T04:23:40.000Z</updated>
         <content type="html"><![CDATA[<p>万彩办公大师</p>
@@ -1869,89 +1908,6 @@ https://www.huoban.com/</p>
 <p>超级表格<br>
 多人共享的&quot;在线Excel<br>
 http://chaojibiaoge.com/</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[大企业内部的交互设计团队博客]]></title>
-        <id>https://mliank.github.io//post/da-qi-ye-nei-bu-de-jiao-hu-she-ji-tuan-dui-bo-ke</id>
-        <link href="https://mliank.github.io//post/da-qi-ye-nei-bu-de-jiao-hu-she-ji-tuan-dui-bo-ke">
-        </link>
-        <updated>2019-09-23T04:21:11.000Z</updated>
-        <content type="html"><![CDATA[<p>蚂蚁金服UED</p>
-<p>Ant Design,蚂蚁金服UED团队，提供Axure元件库</p>
-<p>https://ant.design/</p>
-<p>Google谷歌设计团队官方博客（英文）</p>
-<p>Google设计团队</p>
-<p>https://design.google/</p>
-<p>Facebook非死不可官方设计团队博客（英文）</p>
-<p>Facebook设计团队</p>
-<p>http://facebook.design</p>
-<p>腾讯ISUX</p>
-<p>腾讯社交用户体验设计，简称ISUX。</p>
-<p>https://isux.tencent.com</p>
-<p>IMWEB</p>
-<p>腾讯IMWEB团队博客，目前主要负责腾讯在线教育战略产品</p>
-<p>http://imweb.io</p>
-<p>阿里妈妈MUX</p>
-<p>阿里妈妈MUX团队博客</p>
-<p>http://mux.alimama.com</p>
-<p>腾讯CDC</p>
-<p>腾讯CDC，一流的互联网设计团队</p>
-<p>http://cdc.tencent.com</p>
-<p>腾讯网前端研发中心</p>
-<p>简称FERD，前端研发中心</p>
-<p>http://qqfe.org</p>
-<p>网易UEDC</p>
-<p>网易用户体验团队UEDC官方博客</p>
-<p>http://uedc.163.com</p>
-<p>阿里UED</p>
-<p>花名U一点，阿里最为资深的用户体验设计部门之一</p>
-<p>http://www.aliued.cn</p>
-<p>腾讯TGideas</p>
-<p>腾讯游戏官方设计团队博客</p>
-<p>http://tgideas.qq.com</p>
-<p>alloyteam</p>
-<p>腾讯WEB团队技术博客</p>
-<p>http://www.alloyteam.com</p>
-<p>百度FEX</p>
-<p>FEX 是百度「Web 前端研发部」的内部名称</p>
-<p>http://fex.baidu.com</p>
-<p>凹凸实验室</p>
-<p>京东用户体验设计部团队博客</p>
-<p>https://aotu.io/index.html</p>
-<p>百度MUX</p>
-<p>百度用户体验中心，覆盖了百度85%以上的产品体验设计。</p>
-<p>http://mux.baidu.com</p>
-<p>携程设计委员会</p>
-<p>携程UED团队博客，携程设计委员会</p>
-<p>http://ued.ctrip.com</p>
-<p>360奇舞团</p>
-<p>360奇舞团（奇虎75Team）是奇虎360公司一个前端团队</p>
-<p>https://75team.com</p>
-<p>百度EUX</p>
-<p>百度企业产品用户体验中心</p>
-<p>http://eux.baidu.com</p>
-<p>网易游戏GUX</p>
-<p>网易游戏用户体验中心的博客</p>
-<p>http://gux.163.com</p>
-<p>360UXC</p>
-<p>360用户体验设计中心团队博客</p>
-<p>http://uxc.360.cn</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[扫码登录]]></title>
-        <id>https://mliank.github.io//post/sao-ma-deng-lu</id>
-        <link href="https://mliank.github.io//post/sao-ma-deng-lu">
-        </link>
-        <updated>2019-09-23T04:19:21.000Z</updated>
-        <content type="html"><![CDATA[<p>微信扫码登录的理解，这是知乎上一篇帖子，写的可以https://www.zhihu.com/question/22991085</p>
-<p>原理其实不难，二维码表示对话的ID，手机微信扫码表示用当前账号授权这次对话，授权之后这个ID就合法绑定了一个账号</p>
-<p>具体的过程如下：<br>
-1.用户A访问微信网页版，微信为这个对话生成一个ID：session_id，此事系统并不知道访问者是谁<br>
-2.系统用session_id生成一个内容为 https://login.weixin.qq.com/l/session_id 的二维码<br>
-3.用户A打开自己的手机微信并扫描这个二维码，微信询问用户A该次网页登陆微信的操作是否是A自己的操作，如果A选择是，那么session_id就跟用户A的微信账号绑定，并自动登陆；如果A选择否，那么session_id仍然是未登陆状态</p>
-<p>微信的扫一扫功能是登录后才能使用的功能，所以用微信扫一扫可以授权，而用其他软件的扫码功能则不行。</p>
 ]]></content>
     </entry>
 </feed>
