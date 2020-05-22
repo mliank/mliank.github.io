@@ -7,101 +7,85 @@
 <meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="https://mliank.github.io//favicon.ico?v=1590108627263">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://mliank.github.io//favicon.ico?v=1590108226386">
+<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://mliank.github.io//styles/main.css">
 
 
-
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
 
 <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
 
-
   </head>
   <body>
-    <div id="app" class="main">
-
-      <div class="sidebar" :class="{ 'full-height': menuVisible }">
-  <div class="top-container" data-aos="fade-right">
-    <div class="top-header-container">
-      <a class="site-title-container" href="https://mliank.github.io/">
-        <img src="https://mliank.github.io//images/avatar.png?v=1590108226386" class="site-logo">
-        <h1 class="site-title">Super Lee</h1>
-      </a>
-      <div class="menu-btn" @click="menuVisible = !menuVisible">
-        <div class="line"></div>
-      </div>
-    </div>
-    <div>
-      
+  
+    <nav class="navbar border fixed split-nav">
+  <div class="nav-brand">
+    <h3><a href="https://mliank.github.io/">Super Lee</a></h3>
+  </div>
+  <div class="collapsible">
+    <input id="collapsible1" type="checkbox" name="collapsible1">
+    <button>
+      <label for="collapsible1">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </label>
+    </button>
+    <div class="collapsible-body">
+      <ul class="inline">
         
-          <a href="/" class="site-nav">
-            首页
-          </a>
+          <li>
+            
+              <a href="/" class="menu">
+                首页
+              </a>
+            
+          </li>
         
-      
+          <li>
+            
+              <a href="/archives" class="menu">
+                归档
+              </a>
+            
+          </li>
         
-          <a href="/archives" class="site-nav">
-            归档
-          </a>
+          <li>
+            
+              <a href="/tags" class="menu">
+                标签
+              </a>
+            
+          </li>
         
-      
+          <li>
+            
+              <a href="/post/about" class="menu">
+                关于
+              </a>
+            
+          </li>
         
-          <a href="/tags" class="site-nav">
-            标签
-          </a>
-        
-      
-        
-          <a href="/post/about" class="site-nav">
-            关于
-          </a>
-        
-      
+      </ul>
     </div>
   </div>
-  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
-    <div class="social-container">
-      
-        
-          <a class="social-link" href="https://github.com/mliank" target="_blank">
-            <i class="fab fa-github"></i>
-          </a>
-        
-      
-        
-      
-        
-          <a class="social-link" href="https://weibo.com/lixinru7726/" target="_blank">
-            <i class="fab fa-weibo"></i>
-          </a>
-        
-      
-        
-      
-        
-      
-    </div>
-    <div class="site-description">
-      温故而知新
-    </div>
-    <div class="site-footer">
-      Powered by <a href="https://mliank.github.io/" target="_blank">Super Lee</a> | <a class="rss" href="https://mliank.github.io//atom.xml" target="_blank">RSS</a>
-    </div>
-  </div>
-</div>
+</nav>
 
-
-      <div class="main-container">
-        <div class="content-container" data-aos="fade-up">
-          <div class="post-detail">
-            <h2 class="post-title">API分析</h2>
-            <div class="post-date">2019-11-15</div>
+    <div id="top" class="row site">
+      <div class="sm-12 md-8 col">
+        <div class="paper">
+          <article class="article">
+            <h1>API分析</h1>
+            <p class="article-meta">
+              2019-11-15
+              
+            </p>
             
             <div class="post-content">
               <p>例子1：<br>
@@ -111,24 +95,155 @@
 <p><code>https://api.geetest.com/get.php?gt=e8197b3f2a6690ff8f91ec8fc413c5dd&amp;challenge=d951852d8da2e87c9b1f79509ae227f5&amp;lang=zh-cn&amp;pt=0&amp;w=EN7c7KXThpRDnduU8ys34EIeJo6gLmpY8(Gc)26AcP9IRywVBVZRe11LfiHTbcUWLBbP41FfWyznGsnAhRx9e4vJoa7dNdwjcBVih0bnr0xVswRq9rnXFqxxrSO6nxT4th6DSosyiCjuIARjHX03(HhVbeuSeSZpzyQgOEs8HHznnENR31Xeem2u0qigRhG0IiQ)hv22hFMROj9OHEjPslNo)8a6dqNAItXVn2yAxCzjQtCG(gwnIH0Pl3IWcW7BdlWVC3O9RDVjm6fQlzLKFOhSTwaQfARkGHh1jHNZmyHKmB8m8j(eGh4Rs3dHyOhj(RYcQXkLrnqURf3vx32cu4vfJC2MXsE66UPFUis6w7IY1efqTN5wUP8G9TrOEpuIGlSf17JcHLBEYPSB4h)gxIiCBbnnjIj9UqKimcL0eE8ALE3dV1AGTeNjgjNqbt(KLOqmDbIA4)4m55ZkwRdk)vMQ0(ttKfUwtqeIGkScZXWWVF)8w0ZbGMgWJW0o3JTaNArkbc2jegHSJMwEGHR7A19MCqshb2Mp(2UwI0vS47hfaXZe1OF1ayFxpmm3QSNGhM733tiB6xYhGCg)Q3uiuyJsdGlPGo65I9airmkmj6UYYIS8yzqLthD0ASudbPRGCIBqMeKdrIbV8K(xdzl68cS6rwKD)h0fiFHIPcIg3DSG8Vl1vG6WPPth1gt3pgY99NKnJnSqNgpCLD7O5KS4wVVb)mH2z2N3W30YrLoPed)Gg6k9eTwaEamQSYVoOv7ABKT8zlRiAF0)Dcg4TL5URDl0I0ldl)U6B6EjYE8eoG1vAzhFi)2AeXNXrh6lLzbH1E1xjdtKXpZlVo31eIifxojcI4ZN(o3LxGO8xlcCBdWAZE15NUrZRbRqZwumpQhLwUHkK6qO57RM)mIhxXktEIQdQqkgymH7yxowLIIiB)QNYlsZBmzPDl3JwZQmNuW9FBgJ(U6dcOm5HGKerRjAdMZf4It5xyHsNeM5uuRxoHjXj5ipiuWUO4coUfXkMhreq)nGtTNZqI3KAzxuDHpX(7cYFUyKQRT4wN9zbd8EUHHRKWjpbYg47H2ykgjzMCMKJKN(FKpagJwZFQD5IKA2I2liq32aX)yvcLbmWrn4Y4HMrW1vTNONN5GDeZw6xeVB5dmkiYCIS7PRsx7eUrrlV2FyKkakyFQUCj8Iz6P5XgozZz6VhOEtnErunxytb0QdpXiL(bgtmwi3RV9Ah8hKVmJwvBsEitnyg8PePlVeE2IhtIZ3aMlD0ydTgtLAFnX65wdT6Qfc1V8VgKPuTR88qyxkq1sXf9Mz60RhhVJe5lZ3QQCmXqGGdXQgtUNgADptlZBHkJQknjsYh0(45xqlAGMPzMsDs7qrLAQxfENrtmtck5CNKgluxT8AWgNQNOBNxtY)qYzA70rlkpJIwbEjrsrTpKKB8D0g)5IsAYonLPHUcM(jDCQzB58sKt5UaylZVzuZ2xW2tSpEjB5bwrDVCDnutnLgv0uOT9bsPXBMCRR8zGNMUppjGkAm8Q5lmVl5l4KBaEOGqSWA9ZCzVfKJurw)sZn0GlLfCXd(zgooHvvZc)eNsEWO9eZiBxQZ09XHd7mk9vQtXdVL9duXTkyE8lwRvItg91ccCrrZqnQACaJWODIlT4rzCIRueutkfNVSdi(XxepAyaS6h8diPDZ)7di2AwcoW4YJ7Tn58HmKLz0yUfILEoSNVydv7NVgbKq7QIrL280r9T)9IAVd)wha3nw(sWlo1(J9JQ9(R3o4sFqcjjWQGwW1WchVH2OyPOcGzW60G0ab(gojvItgb05uA(IncZUd)5U79k(jhPfl8gyCnSj(huErj9EQG5MRKERVU1AwvHDEaD3F)us6GGvReEhjr2mEM0A5HoPyLOGRaaUX7oZRPeQSLl1tyQHSr26bv9qDXUw6Nx4hPLH0esX)emO)p(rHRGkp511ARG5jVDRChhbUZSiTcci6GIqm(S54zX6zc2NnM8itT6YK)97kFTa(hfK95MCCui7xQW9d00M.a5ab4086390f37e3ef6980d71a92c437fd2fb6ce05301a0cc051e5669c5fa18e3915020dfb83627c6eea328c1445b6bf41b89a98494ae6d956299f9571b476963d16097ef48b88ebb5e1d293b35194194bfda792564c17d69be5ef621e197bded8d47c45ec634bf7bb3c459c8470f896c126749b87ffc98dd9651c6acb2c7c70&amp;callback=geetest_1573784428731</code></p>
 
             </div>
-            
-            
-              <div class="next-post">
-                <div class="next">下一篇</div>
-                <a href="https://mliank.github.io/post/models-mo-xing/">
-                  <h3 class="post-title">
-                    models模型
-                  </h3>
-                </a>
-              </div>
-            
-
-            
-
-          </div>
-
+          </article>
         </div>
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://mliank.github.io/post/models-mo-xing/">
+                <h3 class="post-title">
+                  models模型
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
       </div>
+
+      <div class="sm-12 md-4 col sidebar">
+  <div class="paper info-container">
+    <img src="https://mliank.github.io//images/avatar.png?v=1590108627263" class="no-responsive avatar">
+    <div class="text-muted">温故而知新</div>
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      最新文章
+    </div>
+    <div class="row">
+      <ul>
+        
+          
+            <li>
+              <a href="https://mliank.github.io/post/shi-pin-ge-shi/">视频格式</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://mliank.github.io/post/django/">Django</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://mliank.github.io/post/api-fen-xi/">API分析</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://mliank.github.io/post/models-mo-xing/">models模型</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://mliank.github.io/post/python-mo-kuai/">Python模块</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://mliank.github.io/post/bootstrap-bi-ji/">BootStrap笔记</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://mliank.github.io/post/you-zhi-jie-kou-fen-xiang/">优质接口分享</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://mliank.github.io/post/flask-huo-qu-fang-wen-zhe-ip-he-user-agent/">Flask获取访问者 IP和User-Agent</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://mliank.github.io/post/gridea-markdown-yu-fa-jian-dan-jiao-cheng/">Gridea  Markdown 语法简单教程</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://mliank.github.io/post/xiao-lu-gong-ju/">效率工具</a>
+            </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      标签列表
+    </div>
+    <div class="row">
+      
+        <a href="https://mliank.github.io/tag/-uYJ9iUQJ/" class="badge warning">
+          flask
+        </a>
+      
+        <a href="https://mliank.github.io/tag/RO6mgJbH7/" class="badge warning">
+          分享
+        </a>
+      
+        <a href="https://mliank.github.io/tag/TwAC4gV1F/" class="badge secondary">
+          小项目
+        </a>
+      
+        <a href="https://mliank.github.io/tag/POAIKWCQm/" class="badge secondary">
+          Gridea
+        </a>
+      
+    </div>
+  </div>
+  <div class="paper">
+    Powered by <a href="https://mliank.github.io/" target="_blank">Super Lee</a> | <a class="rss" href="https://mliank.github.io//atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+
+
     </div>
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
@@ -138,13 +253,6 @@
 AOS.init();
 
 hljs.initHighlightingOnLoad()
-
-var app = new Vue({
-  el: '#app',
-  data: {
-    menuVisible: false,
-  },
-})
 
 </script>
 
