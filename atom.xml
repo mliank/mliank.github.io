@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://mliank.github.io/</id>
     <title>Super Lee</title>
-    <updated>2020-05-22T04:51:54.764Z</updated>
+    <updated>2020-05-26T06:00:30.956Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://mliank.github.io/"/>
     <link rel="self" href="https://mliank.github.io/atom.xml"/>
@@ -10,6 +10,16 @@
     <logo>https://mliank.github.io/images/avatar.png</logo>
     <icon>https://mliank.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Super Lee</rights>
+    <entry>
+        <title type="html"><![CDATA[新零售解决方案]]></title>
+        <id>https://mliank.github.io/Yd2dDE50Y/</id>
+        <link href="https://mliank.github.io/Yd2dDE50Y/">
+        </link>
+        <updated>2020-05-26T05:30:18.000Z</updated>
+        <content type="html"><![CDATA[<p>2020受疫情影响，消费者对线上依赖越来越大，许多公司都顺应形式，推出许多新都品牌和平台，主要做线上营销和团购，而市场上可以提供完整的方案的公司不多；好麦云（钱鲸科技）就是其中一个。<br>
+好麦云（钱鲸科技）成立于2019年，团队主要来源于Today和阿里。目前的产品有：以及针对消费者的好麦客小程序，针对连锁总部的好麦田，针对门店的好麦店，针对供应链的好麦客，针对物流的好麦仓；从人货场三个方面满足零售企业的切实需求，</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Django 2]]></title>
         <id>https://mliank.github.io/1cu9hwCAn/</id>
@@ -1647,54 +1657,6 @@ type=31 : 声音</p>
     ]
 }
 </code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Flask获取访问者 IP和User-Agent]]></title>
-        <id>https://mliank.github.io/flask-huo-qu-fang-wen-zhe-ip-he-user-agent/</id>
-        <link href="https://mliank.github.io/flask-huo-qu-fang-wen-zhe-ip-he-user-agent/">
-        </link>
-        <updated>2019-09-23T07:13:49.000Z</updated>
-        <content type="html"><![CDATA[<p>ip采用<code>request.remote_addr</code>获取<br>
-User-Agent采用<code>request.headers.get('User-Agent')</code>获取<br>
-代码如下</p>
-<pre><code># -*- coding: utf8 -*-   
-
-from flask import Flask, request
-app = Flask(__name__)
-@app.route('/')
-def index():
-    ua = request.headers.get('User-Agent')
-    ip = request.remote_addr
-    return ua,ip
-if __name__ == '__main__':
-    app.run(host=&quot;0.0.0.0&quot;,port=int(&quot;80&quot;))
-
-</code></pre>
-<p>API接口</p>
-<pre><code># -*- coding: utf8 -*-   
-
-from flask import Flask, request,Response,jsonify
-from datetime import datetime
-
-app = Flask(__name__)
-@app.route('/')
-def index():
-    now = datetime.now()
-    ua = request.headers.get('User-Agent')
-    ip = request.remote_addr
-    data={
-        'ip':ip,
-        'User-Agent':ua,
-        'time':now,
-    }
-    return jsonify(data)
-
-if __name__ == '__main__':
-    app.run(host=&quot;0.0.0.0&quot;,port=int(&quot;80&quot;),debug=True)
-</code></pre>
-<p>运行结果<br>
-<img src="https://mliank.github.io//post-images/1569225976018.png" alt="运行结果" loading="lazy"></p>
 ]]></content>
     </entry>
 </feed>
