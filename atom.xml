@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://mliank.github.io/</id>
     <title>Super Lee</title>
-    <updated>2020-05-29T05:13:39.152Z</updated>
+    <updated>2020-06-04T11:50:50.428Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://mliank.github.io/"/>
     <link rel="self" href="https://mliank.github.io/atom.xml"/>
@@ -11,17 +11,607 @@
     <icon>https://mliank.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Super Lee</rights>
     <entry>
-        <title type="html"><![CDATA[Django 2]]></title>
+        <title type="html"><![CDATA[Django2.0:全局配置settings详解]]></title>
+        <id>https://mliank.github.io/GPdEUPDGf/</id>
+        <link href="https://mliank.github.io/GPdEUPDGf/">
+        </link>
+        <updated>2020-06-04T09:41:39.000Z</updated>
+        <content type="html"><![CDATA[<p>Django设置文件包含你所有的Django安装配置。这个文件一般在你的项目文件夹里。比如我们创建了一个名为mysite的项目，那么这个配置文件setting.py就在项目里的mysite文件夹里。</p>
+<p>下面列表一些常用的settings配置供参考。</p>
+<p>1.配置静态文件</p>
+<pre><code>#STATIC_URL = '/static/'为静态文件别名
+STATIC_URL = '/static/'
+#静态文件地址拼接，后面'static'文件为自己建立的存放静态文件（JS，IMG，CSS）的文件名
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'), #主文件下静态文件
+    os.path.join(BASE_DIR,&quot;blog&quot;,&quot;statics&quot;),#项目blog文件下静态文件
+)
+</code></pre>
+<p>2、mysql数据库配置</p>
+<pre><code>########在setting原来默认的sqlite
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+############修改成mysql如下
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'test',    #你的数据库名称
+        'USER': 'root',   #你的数据库用户名
+        'PASSWORD': '19941028', #你的数据库密码
+        'HOST': '', #你的数据库主机，留空默认为localhost
+        'PORT': '3306', #你的数据库端口
+    }}
+#由于mysql默认引擎为MySQLdb，在__init__.py文件中添加下面代码
+#在python3中须替换为pymysql,可在主配置文件（和项目同名的文件下，不是app配置文件）中增加如下代码
+import pymysql
+pymysql.install_as_MySQLdb()
+#如果找不到pymysql板块，则通过pip install pymysql进行安装。
+</code></pre>
+<p>3、设置打印日志到屏幕</p>
+<pre><code>LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django.db.backends': {
+            'handlers': ['console'],
+            'propagate': True,
+            'level': 'DEBUG',
+        },
+    }
+}
+</code></pre>
+<p>4、语言</p>
+<pre><code>LANGUAGE_CODE = 'en-us'# 默认
+LANGUAGE_CODE = 'zh-hans'# 改为中文，主要针对admin页面
+</code></pre>
+<p>5、配置模板路径</p>
+<pre><code>TEMPLATE_DIRS = (
+        os.path.join(BASE_DIR,'templates'),
+    )
+#然后在项目根目录下添加templates文件夹
+</code></pre>
+<p>6、注册APP</p>
+<pre><code>INSTALLED_APPS = [
+ 'django.contrib.admin',
+ 'django.contrib.auth',
+ 'django.contrib.contenttypes',
+ 'django.contrib.sessions',
+ 'django.contrib.messages',
+ 'django.contrib.staticfiles',
+ 'app1.apps.App1Config', 
+ # 默认已有 如果没有只要添加app名称即可 例如： 'blog'
+ # 新建的应用都要在这里添加
+]
+</code></pre>
+<p>7、sql语句</p>
+<pre><code>LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django.db.backends': {
+            'handlers': ['console'],
+            'propagate': True,
+            'level': 'DEBUG',
+        },
+    }
+}　
+</code></pre>
+<p>当你的操作与数据库相关时 会将我们的写的语句翻译成sql语句在服务端打印。</p>
+<p>8、如果数据库中的UserInfo(用户表)继承django内置AbstractUser</p>
+<p>1）model需导入</p>
+<p><code>from django.contrib.auth.models import AbstractUser</code><br>
+2）Settings文件里添加</p>
+<p><code>AUTH_USER_MODEL = &quot;应用名.UserInfo&quot;</code><br>
+9、中间件，自己写的中间件，例如在项目中的md文件夹下md.py文件中的M1与M2两个中间件</p>
+<pre><code>MIDDLEWARE = [
+ 'django.middleware.security.SecurityMiddleware',
+ 'django.contrib.sessions.middleware.SessionMiddleware',
+ 'django.middleware.common.CommonMiddleware',
+ 'django.middleware.csrf.CsrfViewMiddleware',
+ 'django.contrib.auth.middleware.AuthenticationMiddleware',
+ 'django.contrib.messages.middleware.MessageMiddleware',
+ 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+ 'md.md.M1',
+ 'md.md.M2',
+]
+</code></pre>
+<p>需要注意的是自己写的中间件，配置要写在系统中的后面</p>
+<p>10、session存储的相关配置</p>
+<p>1）数据库配置（默认）</p>
+<pre><code>Django默认支持Session，并且默认是将Session数据存储在数据库中，即：django_session 表中。
+配置 settings.py
+ SESSION_ENGINE = 'django.contrib.sessions.backends.db' # 引擎（默认）
+ SESSION_COOKIE_NAME ＝ &quot;sessionid&quot;   # Session的cookie保存在浏览器上时的key，即：sessionid＝随机字符串（默认）
+ SESSION_COOKIE_PATH ＝ &quot;/&quot;    # Session的cookie保存的路径（默认）
+ SESSION_COOKIE_DOMAIN = None    # Session的cookie保存的域名（默认）
+ SESSION_COOKIE_SECURE = False    # 是否Https传输cookie（默认）
+ SESSION_COOKIE_HTTPONLY = True    # 是否Session的cookie只支持http传输（默认）
+ SESSION_COOKIE_AGE = 1209600    # Session的cookie失效日期（2周）（默认）
+ SESSION_EXPIRE_AT_BROWSER_CLOSE = False   # 是否关闭浏览器使得Session过期（默认）
+ SESSION_SAVE_EVERY_REQUEST = False   # 是否每次请求都保存Session，默认修改之后才保存（默认）
+</code></pre>
+<p>2）缓存配置</p>
+<pre><code>配置 settings.py
+ SESSION_ENGINE = 'django.contrib.sessions.backends.cache' # 引擎
+ SESSION_CACHE_ALIAS = 'default'    # 使用的缓存别名（默认内存缓存，也可以是memcache），此处别名依赖缓存的设置
+ SESSION_COOKIE_NAME ＝ &quot;sessionid&quot;   # Session的cookie保存在浏览器上时的key，即：sessionid＝随机字符串
+ SESSION_COOKIE_PATH ＝ &quot;/&quot;    # Session的cookie保存的路径
+ SESSION_COOKIE_DOMAIN = None    # Session的cookie保存的域名
+ SESSION_COOKIE_SECURE = False    # 是否Https传输cookie
+ SESSION_COOKIE_HTTPONLY = True    # 是否Session的cookie只支持http传输
+ SESSION_COOKIE_AGE = 1209600    # Session的cookie失效日期（2周）
+ SESSION_EXPIRE_AT_BROWSER_CLOSE = False   # 是否关闭浏览器使得Session过期
+ SESSION_SAVE_EVERY_REQUEST = False   # 是否每次请求都保存Session，默认修改之后才保存
+</code></pre>
+<p>3）默认配置</p>
+<pre><code>配置 settings.py
+ SESSION_ENGINE = 'django.contrib.sessions.backends.file' # 引擎
+ SESSION_FILE_PATH = None     # 缓存文件路径，如果为None，则使用tempfile模块获取一个临时地址tempfile.gettempdir() 
+ SESSION_COOKIE_NAME ＝ &quot;sessionid&quot;    # Session的cookie保存在浏览器上时的key，即：sessionid＝随机字符串
+ SESSION_COOKIE_PATH ＝ &quot;/&quot;     # Session的cookie保存的路径
+ SESSION_COOKIE_DOMAIN = None    # Session的cookie保存的域名
+ SESSION_COOKIE_SECURE = False    # 是否Https传输cookie
+ SESSION_COOKIE_HTTPONLY = True    # 是否Session的cookie只支持http传输
+ SESSION_COOKIE_AGE = 1209600    # Session的cookie失效日期（2周）
+ SESSION_EXPIRE_AT_BROWSER_CLOSE = False   # 是否关闭浏览器使得Session过期
+ SESSION_SAVE_EVERY_REQUEST = False    # 是否每次请求都保存Session，默认修改之后才保存
+</code></pre>
+<p>注意：<br>
+1）也可以自定义配置 但是自定义的配置都要写到配置文件最后 代码中使用时可以导入配置</p>
+<pre><code>from django.conf import settings
+settings.配置名
+</code></pre>
+<p>2）上面所有配置都是针对特定问题需要修改的，系统默认配置不做说明<br>
+3）上面配置只是前面django入门教程所遇到的常用配置 后续所遇配置都会逐步在此教程中持续添加跟新</p>
+<p>11、配置文件上传目录</p>
+<pre><code>#设置文件上传路径
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+</code></pre>
+<p>如果想在浏览器里访问自己上传的文件则需要在urls.py做如下设置：</p>
+<p>from django.views.static import serve<br>
+from django.conf import settings</p>
+<p>urlpatterns = [<br>
+...<br>
+re_path('^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),<br>
+]<br>
+下面看段django settings最佳配置实例代码，具体代码如下所示：</p>
+<p>import os<br>
+import socket<br>
+SITE_ID = 1</p>
+<h1 id="项目的根目录">项目的根目录</h1>
+<h1 id="简化后面的操作">简化后面的操作</h1>
+<p>PROJECT_ROOT = os.path.dirname(os.path.dirname(<strong>file</strong>))</p>
+<h1 id="加载应用">加载应用</h1>
+<h1 id="把应用添加到installed_apps中">把应用添加到INSTALLED_APPS中</h1>
+<p>from apps.kuser.mysetting import myapp as kuser_app<br>
+from apps.blog.mysetting import myapp as blog_app<br>
+MY_APPS = blog_app + kuser_app</p>
+<h1 id="加载静态文件">加载静态文件</h1>
+<p>from apps.blog.mysetting import my_staticfiles as blog_staticfiles<br>
+from apps.kuser.mysetting import my_staticfiles as kuser_staticfiles<br>
+MY_STATIC_DIRS = blog_staticfiles + kuser_staticfiles</p>
+<h1 id="加载模板文件">加载模板文件</h1>
+<p>from apps.blog.mysetting import my_templates as blog_templates<br>
+from apps.kuser.mysetting import my_templates as kuser_templates<br>
+MY_TEMPLATE_DIRS = blog_templates + kuser_templates</p>
+<h1 id="密钥配置">密钥配置</h1>
+<h1 id="适用于开发环境和部署环境">适用于开发环境和部署环境</h1>
+<h1 id="可以从系统环境中配置文件中和硬编码的配置中得到密钥">可以从系统环境中，配置文件中，和硬编码的配置中得到密钥</h1>
+<p>try:<br>
+SECRET_KEY = os.environ['SECRET_KEY']<br>
+except:<br>
+try:<br>
+with open(os.path.join(PROJECT_ROOT, 'db/secret_key').replace('\', '/')) as f:<br>
+SECRET_KEY = f.read().strip()<br>
+except:<br>
+SECRET_KEY = '*lk<sup>6@0l0(iulgar$j)faff&amp;</sup>(<sup>u+qk3j73d18@&amp;+ur</sup>xuTxY'</p>
+<h1 id="得到主机名">得到主机名</h1>
+<p>def hostname():<br>
+sys = os.name<br>
+if sys == 'nt':<br>
+hostname = os.getenv('computername')<br>
+return hostname<br>
+elif sys == 'posix':<br>
+host = os.popen('echo $HOSTNAME')<br>
+try:<br>
+hostname = host.read()<br>
+return hostname<br>
+finally:<br>
+host.close()<br>
+else:<br>
+raise RuntimeError('Unkwon hostname')<br>
+#调试和模板调试配置<br>
+#主机名相同则为开发环境，不同则为部署环境<br>
+#ALLOWED_HOSTS只在调试环境中才能为空<br>
+if socket.gethostname().lower() == hostname().lower():<br>
+DEBUG = TEMPLATE_DEBUG = True<br>
+ALLOWED_HOSTS = []<br>
+else:<br>
+ALLOWED_HOSTS = [<br>
+'baidu.com',<br>
+'0.0.0.0',<br>
+]<br>
+DEBUG = TEMPLATE_DEBUG = False<br>
+#数据库配置<br>
+MYDB = {<br>
+'mysql': {<br>
+'ENGINE': 'django.db.backends.mysql',<br>
+'NAME': 'books', #你的数据库名称<br>
+'USER': 'root', #你的数据库用户名<br>
+'PASSWORD': '', #你的数据库密码<br>
+'HOST': '', #你的数据库主机，留空默认为localhost<br>
+'PORT': '3306', #你的数据库端口<br>
+},<br>
+'sqlite': {<br>
+'ENGINE': 'django.db.backends.sqlite3',<br>
+'NAME': os.path.join(PROJECT_ROOT, 'db/db.sqlite3').replace('\', '/'),<br>
+}<br>
+}</p>
+<h1 id="给静态文件url一个后缀在templates里用到的">给静态文件url一个后缀，在templates里用到的。</h1>
+<h1 id="映射到静态文件的url">映射到静态文件的url</h1>
+<h1 id="static_url的含义与media_url类似">STATIC_URL的含义与MEDIA_URL类似</h1>
+<p>STATIC_URL = '/static/'</p>
+<h1 id="总的static目录">总的static目录</h1>
+<h1 id="可以使用命令-managepy-collectstatic-自动收集static文件">可以使用命令 manage.py collectstatic 自动收集static文件</h1>
+<h1 id="static_root-ospathjoinproject_root-staticreplace">STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static').replace('\', '/')</h1>
+<p>#放各个app的static目录及公共的static目录<br>
+#STATICFILES_DIRS：和TEMPLATE_DIRS的含义差不多，就是除了各个app的static目录以外还需要管理的静态文件设置，<br>
+#比如项目的公共文件差不多。然后给静态文件变量赋值，告诉Django，静态文件在哪里<br>
+#另外，Django提供了一个findstatic命令来查找指定的静态文件所在的目录，例如：D:\TestDjango&gt;python manage.py findstatic Chrome.jpg</p>
+<h1 id="默认情况下如果没有修改staticfiles_finders的话django首先会在staticfiles_dirs配置的文件夹中寻找静态文件然后再从每个app的static子目录下查找">默认情况下（如果没有修改STATICFILES_FINDERS的话），Django首先会在STATICFILES_DIRS配置的文件夹中寻找静态文件，然后再从每个app的static子目录下查找，</h1>
+<h1 id="并且返回找到的第一个文件-所以我们可以将全局的静态文件放在staticfiles_dirs配置的目录中将app独有的静态文件放在app的static子目录中">并且返回找到的第一个文件。所以我们可以将全局的静态文件放在STATICFILES_DIRS配置的目录中，将app独有的静态文件放在app的static子目录中。</h1>
+<h1 id="存放的时候按类别存放在static目录的子目录下如图片都放在images文件夹中所有的css都放在css文件夹中所有的js文件都放在js文件夹中">存放的时候按类别存放在static目录的子目录下，如图片都放在images文件夹中，所有的CSS都放在css文件夹中，所有的js文件都放在js文件夹中。</h1>
+<p>STATICFILES_DIRS = (<br>
+(&quot;downloads&quot;, os.path.join(PROJECT_ROOT, 'static/downloads').replace('\', '/')),<br>
+(&quot;uploads&quot;, os.path.join(PROJECT_ROOT, 'static/uploads').replace('\', '/')),<br>
+)</p>
+<h1 id="将app中的静态文件添加到静态文件配置列表中">将app中的静态文件添加到静态文件配置列表中</h1>
+<p>STATICFILES_DIRS += MY_STATIC_DIRS</p>
+<h1 id="最后关键的部分是staticfiles_dirs以下配置">最后关键的部分是STATICFILES_DIRS以下配置</h1>
+<h1 id="简要说一下static文件夹在项目里有css-js-images-三个文件夹看项目结构他们的路径分别是">简要说一下，static文件夹在项目里，有css js images 三个文件夹（看项目结构），他们的路径分别是：</h1>
+<h1 id="ospathjoinstatic_rootcssospathjoinstatic_rootjsospathjoinstatic_rootimages">os.path.join(STATIC_ROOT,'css')，os.path.join(STATIC_ROOT,'js')，os.path.join(STATIC_ROOT,'images')；</h1>
+<h1 id="我们分别给他们起三个别名cssjsimages你可以随意给不过为了易记我们原名称指定别名了">我们分别给他们起三个别名css，js，images（你可以随意给，不过为了易记，我们原名称指定别名了）</h1>
+<p>TEMPLATE_DIRS = (<br>
+os.path.join(PROJECT_ROOT, 'templates').replace('\', '/'),<br>
+)</p>
+<h1 id="配置应用的模板文件路径">配置应用的模板文件路径</h1>
+<p>TEMPLATE_DIRS += MY_TEMPLATE_DIRS</p>
+<h1 id="配置缓存">配置缓存</h1>
+<p>CACHES = {<br>
+'default': {<br>
+'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',<br>
+'LOCATION': 'unix:/tmp/memcached.sock',<br>
+'KEY_PREFIX': 'lcfcn',<br>
+'TIMEOUT': None<br>
+}<br>
+}<br>
+LOGIN_REDIRECT_URL = '/'<br>
+LOGIN_URL = '/auth/login/'<br>
+LOGOUT_URL = '/auth/logout/'</p>
+<h1 id="指用户上传的文件比如在model里面的filefieldimagefield上传的文件-如果你定义">指用户上传的文件，比如在Model里面的FileFIeld，ImageField上传的文件。如果你定义</h1>
+<h1 id="media_rootctempmedia那么filemodelsfilefieldupload_toabc上传的文件就会被保存到ctempmediaabc-media_root必须是本地路径的绝对路径">MEDIA_ROOT=c:\temp\media，那么File=models.FileField(upload_to=&quot;abc/&quot;)，上传的文件就会被保存到c:\temp\media\abc。MEDIA_ROOT必须是本地路径的绝对路径。</h1>
+<p>MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'static/uploads')</p>
+<h1 id="media_url是指从浏览器访问时的地址前缀">MEDIA_URL是指从浏览器访问时的地址前缀。</h1>
+<p>MEDIA_URL = '/uploads/'</p>
+<h1 id="应用注册列表">应用注册列表</h1>
+<p>INSTALLED_APPS = (<br>
+'django.contrib.admin',<br>
+'django.contrib.auth',<br>
+'django.contrib.contenttypes',<br>
+'django.contrib.sessions',<br>
+'django.contrib.messages',<br>
+'django.contrib.staticfiles',<br>
+'django.contrib.sites',<br>
+'django.contrib.sitemaps',<br>
+)<br>
+#为了不和系统应用混合，自己开发的应用放在这里</p>
+<h1 id="将自己写的app添加到应用列表中去">将自己写的app添加到应用列表中去</h1>
+<p>INSTALLED_APPS += MY_APPS</p>
+<h1 id="django-中间件">django 中间件</h1>
+<h1 id="django处理一个request的过程是首先通过django-中间件然后再通过默认的url方式进行的">django处理一个Request的过程是首先通过django 中间件，然后再通过默认的URL方式进行的。</h1>
+<h1 id="所以说我们要做的就是在django-中间件这个地方把所有request拦截住">所以说我们要做的就是在django 中间件这个地方把所有Request拦截住，</h1>
+<h1 id="用我们自己的方式完成处理以后直接返回response那么我们可以简化原来的设计思路">用我们自己的方式完成处理以后直接返回Response,那么我们可以简化原来的设计思路，</h1>
+<h1 id="把中间件不能处理的-request统统不管丢给django去处理">把中间件不能处理的 Request统统不管，丢给Django去处理。</h1>
+<p>MIDDLEWARE_CLASSES = (<br>
+'django.middleware.cache.UpdateCacheMiddleware',<br>
+'django.contrib.sessions.middleware.SessionMiddleware',<br>
+'django.middleware.common.CommonMiddleware',<br>
+'django.middleware.csrf.CsrfViewMiddleware',<br>
+'django.contrib.auth.middleware.AuthenticationMiddleware',</p>
+<h1 id="djangocontribauthmiddlewaresessionauthenticationmiddleware">'django.contrib.auth.middleware.SessionAuthenticationMiddleware',</h1>
+<p>'django.contrib.messages.middleware.MessageMiddleware',<br>
+'django.middleware.clickjacking.XFrameOptionsMiddleware',<br>
+'django.middleware.cache.FetchFromCacheMiddleware',<br>
+)<br>
+ROOT_URLCONF = 'lcforum.urls'<br>
+WSGI_APPLICATION = 'lcforum.wsgi.application'<br>
+#数据库配置<br>
+DATABASES = {<br>
+'default': MYDB.get('sqlite'),<br>
+}</p>
+<h1 id="语言">语言</h1>
+<p>LANGUAGE_CODE = 'zh-cn'</p>
+<h1 id="时区">时区</h1>
+<p>TIME_ZONE = 'Asia/Shanghai'<br>
+USE_TZ = True</p>
+<h1 id="在template中使用静态文件">在template中使用静态文件</h1>
+<h1 id="采用这种方式需要有一些额外配置打开settingspy确认template_context_processors中包含有djangocorecontext_processorsstatic">采用这种方式需要有一些额外配置，打开settings.py，确认TEMPLATE_CONTEXT_PROCESSORS中包含有'django.core.context_processors.static'</h1>
+<h1 id="template_context_processors">TEMPLATE_CONTEXT_PROCESSORS = (</h1>
+<h1 id="djangocorecontext_processorsdebug">'django.core.context_processors.debug',</h1>
+<h1 id="djangocorecontext_processorsi18n">'django.core.context_processors.i18n',</h1>
+<h1 id="djangocorecontext_processorsmedia">'django.core.context_processors.media',</h1>
+<h1 id="djangocorecontext_processorsstatic">'django.core.context_processors.static',</h1>
+<h1 id="djangocontribauthcontext_processorsauth">'django.contrib.auth.context_processors.auth',</h1>
+<h1 id="djangocontribmessagescontext_processorsmessages">'django.contrib.messages.context_processors.messages',</h1>
+<h1 id=""></h1>
+<h1 id="djangocorecontext_processorstz">'django.core.context_processors.tz',</h1>
+<h1 id="djangocontribmessagescontext_processorsmessages-2">'django.contrib.messages.context_processors.messages',</h1>
+<h1 id="blogcontext_processorscustom_proc自定义函数"># 'blog.context_processors.custom_proc',自定义函数</h1>
+<h1 id="-2">)</h1>
+<p>#from django.conf import settings<br>
+#gettext = lambda s: s<br>
+#getattr()</p>
+<h1 id="假设有个工程mysite有两个app为blog跟bbs">假设有个工程mysite，有两个app为blog跟bbs</h1>
+<h1 id="django处理static的方法是把各个app各自的static合并到一处">django处理static的方法是把各个app各自的static合并到一处</h1>
+<h1 id="比如">比如:</h1>
+<h1 id="mysitemysitestatic-放置公共静态文件">mysite/mysite/static 放置公共静态文件</h1>
+<h1 id="mysitebbsstatic-放置该app自己的静态文件">mysite/bbs/static 放置该app自己的静态文件</h1>
+<h1 id="mysiteblogstatic-放置该app自己的静态文件">mysite/blog/static 放置该app自己的静态文件</h1>
+<h1 id="可以这么设置">可以这么设置：</h1>
+<h1 id="static_root-wwwmysitemysitestatic">STATIC_ROOT = '/www/mysite/mysite/static '</h1>
+<h1 id="static_url-static">STATIC_URL = '/static/'</h1>
+<h1 id="staticfiles_dirs">STATICFILES_DIRS = (</h1>
+<h1 id="mysitestatic">'mysite/static',</h1>
+<h1 id="bbsstatic">'bbs/static/',</h1>
+<h1 id="blogstatic">'blog/static/',</h1>
+<h1 id="-3">)</h1>
+<h1 id="使用命令">使用命令</h1>
+<h1 id="managepy-collectstatic">manage.py collectstatic</h1>
+<h1 id="就会自动把所有静态文件全部复制到static_root中">就会自动把所有静态文件全部复制到STATIC_ROOT中</h1>
+<h1 id="如果开启了admin这一步是很必要的不然部署到生产环境的时候会找不到样式文件">如果开启了admin，这一步是很必要的，不然部署到生产环境的时候会找不到样式文件</h1>
+<h1 id="不要把你项目的静态文件放到这个目录-这个目录只有在运行python-managepy-collectstatic时才会用到">不要把你项目的静态文件放到这个目录。这个目录只有在运行python manage.py collectstatic时才会用到</h1>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Django2.0:MVC与MTV开发模式]]></title>
+        <id>https://mliank.github.io/M6NbINsbb/</id>
+        <link href="https://mliank.github.io/M6NbINsbb/">
+        </link>
+        <updated>2020-06-04T09:28:26.000Z</updated>
+        <content type="html"><![CDATA[<p>了解了，Django的请求与响应这个流程，下面我们一起来做一个简单的Blog文章发布系统：</p>
+<p>一、先设计一个简单的数据库，里面只放标题(title)、内容(body)、发布时间(created_time)三个字段。在原来的项目里，我们打开blog/models.py，输入如下代码：</p>
+<pre><code>from django.db import models
+
+class Article(models.Model):
+    title = models.CharField('标题',max_length=70)
+    body = models.TextField('内容', max_length=200, blank=True)
+    created_time = models.DateTimeField('发布时间')
+    
+    class Meta:
+        verbose_name = '文章'
+        verbose_name_plural = '文章'
+        
+    def __str__(self):
+        return self.title
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://i.loli.net/2020/06/04/JfTy6WiBRHFoaxq.png" alt="" loading="lazy"></figure>
+<p>之后在Pycharm底部Terminal里输入下面的命令进行数据库迁移：</p>
+<pre><code>python manage.py makemigrations
+python manage.py migrate
+</code></pre>
+<p>我们打开blog/admin.py 文件，在里面输入：</p>
+<pre><code>from django.contrib import admin
+from .models import Article
+
+class ArticleAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title', 'created_time',)
+    list_display_links = ('title',)
+    
+admin.site.register(Article,ArticleAdmin)
+</code></pre>
+<p>然后我们通过下面的命令创建一个管理员：</p>
+<p><code>python manage.py createsuperuser</code><br>
+创建管理员的时候，会提示你输入管理员帐号、密码、邮箱。注意，密码不能输入太简单，不然没法通过校检。会提示重新来一次。</p>
+<h1 id="运行">运行</h1>
+<p><code>python manage.py runserver</code><br>
+启动成功，然后我们在浏览器里输入网址：http://127.0.0.1:8000/admin/ 回车，我们就能看到网站管理后台界面。<br>
+<img src="https://i.loli.net/2020/06/04/EJTHMjO18xwoNYU.png" alt="" loading="lazy"></p>
+<p>二、添加一个URL和添加一个和URL对应的视图函数</p>
+<p>文章增加好了，现在我们需要做的是通过输入网址，就能在浏览器里查看到我们增加的文章。</p>
+<p>打开项目目录里mysite/urls.py的文件，我们增加一个新的URL，在urlpatterns列表里面增加：</p>
+<pre><code>urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('index', views.hello),
+    path('', views.index, name='index'), #+ 新增一个新的URL
+    ]
+</code></pre>
+<p>打开blog/views.py文件，为对应的网址，增加一个响应函数。代码如下：</p>
+<pre><code>from django.shortcuts import render
+from django.http import HttpResponse
+from blog import models
+
+def hello(request):
+    return HttpResponse('Hello,world')
+    
+#下面的代码是新增加的，这个函数主要是把查询的内容渲染到 index.html页面去    
+def index(request):
+    blog_index = models.Article.objects.all().order_by('-id')
+    context = {
+        'blog_index':blog_index,
+    }
+    return render(request, 'index.html',context)
+</code></pre>
+<p>三、然后在项目目录里的templates文件夹里，新建立一个index.html文件，并输入如下代码：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;博客首页&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div&gt;
+    &lt;ul&gt;
+    &lt;h3&gt;最新文章&lt;/h3&gt;
+        {% for x in blog_index %}
+        &lt;li&gt;{{ x.title }}&lt;/li&gt;
+        {% endfor %}
+    &lt;/ul&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>打开mysite/settins.py文件，找到TEMPLATES，在'DIRS': [ ],的括号里，把templates添加路径添加进去。</p>
+<p><code>os.path.join(BASE_DIR, 'templates'),</code><br>
+<img src="https://i.loli.net/2020/06/04/av6IWh1bEtLFs9T.png" alt="" loading="lazy"></p>
+<p>注意：如果你的项目是用Pycharm创建的话，这里已经添加过了，不需要重复添加。</p>
+<p>现在我们重启Django服务，在浏览器器里，输入网址：http://127.0.0.1:8000/</p>
+<figure data-type="image" tabindex="2"><img src="https://i.loli.net/2020/06/04/eHgf5Nwqt16LzjP.png" alt="" loading="lazy"></figure>
+<p>回车之后，就能在浏览器里看到刚才我们在后台增加的文章。</p>
+<p>在上面的例子里，我着重提示了三个地方的操作：models.py文件编辑、views.py文件编辑、templates下的模板文件编辑。那么这个三操作，具体有什么作用呢？</p>
+<p>1、models，数据模型：这是一个抽象层，用来构建和操作你的web应用中的数据，模型是你的数据的唯一的、权威的信息源。它包含你所储存数据的必要字段和行为。通常，每个模型对应数据库中唯一的一张表。</p>
+<p>2、templates，模板：模板层，负责怎么样显示数据，说白了，就是利用一些格式化的html文件，使数据按照要求显示（显示在哪里，怎么显示等等）。</p>
+<p>3、views，视图：用于封装负责处理用户请求及返回响应的逻辑。视图可以看作是前端与数据库的中间人，它会将前端想要的数据从数据库中读出来给前端。他也会将用户要想保存的数据写到数据库。</p>
+<p>之后的DjangoWeb开发之后，我们都要按这样的流程，或者说是按照这样的开发模式进行开发。这样的开发模式我们把它叫MVC开发模式。</p>
+<p>以下是 Django 中 M、V 和 C 各自的含义：<br>
+M ：数据存取部分，由django数据库层处理，本章要讲述的内容。<br>
+V：选择显示哪些数据要显示以及怎样显示的部分，由视图和模板处理。<br>
+C：根据用户输入委派视图的部分，由 Django 框架根据 URLconf 设置，对给定 URL 调用适当的 Python 函数。</p>
+<p>在Django里，由于 C层由框架自行处理，而 Django 里更关注的是模型（Model）、模板(Template)和视图（Views），所以Django 也被称为 MTV框架 。在MTV开发模式中：<br>
+M ：代表模型（Model），即数据存取层。 该层处理与数据相关的所有事务： 如何存取、如何验证有效<br>
+T ：代表模板(Template)，即表现层。 该层处理与表现相关的决定： 如何在页面或其他类型文档中进行显示。<br>
+V ：代表视图（View），即业务逻辑层。 该层包含存取模型及调取恰当模板的相关逻辑。 你可以把它看作模型与模板之间的桥梁。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Django2.0入门教程:请求与响应]]></title>
+        <id>https://mliank.github.io/pLIYuFMwj/</id>
+        <link href="https://mliank.github.io/pLIYuFMwj/">
+        </link>
+        <updated>2020-06-04T09:21:10.000Z</updated>
+        <content type="html"><![CDATA[<p><img src="https://i.loli.net/2020/06/04/NeQhStqRx91lmD3.png" alt="访问的网站的流程图" loading="lazy"><br>
+用户在浏览器里输入网址（URL），回车之后就会向目标网址发送一个HTTP请求，服务器收到请求之后就会做出一个响应，把内容通过浏览器渲染出来，呈现给用户看。</p>
+<p>下图，就是请求响应的过程。<br>
+<img src="https://i.loli.net/2020/06/04/YHjiGPRvskhSqIm.png" alt="请求响应的过程" loading="lazy"></p>
+<p>我们在浏览器里输入网址http://127.0.0.1:8000/index，得到了Hello，world。Hello，world就是服务器对这个网址(URL)做出的响应。</p>
+<p>这个网址(URL)是从哪得来的呢？这个网址(URL)就是我们自己设置的，就是在项目里的mysite文件夹下的urls.py中。</p>
+<pre><code>urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('index', views.hello),
+]
+</code></pre>
+<p>其中<code>path('index', views.hello),</code>对应的就是URL就是<code>http://127.0.0.1:8000/index</code></p>
+<p>URL我们都集中写在一个文件中，每个URL函数都以path、re_path（2.0的写法）的形式写出来，放在urlpatterns列表里，每个URL函数包含三个参数：URL(正规表达式)、对应方法、名称。</p>
+<p>这个URL对应的方法是views.hello，这个会给我们返回响应，也就是Hello，world，我们把这个方法方法写在了blog下的views.py文件里。这个方法其实是一个函数，这个函数通过HttpResponse，返回一个字符串'Hello,world'。</p>
+<pre><code>def hello(request):
+    return HttpResponse('Hello,world')
+</code></pre>
+<p>每一个URL都会对应一个函数，函数必须存在一个参数，一般约定为request,每个响应(函数)，都对应着一个URL。URL发出请求之后，这个函数就作出相对的响应，把'Hello,world'这个字符串渲染成HTML页面，在浏览器里呈现给用户。这个流程，就是请求与响应的流程，也是Django的处理流程。下面通过一张图片，更形象的的让你了解DJango的处理流程。<br>
+<img src="https://i.loli.net/2020/06/04/rAevcfKHUFzQmMs.png" alt="具体流程" loading="lazy"></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Django 2.0]]></title>
         <id>https://mliank.github.io/1cu9hwCAn/</id>
         <link href="https://mliank.github.io/1cu9hwCAn/">
         </link>
         <updated>2020-05-22T04:39:39.000Z</updated>
         <content type="html"><![CDATA[<p>to do</p>
-<ol>
-<li>打开冰箱门</li>
-<li>把大象装冰箱</li>
-<li>关上冰箱门</li>
-</ol>
+<h1 id="安装">安装</h1>
+<h2 id="pip安装">pip安装</h2>
+<pre><code>pip install django #安装最新Django
+pip install django==2.0.7 #指定版本安装
+</code></pre>
+<h2 id="检查">检查</h2>
+<p><code>pip list</code><br>
+或者</p>
+<pre><code>import django
+print(django.VERSION)
+</code></pre>
+<h1 id="创建项目">创建项目</h1>
+<p>使用 django-admin.py 来创建 HelloWorld 项目：<br>
+<code>django-admin.py startproject HelloWorld</code></p>
+<h2 id="目录说明">目录说明：</h2>
+<ul>
+<li>HelloWorld: 项目的容器。</li>
+<li>manage.py: 一个实用的命令行工具，可让你以各种方式与该 Django 项目进行交互。</li>
+<li>HelloWorld/<strong>init</strong>.py: 一个空文件，告诉 Python 该目录是一个 Python 包。</li>
+<li>HelloWorld/asgi.py: 一个 ASGI 兼容的 Web 服务器的入口，以便运行你的项目。</li>
+<li>HelloWorld/settings.py: 该 Django 项目的设置/配置。</li>
+<li>HelloWorld/urls.py: 该 Django 项目的 URL 声明; 一份由 Django 驱动的网站&quot;目录&quot;。</li>
+<li>HelloWorld/wsgi.py: 一个 WSGI 兼容的 Web 服务器的入口，以便运行你的项目。</li>
+</ul>
+<h2 id="运行">运行</h2>
+<p><code>python3 manage.py runserver 0.0.0.0:8000</code><br>
+<img src="https://i.loli.net/2020/06/04/sUZTzqD1kde4wSl.png" alt="运行" loading="lazy"></p>
+<h1 id="创建app">创建app</h1>
+<p>使用 manage.py 来创建blog：<br>
+<code>python manage.py startapp blog</code><br>
+<img src="https://i.loli.net/2020/06/04/skORWuzFLbyh8J9.png" alt="结构" loading="lazy"></p>
+<pre><code>blog                 #应用目录
+│  admin.py        #对应应用后台管理配置文件。
+│  apps.py         #对应应用的配置文件。
+│  models.py       #数据模块，数据库设计就在此文件中设计。后面重点讲解
+│  tests.py        #自动化测试模块，可在里面编写测试脚本自动化测试
+│  views.py        #视图文件，用来执行响应代码的。你在浏览器所见所得都是它处理的。
+│  __init__.py
+│
+├─migrations        #数据迁移、移植文目录，记录数据库操作记录，内容自动生成。
+│  │  __init__.py
+</code></pre>
+<p>应用创建好了，我们需要在项目目录下的mysite文件夹下的settings.py配置文件里的INSTALLED_APPS选项里注册应用。申明blog这个文件夹是一个APP应用。</p>
+<figure data-type="image" tabindex="1"><img src="https://i.loli.net/2020/06/04/7OlR3yiZWuFSGcN.png" alt="注册应用" loading="lazy"></figure>
+<h2 id="修改配置文件">修改配置文件</h2>
+<p>在这之前，我们需要设置一下我们的项目文件夹里的mysite目录下的settings.py配置文件，我们需要把语言设置为中文和时区修改为中国时区。<br>
+<code>LANGUAGE_CODE = 'zh-hans'</code>和<code>TIME_ZONE = 'Asia/Shanghai'</code><br>
+我们在文件尾部：</p>
+<pre><code>mysite/mysite/settings.py
+
+# 把语言改为中文
+# LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-hans'
+# 把国际时区改为中国时区
+# TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
+</code></pre>
+<p>打开 blog 目录下 view.py 文件，在里面输入:</p>
+<pre><code>#mysite/blog/views.py
+from django.http import HttpResponse
+
+def hello(request):
+    return HttpResponse('Hello,world')
+</code></pre>
+<p>再打开mysite目录下的urls.py文件：</p>
+<pre><code>mysite/mysite/urls.py
+
+from django.contrib import admin
+from django.urls import path
+from blog import views         #+ 
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('index', views.hello),   #+
+]
+</code></pre>
+<h2 id="启动">启动</h2>
+<p>使用命令<code>python manage.py runserver</code></p>
+<p>在浏览器里输入 http://127.0.0.1:8000/index 回车！<br>
+<img src="https://i.loli.net/2020/06/04/8FEvQmD7THJsBcX.png" alt="看到了我们期待已久的Hello world. " loading="lazy"></p>
 ]]></content>
     </entry>
     <entry>
@@ -47,7 +637,7 @@ combine：新文件名</p>
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[Django]]></title>
+        <title type="html"><![CDATA[Django常用命令和设置]]></title>
         <id>https://mliank.github.io/django/</id>
         <link href="https://mliank.github.io/django/">
         </link>
@@ -57,7 +647,7 @@ django項目提供給你的一个后台数据库管理界面<br>
 数据库生成命令:<br>
 makemigrations:执行检查数据库差异，生成迁移文件<br>
 migrate :根据迁移文件生成対座的SQL悟句<br>
-django默人的自带了一些数据库内容<br>
+django默任的自带了一些数据库内容<br>
 python manage.py migrate<br>
 创建管理界面的超級用戸:<br>
 python manage.py createsuperuser<br>
@@ -72,6 +662,21 @@ TIME_ ZONE = ' Asia/ Shanghai<br>
 - models 创建该APP下可能使用到的数据库<br>
 -test 实现某些測試駆幼I<br>
 -views实现対座功能的</p>
+<h1 id="django常用命令">Django常用命令</h1>
+<p>一些Django常用的命令。</p>
+<p>安装Django： pip install django  指定版本 pip3 install django==2.0</p>
+<p>新建项目： django-admin.py startproject mysite</p>
+<p>新建APP : python manage.py startapp blog</p>
+<p>启动：python manage.py runserver 8080</p>
+<p>同步或者更改生成 数据库：</p>
+<p>python manage.py makemigrations</p>
+<p>python manage.py migrate</p>
+<p>清空数据库： python manage.py flush</p>
+<p>创建管理员： python manage.py createsuperuser</p>
+<p>修改用户密码： python manage.py changepassword username</p>
+<p>Django项目环境终端： python manage.py shell</p>
+<p>这个命令和 直接运行 python 进入 shell 的区别是：你可以在这个 shell 里面调用当前项目的 models.py 中的 API，对于操作数据的测试非常方便。</p>
+<p>更多关于Django的命令在终端输入：python manage.py 查看</p>
 ]]></content>
     </entry>
     <entry>
@@ -137,1569 +742,6 @@ TIME_ ZONE = ' Asia/ Shanghai<br>
 <code>os.path.splitext(path)</code>分割文件名和扩展名</p>
 <pre><code> 
 </code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[BootStrap笔记]]></title>
-        <id>https://mliank.github.io/bootstrap-bi-ji/</id>
-        <link href="https://mliank.github.io/bootstrap-bi-ji/">
-        </link>
-        <updated>2019-10-09T02:13:24.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="前言">前言</h1>
-<p>为所有开发者、所有应用场景而设计。<br>
-Bootstrap 让前端开发更快速、简单。所有开发者都能快速上手、所有设备都可以适配、所有项目都适用。</p>
-<h2 id="导航条navbar">导航条<code>navbar</code></h2>
-<p><code>navbar-default</code>白底的导航条<br>
-<code>navbar-inverse</code>黑底的导航条</p>
-<h2 id="按钮btn">按钮<code>btn</code></h2>
-<pre><code>&lt;div class=&quot;btn-group&quot; role=&quot;group&quot; aria-label=&quot;...&quot;&gt;
-  &lt;button type=&quot;button&quot; class=&quot;btn btn-default&quot;&gt;Left&lt;/button&gt;
-  &lt;button type=&quot;button&quot; class=&quot;btn btn-default&quot;&gt;Middle&lt;/button&gt;
-  &lt;button type=&quot;button&quot; class=&quot;btn btn-default&quot;&gt;Right&lt;/button&gt;
-&lt;/div&gt;
-</code></pre>
-<h2 id="轮播">轮播</h2>
-<pre><code>&lt;div id=&quot;myCarousel&quot; class=&quot;carousel slide pad_010 b_k&quot; data-ride=&quot;carousel&quot;&gt;
-    &lt;!-- 轮播（Carousel）指标 --&gt;
-    &lt;ol class=&quot;carousel-indicators&quot;&gt;
-        &lt;li data-target=&quot;#myCarousel&quot; data-slide-to=&quot;0&quot; class=&quot;active&quot;&gt;&lt;/li&gt;
-        &lt;li data-target=&quot;#myCarousel&quot; data-slide-to=&quot;1&quot;&gt;&lt;/li&gt;
-        &lt;li data-target=&quot;#myCarousel&quot; data-slide-to=&quot;2&quot;&gt;&lt;/li&gt;
-    &lt;/ol&gt;
-    &lt;!-- 轮播（Carousel）项目 --&gt;
-    &lt;div class=&quot;carousel-inner bor_btm&quot;&gt;
-        &lt;div class=&quot;item active&quot;&gt;
-            &lt;img src=&quot;http://wx1.sinaimg.cn/mw600/0076BSS5ly1g899dgpdbyj30xc0m8juo.jpg&quot;&gt;
-            &lt;div class=&quot;carousel-caption&quot;&gt;
-                &lt;h4&gt;图一&lt;/h4&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-        &lt;div class=&quot;item&quot;&gt;
-            &lt;img src=&quot;http://wx4.sinaimg.cn/mw600/0076BSS5ly1g8996zq2w8j31900u0zoe.jpg&quot;&gt;
-            &lt;div class=&quot;carousel-caption&quot;&gt;
-                &lt;h4&gt;图二&lt;/h4&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-        &lt;div class=&quot;item&quot;&gt;
-            &lt;img src=&quot;http://wx1.sinaimg.cn/mw600/0076BSS5ly1g8986ev12zj30jg0t64fe.jpg&quot;&gt;
-            &lt;div class=&quot;carousel-caption&quot;&gt;
-                &lt;h4&gt;图三&lt;/h4&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;!-- 轮播（Carousel）导航 --&gt;
-    &lt;a class=&quot;carousel-control left&quot; href=&quot;#myCarousel&quot; data-slide=&quot;prev&quot;&gt;&amp;lsaquo;&lt;/a&gt;
-    &lt;a class=&quot;carousel-control right&quot; href=&quot;#myCarousel&quot; data-slide=&quot;next&quot;&gt;&amp;rsaquo;&lt;/a&gt;
-&lt;/div&gt;
-</code></pre>
-<p>#表格</p>
-<h1 id=""></h1>
-<p>表单</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[优质接口分享]]></title>
-        <id>https://mliank.github.io/you-zhi-jie-kou-fen-xiang/</id>
-        <link href="https://mliank.github.io/you-zhi-jie-kou-fen-xiang/">
-        </link>
-        <updated>2019-09-23T08:31:18.000Z</updated>
-        <content type="html"><![CDATA[<p>腾讯<br>
-<a href="https://nodeapi.3g.qq.com/nodeapi/api/weather@getWeather">天气接口</a><br>
-<img src="https://mliank.github.io//post-images/1569227601485.png" alt="" loading="lazy"></p>
-<p>目前接口列表：<br>
-新实时段子<br>
-<a href="https://api.apiopen.top/getJoke?page=1&amp;count=2&amp;type=video">https://api.apiopen.top/getJoke?page=1&amp;count=2&amp;type=video</a><br>
-通过Id查段子<br>
-https://api.apiopen.top/getSingleJoke?sid=28654780<br>
-快递查询：<br>
-https://api.apiopen.top/EmailSearch?number=1012002<br>
-随机单句诗词推荐：<br>
-https://api.apiopen.top/singlePoetry<br>
-随机一首诗词推荐：<br>
-https://api.apiopen.top/recommendPoetry<br>
-搜索古诗词：<br>
-https://api.apiopen.top/searchPoetry?name=古风二首%20二<br>
-搜索古诗词作者：<br>
-https://api.apiopen.top/searchAuthors?name=李白<br>
-模糊搜索古诗词（可搜索诗词名、诗词内容、诗词作者）：<br>
-https://api.apiopen.top/likePoetry?name=李白<br>
-获取宋朝古诗词：<br>
-https://api.apiopen.top/getSongPoetry?page=1&amp;count=20<br>
-获取唐朝古诗词：<br>
-https://api.apiopen.top/getTangPoetry?page=1&amp;count=20<br>
-音乐搜索接口：<br>
-https://api.apiopen.top/searchMusic?name=不要说话<br>
-音乐电台接口：<br>
-https://api.apiopen.top/musicBroadcasting<br>
-音乐电台详情接口：<br>
-https://api.apiopen.top/musicBroadcastingDetails?channelname=public_tuijian_spring<br>
-音乐详情接口：<br>
-https://api.apiopen.top/musicDetails?id=604392760<br>
-音乐排行榜接口：<br>
-https://api.apiopen.top/musicRankings<br>
-音乐排行榜详情接口：<br>
-https://api.apiopen.top/musicRankingsDetails?type=1<br>
-每日视频推荐接口：<br>
-https://api.apiopen.top/todayVideo<br>
-视频大纲获取接口：<br>
-https://api.apiopen.top/videoHomeTab<br>
-视频分类推荐接口：<br>
-https://api.apiopen.top/videoCategory<br>
-视频分类推荐接口：<br>
-https://api.apiopen.top/videoCategoryDetails?id=14<br>
-根据ID推荐接口：<br>
-https://api.apiopen.top/videoRecommend?id=127398<br>
-新闻接口：<br>
-https://www.apiopen.top/journalismApi<br>
-随机推荐热门段子（包含文字、图片、GIF、视频）：<br>
-https://www.apiopen.top/satinApi?type=1&amp;page=1<br>
-随机推荐热门段子【神评版本】（包含文字、图片、GIF、视频）：<br>
-https://www.apiopen.top/satinGodApi?type=1&amp;page=1<br>
-随机推荐热门段子【神评版本】评论列表：<br>
-https://www.apiopen.top/satinCommentApi?id=27610708&amp;page=1<br>
-热门小说推荐列表<br>
-https://www.apiopen.top/novelApi<br>
-小说搜索接口<br>
-https://www.apiopen.top/novelSearchApi?name=盗墓笔记<br>
-小说详情接口<br>
-https://www.apiopen.top/novelInfoApi?name=盗墓笔记<br>
-天气获取接口<br>
-https://www.apiopen.top/weatherApi?city=成都<br>
-美图获取接口<br>
-https://www.apiopen.top/meituApi?page=1<br>
-个性网名获取接口<br>
-https://www.apiopen.top/femaleNameApi?page=1<br>
-创建应用接口<br>
-https://www.apiopen.top/createUserKey?appId=com.chat.peakchao&amp;passwd=123456<br>
-增加统计信息接口<br>
-https://www.apiopen.top/addStatistics?appKey=00d91e8e0cca2b76f515926a36db68f5&amp;type=点击统计&amp;typeId=1&amp;count=2<br>
-查询统计信息接口<br>
-https://www.apiopen.top/findStatistics?appKey=00d91e8e0cca2b76f515926a36db68f5<br>
-用户注册接口<br>
-https://www.apiopen.top/createUser?key=00d91e8e0cca2b76f515926a36db68f5&amp;phone=13594347817&amp;passwd=123654<br>
-用户登陆接口<br>
-https://www.apiopen.top/login?key=00d91e8e0cca2b76f515926a36db68f5&amp;phone=13594347817&amp;passwd=123456<br>
-2018-04-18 更新（已备案完成，可访问。）：<br>
-应其他特殊需求，现正在进行域名备案，备案期间需要关闭服务器，待备案完成后方可访问，备案后，域名将允许在微信小程序或其他第三方领域使用。<br>
-2018-09-24 更新：<br>
-古诗词相关接口<br>
-快递查询：<br>
-https://api.apiopen.top/EmailSearch?number=1012002<br>
-随机单句诗词推荐：<br>
-https://api.apiopen.top/singlePoetry<br>
-随机一首诗词推荐：<br>
-https://api.apiopen.top/recommendPoetry<br>
-搜索古诗词：<br>
-https://api.apiopen.top/searchPoetry?name=古风二首%20二<br>
-搜索古诗词作者：<br>
-https://api.apiopen.top/searchAuthors?name=李白<br>
-模糊搜索古诗词（可搜索诗词名、诗词内容、诗词作者）：<br>
-https://api.apiopen.top/likePoetry?name=李白<br>
-获取宋朝古诗词：<br>
-https://api.apiopen.top/getSongPoetry?page=1&amp;count=20<br>
-获取唐朝古诗词：<br>
-https://api.apiopen.top/getTangPoetry?page=1&amp;count=20<br>
-2018-09-23 更新：<br>
-视频/音乐相关接口<br>
-新实时段子<br>
-https://api.apiopen.top/getJoke?page=1&amp;count=2&amp;type=video<br>
-通过Id查段子<br>
-https://api.apiopen.top/getSingleJoke?sid=28654780<br>
-音乐搜索接口：<br>
-https://api.apiopen.top/searchMusic?name=不要说话<br>
-音乐电台接口：<br>
-https://api.apiopen.top/musicBroadcasting<br>
-音乐电台详情接口：<br>
-https://api.apiopen.top/musicBroadcastingDetails?channelname=public_tuijian_spring<br>
-音乐详情接口：<br>
-https://api.apiopen.top/musicDetails?id=604392760<br>
-音乐排行榜接口：<br>
-https://api.apiopen.top/musicRankings<br>
-音乐排行榜详情接口：<br>
-https://api.apiopen.top/musicRankingsDetails?type=1<br>
-每日视频推荐接口：<br>
-https://api.apiopen.top/todayVideo<br>
-视频大纲获取接口：<br>
-https://api.apiopen.top/videoHomeTab<br>
-视频分类推荐接口：<br>
-https://api.apiopen.top/videoCategory<br>
-视频分类推荐接口：<br>
-https://api.apiopen.top/videoCategoryDetails?id=14<br>
-根据ID推荐接口：<br>
-https://api.apiopen.top/videoRecommend?id=127398<br>
-2018-07-13 更新：<br>
-新闻接口<br>
-https://www.apiopen.top/journalismApi<br>
-返回值：</p>
-<pre><code>{
-    &quot;code&quot;: 200,
-    &quot;msg&quot;: &quot;成功!&quot;,
-    &quot;data&quot;: {
-        &quot;tech&quot;: [
-            {
-                &quot;liveInfo&quot;: null,
-                &quot;tcount&quot;: 1,
-                &quot;picInfo&quot;: [
-                    {
-                        &quot;ref&quot;: null,
-                        &quot;width&quot;: null,
-                        &quot;url&quot;: &quot;http://cms-bucket.nosdn.127.net/2018/07/13/96e750810c7c47c7b95d6ee112cb9ab4.png&quot;,
-                        &quot;height&quot;: null
-                    }
-                ],
-                &quot;docid&quot;: &quot;DMJU4F9E00097U7R&quot;,
-                &quot;videoInfo&quot;: null,
-                &quot;channel&quot;: &quot;tech&quot;,
-                &quot;link&quot;: &quot;https://3g.163.com/all/article/DMJU4F9E00097U7R.html&quot;,
-                &quot;source&quot;: &quot;网易科技报道&quot;,
-                &quot;title&quot;: &quot;消息称滴滴考虑明年IPO 放慢融资计划&quot;,
-                &quot;type&quot;: &quot;doc&quot;,
-                &quot;imgsrcFrom&quot;: null,
-                &quot;imgsrc3gtype&quot;: 1,
-                &quot;unlikeReason&quot;: &quot;重复、旧闻/6,内容质量差/6&quot;,
-                &quot;digest&quot;: &quot;网易科技讯7月13日消息，据香港媒体报道，消息人士透露，滴滴&quot;,
-                &quot;typeid&quot;: &quot;&quot;,
-                &quot;addata&quot;: null,
-                &quot;tag&quot;: &quot;&quot;,
-                &quot;category&quot;: &quot;科技&quot;,
-                &quot;ptime&quot;: &quot;2018-07-13 15:47:37&quot;
-            }
-        ],
-        &quot;auto&quot;: [
-            {
-                &quot;liveInfo&quot;: null,
-                &quot;tcount&quot;: 514,
-                &quot;picInfo&quot;: [
-                    {
-                        &quot;ref&quot;: null,
-                        &quot;width&quot;: null,
-                        &quot;url&quot;: &quot;http://cms-bucket.nosdn.127.net/2018/07/13/bcb246ac4558454d979b593138207f39.jpeg&quot;,
-                        &quot;height&quot;: null
-                    }
-                ],
-                &quot;docid&quot;: &quot;DMIP77HO0008856R&quot;,
-                &quot;videoInfo&quot;: null,
-                &quot;channel&quot;: &quot;auto&quot;,
-                &quot;link&quot;: &quot;https://3g.163.com/all/article/DMIP77HO0008856R.html&quot;,
-                &quot;source&quot;: &quot;网易汽车&quot;,
-                &quot;title&quot;: &quot;尊贵到令人膨胀 这辆宾利慕尚情怀爆棚&quot;,
-                &quot;type&quot;: &quot;doc&quot;,
-                &quot;imgsrcFrom&quot;: null,
-                &quot;imgsrc3gtype&quot;: 1,
-                &quot;unlikeReason&quot;: &quot;重复、旧闻/6,内容质量差/6&quot;,
-                &quot;digest&quot;: &quot;宾利汽车将于2019年迎来品牌成立100周年，为庆祝这一即将&quot;,
-                &quot;typeid&quot;: &quot;&quot;,
-                &quot;addata&quot;: null,
-                &quot;tag&quot;: &quot;&quot;,
-                &quot;category&quot;: &quot;汽车&quot;,
-                &quot;ptime&quot;: &quot;2018-07-13 05:02:30&quot;
-            }
-        ]
-    }
-}
-</code></pre>
-<p>2018-05-04 更新：<br>
-随机推荐热门段子【神评版本】评论列表<br>
-https://www.apiopen.top/satinCommentApi?id=27610708&amp;page=1<br>
-接口传参说明：<br>
-page=1:页码<br>
-id=27610708:此id来自于神评列表的id<br>
-返回值：</p>
-<pre><code>{
-    &quot;code&quot;: 200,
-    &quot;msg&quot;: &quot;成功!&quot;,
-    &quot;data&quot;: {
-        &quot;author_uid&quot;: 19064947,
-        &quot;hot&quot;: {
-            &quot;info&quot;: {
-                &quot;count&quot;: 3
-            },
-            &quot;list&quot;: [
-                {
-                    &quot;content&quot;: &quot;脚气闷到裆&quot;,
-                    &quot;ctime&quot;: &quot;2018-04-17T22:30:02&quot;,
-                    &quot;data_id&quot;: 27610708,
-                    &quot;hate_count&quot;: 0,
-                    &quot;id&quot;: 479161,
-                    &quot;like_count&quot;: 154,
-                    &quot;precmts&quot;: [],
-                    &quot;status&quot;: 0,
-                    &quot;type&quot;: &quot;text&quot;,
-                    &quot;user&quot;: {
-                        &quot;id&quot;: 21759605,
-                        &quot;is_vip&quot;: false,
-                        &quot;personal_page&quot;: &quot;&quot;,
-                        &quot;profile_image&quot;: &quot;http://wimg.spriteapp.cn/p/jie.jpg&quot;,
-                        &quot;qq_uid&quot;: &quot;&quot;,
-                        &quot;qzone_uid&quot;: &quot;&quot;,
-                        &quot;room_icon&quot;: &quot;&quot;,
-                        &quot;room_name&quot;: &quot;&quot;,
-                        &quot;room_role&quot;: &quot;&quot;,
-                        &quot;room_url&quot;: &quot;&quot;,
-                        &quot;sex&quot;: &quot;m&quot;,
-                        &quot;total_cmt_like_count&quot;: &quot;255&quot;,
-                        &quot;username&quot;: &quot;风盖着吹&quot;,
-                        &quot;weibo_uid&quot;: &quot;&quot;
-                    },
-                    &quot;vote&quot;: []
-                },
-                {
-                    &quot;content&quot;: &quot;中间开个口，嗯 很舒坦&quot;,
-                    &quot;ctime&quot;: &quot;2018-04-20T01:32:19&quot;,
-                    &quot;data_id&quot;: 27610708,
-                    &quot;hate_count&quot;: 2,
-                    &quot;id&quot;: 685602,
-                    &quot;like_count&quot;: 70,
-                    &quot;precmts&quot;: [],
-                    &quot;status&quot;: 0,
-                    &quot;type&quot;: &quot;text&quot;,
-                    &quot;user&quot;: {
-                        &quot;id&quot;: 22382795,
-                        &quot;is_vip&quot;: false,
-                        &quot;personal_page&quot;: &quot;&quot;,
-                        &quot;profile_image&quot;: &quot;http://wimg.spriteapp.cn/profile/large/2018/04/20/5ad8d12442b3a_mini.jpg&quot;,
-                        &quot;qq_uid&quot;: &quot;&quot;,
-                        &quot;qzone_uid&quot;: &quot;&quot;,
-                        &quot;room_icon&quot;: &quot;&quot;,
-                        &quot;room_name&quot;: &quot;&quot;,
-                        &quot;room_role&quot;: &quot;&quot;,
-                        &quot;room_url&quot;: &quot;&quot;,
-                        &quot;sex&quot;: &quot;m&quot;,
-                        &quot;total_cmt_like_count&quot;: &quot;84&quot;,
-                        &quot;username&quot;: &quot;昵称审核未通过&quot;,
-                        &quot;weibo_uid&quot;: &quot;&quot;
-                    },
-                    &quot;vote&quot;: []
-                },
-                {
-                    &quot;content&quot;: &quot;麻烦姐夫打赞&quot;,
-                    &quot;ctime&quot;: &quot;2018-04-19T23:52:38&quot;,
-                    &quot;data_id&quot;: 27610708,
-                    &quot;hate_count&quot;: 5,
-                    &quot;id&quot;: 676713,
-                    &quot;like_count&quot;: 33,
-                    &quot;precmts&quot;: [],
-                    &quot;status&quot;: 0,
-                    &quot;type&quot;: &quot;text&quot;,
-                    &quot;user&quot;: {
-                        &quot;id&quot;: 22380832,
-                        &quot;is_vip&quot;: false,
-                        &quot;personal_page&quot;: &quot;http://user.qzone.qq.com/73810188211C98272F24B39C95F3888D&quot;,
-                        &quot;profile_image&quot;: &quot;http://wimg.spriteapp.cn/profile/large/2018/04/19/5ad8b98686516_mini.jpg&quot;,
-                        &quot;qq_uid&quot;: &quot;&quot;,
-                        &quot;qzone_uid&quot;: &quot;73810188211C98272F24B39C95F3888D&quot;,
-                        &quot;room_icon&quot;: &quot;&quot;,
-                        &quot;room_name&quot;: &quot;&quot;,
-                        &quot;room_role&quot;: &quot;&quot;,
-                        &quot;room_url&quot;: &quot;&quot;,
-                        &quot;sex&quot;: &quot;m&quot;,
-                        &quot;total_cmt_like_count&quot;: &quot;33&quot;,
-                        &quot;username&quot;: &quot;周某人来找姐夫&quot;,
-                        &quot;weibo_uid&quot;: &quot;&quot;
-                    },
-                    &quot;vote&quot;: []
-                }
-            ]
-        },
-        &quot;normal&quot;: {
-            &quot;info&quot;: {
-                &quot;count&quot;: 140,
-                &quot;np&quot;: 20
-            },
-            &quot;list&quot;: [
-                {
-                    &quot;content&quot;: &quot;你是想象不出自己有多穷&quot;,
-                    &quot;ctime&quot;: &quot;2018-05-02T23:17:43&quot;,
-                    &quot;data_id&quot;: 27610708,
-                    &quot;hate_count&quot;: 0,
-                    &quot;id&quot;: 1750296,
-                    &quot;like_count&quot;: 0,
-                    &quot;precmts&quot;: [],
-                    &quot;status&quot;: 0,
-                    &quot;type&quot;: &quot;text&quot;,
-                    &quot;user&quot;: {
-                        &quot;id&quot;: 16144082,
-                        &quot;is_vip&quot;: false,
-                        &quot;personal_page&quot;: &quot;http://user.qzone.qq.com/3720E9B0E9A28CBCB2BF1639F100A7F1&quot;,
-                        &quot;profile_image&quot;: &quot;http://wimg.spriteapp.cn/profile/large/2018/04/30/5ae6fe78a87ed_mini.jpg&quot;,
-                        &quot;qq_uid&quot;: &quot;&quot;,
-                        &quot;qzone_uid&quot;: &quot;3720E9B0E9A28CBCB2BF1639F100A7F1&quot;,
-                        &quot;room_icon&quot;: &quot;&quot;,
-                        &quot;room_name&quot;: &quot;&quot;,
-                        &quot;room_role&quot;: &quot;&quot;,
-                        &quot;room_url&quot;: &quot;&quot;,
-                        &quot;sex&quot;: &quot;m&quot;,
-                        &quot;total_cmt_like_count&quot;: &quot;213&quot;,
-                        &quot;username&quot;: &quot;请问菇凉妳的心怎么走&quot;,
-                        &quot;weibo_uid&quot;: &quot;&quot;
-                    },
-                    &quot;vote&quot;: []
-                },
-                {
-                    &quot;content&quot;: &quot;脚背痒怎么办&quot;,
-                    &quot;ctime&quot;: &quot;2018-04-24T19:48:02&quot;,
-                    &quot;data_id&quot;: 27610708,
-                    &quot;hate_count&quot;: 0,
-                    &quot;id&quot;: 1117028,
-                    &quot;like_count&quot;: 0,
-                    &quot;precmts&quot;: [],
-                    &quot;status&quot;: 0,
-                    &quot;type&quot;: &quot;text&quot;,
-                    &quot;user&quot;: {
-                        &quot;id&quot;: 20600661,
-                        &quot;is_vip&quot;: false,
-                        &quot;personal_page&quot;: &quot;&quot;,
-                        &quot;profile_image&quot;: &quot;http://wx.qlogo.cn/mmopen/ZeuSZYeUCFL1xh9kYCrel0ia1E8a5RugFZ4A1bwt3Y6Gb3ph6MZdqaTw4A6Dq9Q8SoToEKqOjiaDfopBqib2wrlZaOWibz9V0F96/0&quot;,
-                        &quot;qq_uid&quot;: &quot;&quot;,
-                        &quot;qzone_uid&quot;: &quot;&quot;,
-                        &quot;room_icon&quot;: &quot;&quot;,
-                        &quot;room_name&quot;: &quot;&quot;,
-                        &quot;room_role&quot;: &quot;&quot;,
-                        &quot;room_url&quot;: &quot;&quot;,
-                        &quot;sex&quot;: &quot;m&quot;,
-                        &quot;total_cmt_like_count&quot;: &quot;1728&quot;,
-                        &quot;username&quot;: &quot;付小瑞&quot;,
-                        &quot;weibo_uid&quot;: &quot;&quot;
-                    },
-                    &quot;vote&quot;: []
-                },
-                {
-                    &quot;content&quot;: &quot;看来我的恋脚癖该找个医生治治了&quot;,
-                    &quot;ctime&quot;: &quot;2018-04-23T18:39:04&quot;,
-                    &quot;data_id&quot;: 27610708,
-                    &quot;hate_count&quot;: 0,
-                    &quot;id&quot;: 1028740,
-                    &quot;like_count&quot;: 0,
-                    &quot;precmts&quot;: [],
-                    &quot;status&quot;: 0,
-                    &quot;type&quot;: &quot;text&quot;,
-                    &quot;user&quot;: {
-                        &quot;id&quot;: 22291903,
-                        &quot;is_vip&quot;: false,
-                        &quot;personal_page&quot;: &quot;http://m.weibo.com/u/5257725865&quot;,
-                        &quot;profile_image&quot;: &quot;http://wimg.spriteapp.cn/profile/large/2018/04/20/5ad9456199f2e_mini.jpg&quot;,
-                        &quot;qq_uid&quot;: &quot;&quot;,
-                        &quot;qzone_uid&quot;: &quot;&quot;,
-                        &quot;room_icon&quot;: &quot;&quot;,
-                        &quot;room_name&quot;: &quot;&quot;,
-                        &quot;room_role&quot;: &quot;&quot;,
-                        &quot;room_url&quot;: &quot;&quot;,
-                        &quot;sex&quot;: &quot;m&quot;,
-                        &quot;total_cmt_like_count&quot;: &quot;342&quot;,
-                        &quot;username&quot;: &quot;关爱97年空巢老人&quot;,
-                        &quot;weibo_uid&quot;: 5257725865
-                    },
-                    &quot;vote&quot;: []
-                },
-                {
-                    &quot;content&quot;: &quot;放屁加脚气，原子弹的威力&quot;,
-                    &quot;ctime&quot;: &quot;2018-04-23T15:54:44&quot;,
-                    &quot;data_id&quot;: 27610708,
-                    &quot;hate_count&quot;: 0,
-                    &quot;id&quot;: 1017581,
-                    &quot;like_count&quot;: 1,
-                    &quot;precmts&quot;: [],
-                    &quot;status&quot;: 0,
-                    &quot;type&quot;: &quot;text&quot;,
-                    &quot;user&quot;: {
-                        &quot;id&quot;: 21975374,
-                        &quot;is_vip&quot;: false,
-                        &quot;personal_page&quot;: &quot;&quot;,
-                        &quot;profile_image&quot;: &quot;http://wimg.spriteapp.cn/p/jie.jpg&quot;,
-                        &quot;qq_uid&quot;: &quot;&quot;,
-                        &quot;qzone_uid&quot;: &quot;&quot;,
-                        &quot;room_icon&quot;: &quot;&quot;,
-                        &quot;room_name&quot;: &quot;&quot;,
-                        &quot;room_role&quot;: &quot;&quot;,
-                        &quot;room_url&quot;: &quot;&quot;,
-                        &quot;sex&quot;: &quot;m&quot;,
-                        &quot;total_cmt_like_count&quot;: &quot;7&quot;,
-                        &quot;username&quot;: &quot;刚刚好EwD&quot;,
-                        &quot;weibo_uid&quot;: &quot;&quot;
-                    },
-                    &quot;vote&quot;: []
-                },
-                {
-                    &quot;content&quot;: &quot;谁能告诉我这是鞋还是裤子？&quot;,
-                    &quot;ctime&quot;: &quot;2018-04-23T10:04:22&quot;,
-                    &quot;data_id&quot;: 27610708,
-                    &quot;hate_count&quot;: 0,
-                    &quot;id&quot;: 992004,
-                    &quot;like_count&quot;: 0,
-                    &quot;precmts&quot;: [],
-                    &quot;status&quot;: 0,
-                    &quot;type&quot;: &quot;text&quot;,
-                    &quot;user&quot;: {
-                        &quot;id&quot;: 17998445,
-                        &quot;is_vip&quot;: false,
-                        &quot;personal_page&quot;: &quot;http://user.qzone.qq.com/30BA25041BC9EC6D140D26420AD6FF80&quot;,
-                        &quot;profile_image&quot;: &quot;http://qzapp.qlogo.cn/qzapp/100336987/30BA25041BC9EC6D140D26420AD6FF80/100&quot;,
-                        &quot;qq_uid&quot;: &quot;&quot;,
-                        &quot;qzone_uid&quot;: &quot;30BA25041BC9EC6D140D26420AD6FF80&quot;,
-                        &quot;room_icon&quot;: &quot;&quot;,
-                        &quot;room_name&quot;: &quot;&quot;,
-                        &quot;room_role&quot;: &quot;&quot;,
-                        &quot;room_url&quot;: &quot;&quot;,
-                        &quot;sex&quot;: &quot;m&quot;,
-                        &quot;total_cmt_like_count&quot;: &quot;125&quot;,
-                        &quot;username&quot;: &quot;殠尐孖 &quot;,
-                        &quot;weibo_uid&quot;: &quot;&quot;
-                    },
-                    &quot;vote&quot;: []
-                },
-                {
-                    &quot;content&quot;: &quot;噗，哈哈哈哈哈哈哈哈哈哈哈哈&quot;,
-                    &quot;ctime&quot;: &quot;2018-04-21T13:37:37&quot;,
-                    &quot;data_id&quot;: 27610708,
-                    &quot;hate_count&quot;: 0,
-                    &quot;id&quot;: 818201,
-                    &quot;like_count&quot;: 1,
-                    &quot;precmts&quot;: [
-                        {
-                            &quot;content&quot;: &quot;脚气闷到裆&quot;,
-                            &quot;ctime&quot;: &quot;2018-04-17T22:30:02&quot;,
-                            &quot;data_id&quot;: 27610708,
-                            &quot;floor&quot;: 1,
-                            &quot;hate_count&quot;: 0,
-                            &quot;id&quot;: 479161,
-                            &quot;like_count&quot;: 154,
-                            &quot;status&quot;: 0,
-                            &quot;type&quot;: &quot;text&quot;,
-                            &quot;user&quot;: {
-                                &quot;id&quot;: 21759605,
-                                &quot;is_vip&quot;: false,
-                                &quot;personal_page&quot;: &quot;&quot;,
-                                &quot;profile_image&quot;: &quot;http://wimg.spriteapp.cn/p/jie.jpg&quot;,
-                                &quot;qq_uid&quot;: &quot;&quot;,
-                                &quot;qzone_uid&quot;: &quot;&quot;,
-                                &quot;room_icon&quot;: &quot;&quot;,
-                                &quot;room_name&quot;: &quot;&quot;,
-                                &quot;room_role&quot;: &quot;&quot;,
-                                &quot;room_url&quot;: &quot;&quot;,
-                                &quot;sex&quot;: &quot;m&quot;,
-                                &quot;total_cmt_like_count&quot;: &quot;255&quot;,
-                                &quot;username&quot;: &quot;风盖着吹&quot;,
-                                &quot;weibo_uid&quot;: &quot;&quot;
-                            },
-                            &quot;vote&quot;: []
-                        }
-                    ],
-                    &quot;status&quot;: 0,
-                    &quot;type&quot;: &quot;text&quot;,
-                    &quot;user&quot;: {
-                        &quot;id&quot;: 19785848,
-                        &quot;is_vip&quot;: false,
-                        &quot;personal_page&quot;: &quot;&quot;,
-                        &quot;profile_image&quot;: &quot;http://wimg.spriteapp.cn/profile/large/2017/05/10/5912f6edaf3f5_mini.jpg&quot;,
-                        &quot;qq_uid&quot;: &quot;&quot;,
-                        &quot;qzone_uid&quot;: &quot;&quot;,
-                        &quot;room_icon&quot;: &quot;&quot;,
-                        &quot;room_name&quot;: &quot;&quot;,
-                        &quot;room_role&quot;: &quot;&quot;,
-                        &quot;room_url&quot;: &quot;&quot;,
-                        &quot;sex&quot;: &quot;m&quot;,
-                        &quot;total_cmt_like_count&quot;: &quot;4&quot;,
-                        &quot;username&quot;: &quot;About today.WYL&quot;,
-                        &quot;weibo_uid&quot;: &quot;&quot;
-                    },
-                    &quot;vote&quot;: []
-                }
-            ]
-        }
-    }
-}
-</code></pre>
-<h2 id="热门小说推荐列表">热门小说推荐列表</h2>
-<p>https://www.apiopen.top/novelApi<br>
-返回值：</p>
-<pre><code>{
-    &quot;code&quot;: 200,
-    &quot;msg&quot;: &quot;成功!&quot;,
-    &quot;data&quot;: [
-        {
-            &quot;bid&quot;: &quot;7034781&quot;,
-            &quot;bookname&quot;: &quot;乡村美女图&quot;,
-            &quot;introduction&quot;: &quot;乡村赤脚小医生叶福贵，机缘巧合偶获仙府，担负起寻找转世仙女美女的任务，同时，带领着乡亲们走上富裕的阳光大道。 寻找一个个仙子美女，那也是一个技术活，和一个个仙女一起生活，更是一门艺术，叶福贵这个仙府主人，养活一大堆仙女，太幸福操劳了。 这个幸福的操劳，放着我来，谁都别抢。&quot;,
-            &quot;book_info&quot;: &quot;乡村赤脚小医生叶福贵，机缘巧合偶获仙府，担负起寻找转世仙女美女的任务，同时，带领着乡亲们走上富裕的阳光大道。 寻找一个个仙子美女，那也是一个技术活，和一个个仙女一起生活，更是一门艺术，叶福贵这个仙府主人，养活一大堆仙女，太幸福操劳了。 这个幸福的操劳，放着我来，谁都别抢。&quot;,
-            &quot;chapterid&quot;: &quot;1010932&quot;,
-            &quot;topic&quot;: &quot;第一千一百四十章视察工作&quot;,
-            &quot;topic_first&quot;: &quot;第一章和美女村长一起看春戏&quot;,
-            &quot;date_updated&quot;: 1525350909,
-            &quot;author&quot;: &quot;3644907&quot;,
-            &quot;author_name&quot;: &quot;老婆爱我&quot;,
-            &quot;top_class&quot;: &quot;502&quot;,
-            &quot;state&quot;: &quot;1&quot;,
-            &quot;readCount&quot;: &quot;0&quot;,
-            &quot;praiseCount&quot;: &quot;0&quot;,
-            &quot;stat_name&quot;: &quot;连载&quot;,
-            &quot;class_name&quot;: &quot;都市生活&quot;,
-            &quot;size&quot;: &quot;3338885&quot;,
-            &quot;book_cover&quot;: &quot;http://img-tailor.11222.cn/bcv/big/201703221635121902.jpg&quot;,
-            &quot;chapterid_first&quot;: &quot;786581&quot;,
-            &quot;chargeMode&quot;: &quot;3&quot;,
-            &quot;digest&quot;: &quot;0&quot;,
-            &quot;price&quot;: &quot;0.5&quot;,
-            &quot;tag&quot;: [
-                &quot;爽文&quot;,
-                &quot;学生&quot;,
-                &quot;异能&quot;,
-                &quot;扮猪吃虎&quot;
-            ],
-            &quot;is_new&quot;: 1,
-            &quot;discountNum&quot;: 10,
-            &quot;quick_price&quot;: 0,
-            &quot;formats&quot;: &quot;1&quot;,
-            &quot;audiobook_playCount&quot;: &quot;0&quot;,
-            &quot;chapterNum&quot;: &quot;1140&quot;,
-            &quot;isShortStory&quot;: false,
-            &quot;userid&quot;: &quot;603878327&quot;,
-            &quot;search_heat&quot;: &quot;91&quot;,
-            &quot;num_click&quot;: &quot;647637&quot;,
-            &quot;recommend_num&quot;: &quot;605962&quot;,
-            &quot;first_cate_id&quot;: &quot;51&quot;,
-            &quot;first_cate_name&quot;: &quot;都市小说&quot;,
-            &quot;reason&quot;: &quot;&quot;
-        },
-        {
-            &quot;bid&quot;: &quot;7010609&quot;,
-            &quot;bookname&quot;: &quot;套路总裁轻点爱&quot;,
-            &quot;introduction&quot;: &quot;　　作为跨国集团的总裁，黄金单身汉，经常有人给他送女人。这个胆大包天的丫头竟然把男人送上了他的床，这是在怀疑他的性取向吗？他气愤不已地把男人丢了出去，把她拽了进来，他要向她证明，他到底喜欢男人还是女人！片段一：赵冬寒：沐易臣，你到底想干什么？沐易臣：你！片段二：沐易臣：我们好久没上床了，过来！赵冬寒：别，昨晚不是还……了吗？沐易臣：宝贝你忘了？昨晚我是在“沙发”上办的你。&quot;,
-            &quot;book_info&quot;: &quot;　　作为跨国集团的总裁，黄金单身汉，经常有人给他送女人。这个胆大包天的丫头竟然把男人送上了他的床，这是在怀疑他的性取向吗？他气愤不已地把男人丢了出去，把她拽了进来，他要向她证明，他到底喜欢男人还是女人！片段一：赵冬寒：沐易臣，你到底想干什么？沐易臣：你！片段二：沐易臣：我们好久没上床了，过来！赵冬寒：别，昨晚不是还……了吗？沐易臣：宝贝你忘了？昨晚我是在“沙发”上办的你。&quot;,
-            &quot;chapterid&quot;: &quot;991532&quot;,
-            &quot;topic&quot;: &quot;番外十二赔了夫人又折兵（全文完结）&quot;,
-            &quot;topic_first&quot;: &quot;第一章头牌男公关&quot;,
-            &quot;date_updated&quot;: 1523846993,
-            &quot;author&quot;: &quot;613555&quot;,
-            &quot;author_name&quot;: &quot;白秋练&quot;,
-            &quot;top_class&quot;: &quot;502&quot;,
-            &quot;state&quot;: &quot;2&quot;,
-            &quot;readCount&quot;: &quot;0&quot;,
-            &quot;praiseCount&quot;: &quot;0&quot;,
-            &quot;stat_name&quot;: &quot;完结&quot;,
-            &quot;class_name&quot;: &quot;现代言情&quot;,
-            &quot;size&quot;: &quot;1247582&quot;,
-            &quot;book_cover&quot;: &quot;http://img-tailor.11222.cn/bcv/big/201804271512516485.jpg&quot;,
-            &quot;chapterid_first&quot;: &quot;846760&quot;,
-            &quot;chargeMode&quot;: &quot;3&quot;,
-            &quot;digest&quot;: &quot;0&quot;,
-            &quot;price&quot;: &quot;0.5&quot;,
-            &quot;tag&quot;: [
-                &quot;腹黑&quot;,
-                &quot;霸道&quot;,
-                &quot;总裁&quot;,
-                &quot;宠文甜文&quot;
-            ],
-            &quot;is_new&quot;: 1,
-            &quot;discountNum&quot;: 10,
-            &quot;quick_price&quot;: 0,
-            &quot;formats&quot;: &quot;1&quot;,
-            &quot;audiobook_playCount&quot;: &quot;0&quot;,
-            &quot;chapterNum&quot;: &quot;592&quot;,
-            &quot;isShortStory&quot;: false,
-            &quot;userid&quot;: &quot;744458482&quot;,
-            &quot;search_heat&quot;: &quot;91&quot;,
-            &quot;num_click&quot;: &quot;439140&quot;,
-            &quot;recommend_num&quot;: &quot;397465&quot;,
-            &quot;first_cate_id&quot;: &quot;19&quot;,
-            &quot;first_cate_name&quot;: &quot;言情小说&quot;,
-            &quot;reason&quot;: &quot;&quot;
-        },
-        {
-            &quot;bid&quot;: &quot;6720460&quot;,
-            &quot;bookname&quot;: &quot;太古狂魔&quot;,
-            &quot;introduction&quot;: &quot;一名身缠七彩恶龙、肩扛古老石棺的白发青年，仰望高高在上的诸天至尊、万古道祖，淡淡道：“诸位，我说我这石棺葬过天，你们信么？”&quot;,
-            &quot;book_info&quot;: &quot;一名身缠七彩恶龙、肩扛古老石棺的白发青年，仰望高高在上的诸天至尊、万古道祖，淡淡道：“诸位，我说我这石棺葬过天，你们信么？”&quot;,
-            &quot;chapterid&quot;: &quot;1041135&quot;,
-            &quot;topic&quot;: &quot;第一千二百五十三章出尔反尔！&quot;,
-            &quot;topic_first&quot;: &quot;第一章秦宇&quot;,
-            &quot;date_updated&quot;: 1525365302,
-            &quot;author&quot;: &quot;52467&quot;,
-            &quot;author_name&quot;: &quot;汉隶&quot;,
-            &quot;top_class&quot;: &quot;502&quot;,
-            &quot;state&quot;: &quot;1&quot;,
-            &quot;readCount&quot;: &quot;507&quot;,
-            &quot;praiseCount&quot;: &quot;10&quot;,
-            &quot;stat_name&quot;: &quot;连载&quot;,
-            &quot;class_name&quot;: &quot;东方玄幻&quot;,
-            &quot;size&quot;: &quot;2882433&quot;,
-            &quot;book_cover&quot;: &quot;http://img-tailor.11222.cn/bcv/big/201607011010477093.jpg&quot;,
-            &quot;chapterid_first&quot;: &quot;712798&quot;,
-            &quot;chargeMode&quot;: &quot;3&quot;,
-            &quot;digest&quot;: &quot;0&quot;,
-            &quot;price&quot;: &quot;0.5&quot;,
-            &quot;tag&quot;: [
-                &quot;玄幻&quot;,
-                &quot;东方&quot;,
-                &quot;无敌&quot;
-            ],
-            &quot;is_new&quot;: 1,
-            &quot;discountNum&quot;: 10,
-            &quot;quick_price&quot;: 0,
-            &quot;formats&quot;: &quot;1&quot;,
-            &quot;audiobook_playCount&quot;: &quot;0&quot;,
-            &quot;chapterNum&quot;: &quot;1253&quot;,
-            &quot;isShortStory&quot;: false,
-            &quot;userid&quot;: &quot;0&quot;,
-            &quot;search_heat&quot;: &quot;73&quot;,
-            &quot;num_click&quot;: &quot;1761506&quot;,
-            &quot;recommend_num&quot;: &quot;1719831&quot;,
-            &quot;first_cate_id&quot;: &quot;1&quot;,
-            &quot;first_cate_name&quot;: &quot;玄幻小说&quot;,
-            &quot;reason&quot;: &quot;&quot;
-        },
-        {
-            &quot;bid&quot;: &quot;7363143&quot;,
-            &quot;bookname&quot;: &quot;99亿闪婚：豪门总裁夜夜忙&quot;,
-            &quot;introduction&quot;: &quot;她二十年一次脚下失足，撞了他的豪车，留下签名和号码，走的不带一片云彩。不仅如此，还顺便牵走他‘未婚妻’的名义……隔日，全球惊爆季氏总裁惊现未婚妻……所以，她宋倾城这次是闯大祸了？！不但如此，某男还给她直接甩了一份闪婚协议书。一年后，宋倾城将离婚协议拍在某男面前，“季先生，请签字！”“我有没有告诉过你我不会写三个字。”“哪三个字？”“季正霆。”“……”&quot;,
-            &quot;book_info&quot;: &quot;她二十年一次脚下失足，撞了他的豪车，留下签名和号码，走的不带一片云彩。不仅如此，还顺便牵走他‘未婚妻’的名义……隔日，全球惊爆季氏总裁惊现未婚妻……所以，她宋倾城这次是闯大祸了？！不但如此，某男还给她直接甩了一份闪婚协议书。一年后，宋倾城将离婚协议拍在某男面前，“季先生，请签字！”“我有没有告诉过你我不会写三个字。”“哪三个字？”“季正霆。”“……”&quot;,
-            &quot;chapterid&quot;: &quot;964130&quot;,
-            &quot;topic&quot;: &quot;第699章孩子动了&quot;,
-            &quot;topic_first&quot;: &quot;第1章劈腿能不能先说一声？&quot;,
-            &quot;date_updated&quot;: 1525397105,
-            &quot;author&quot;: &quot;1283790&quot;,
-            &quot;author_name&quot;: &quot;花木&quot;,
-            &quot;top_class&quot;: &quot;502&quot;,
-            &quot;state&quot;: &quot;1&quot;,
-            &quot;readCount&quot;: &quot;0&quot;,
-            &quot;praiseCount&quot;: &quot;0&quot;,
-            &quot;stat_name&quot;: &quot;连载&quot;,
-            &quot;class_name&quot;: &quot;现代言情&quot;,
-            &quot;size&quot;: &quot;1425209&quot;,
-            &quot;book_cover&quot;: &quot;http://img-tailor.11222.cn/bcv/big/201709041733565942.jpg&quot;,
-            &quot;chapterid_first&quot;: &quot;844414&quot;,
-            &quot;chargeMode&quot;: &quot;3&quot;,
-            &quot;digest&quot;: &quot;0&quot;,
-            &quot;price&quot;: &quot;0.5&quot;,
-            &quot;tag&quot;: [
-                &quot;霸道&quot;,
-                &quot;契约&quot;,
-                &quot;忠犬&quot;
-            ],
-            &quot;is_new&quot;: 1,
-            &quot;discountNum&quot;: 10,
-            &quot;quick_price&quot;: 0,
-            &quot;formats&quot;: &quot;1&quot;,
-            &quot;audiobook_playCount&quot;: &quot;0&quot;,
-            &quot;chapterNum&quot;: &quot;699&quot;,
-            &quot;isShortStory&quot;: false,
-            &quot;userid&quot;: &quot;0&quot;,
-            &quot;search_heat&quot;: &quot;91&quot;,
-            &quot;num_click&quot;: &quot;248638&quot;,
-            &quot;recommend_num&quot;: &quot;206963&quot;,
-            &quot;first_cate_id&quot;: &quot;19&quot;,
-            &quot;first_cate_name&quot;: &quot;言情小说&quot;,
-            &quot;reason&quot;: &quot;&quot;
-        }
-    ]
-}
-</code></pre>
-<h2 id="小说搜索接口">小说搜索接口</h2>
-<p>https://www.apiopen.top/novelSearchApi?name=盗墓笔记<br>
-接口传参说明：<br>
-name=1:要搜索的小说名称<br>
-返回值：</p>
-<pre><code>{
-    &quot;code&quot;: 200,
-    &quot;msg&quot;: &quot;成功!&quot;,
-    &quot;data&quot;: [
-        &quot;盗墓笔记&quot;,
-        &quot;盗墓笔记续9&quot;,
-        &quot;盗墓笔记续&quot;,
-        &quot;盗墓笔记续集&quot;,
-        &quot;盗墓笔记12终极解密&quot;,
-        &quot;盗墓笔记之寻龙图&quot;,
-        &quot;盗墓笔记之迷途&quot;,
-        &quot;盗墓笔记之寻仙&quot;,
-        &quot;盗墓笔记薄&quot;,
-        &quot;盗墓笔记之咒语&quot;
-    ]
-}
-小说详情接口
-https://www.apiopen.top/novelInfoApi?name=盗墓笔记
-接口传参说明：
-name=1:要查询的小说名称
-返回值：
-{
-    &quot;code&quot;: 200,
-    &quot;msg&quot;: &quot;成功!&quot;,
-    &quot;data&quot;: {
-        &quot;status&quot;: 1,
-        &quot;info&quot;: {
-            &quot;page&quot;: 1,
-            &quot;size&quot;: 10,
-            &quot;count&quot;: 20,
-            &quot;total&quot;: 198,
-            &quot;qp_rewrite&quot;: &quot;盗墓笔记&quot;,
-            &quot;qp_trigger&quot;: &quot;NOVEL&quot;
-        },
-        &quot;aladdin&quot;: {
-            &quot;title&quot;: &quot;盗墓笔记之寻龙图&quot;,
-            &quot;author&quot;: &quot;今听雨&quot;,
-            &quot;category&quot;: &quot;悬疑探险&quot;,
-            &quot;tags&quot;: &quot;热血,爽文,坚毅,小说&quot;,
-            &quot;hh_hot&quot;: 175,
-            &quot;words&quot;: 612499,
-            &quot;host&quot;: &quot;shuqi.com&quot;,
-            &quot;base&quot;: 0,
-            &quot;bid&quot;: 7508129,
-            &quot;mgbid&quot;: 0,
-            &quot;authorid&quot;: 1978275,
-            &quot;status&quot;: 1,
-            &quot;top_class&quot;: &quot;502&quot;,
-            &quot;formats&quot;: 1,
-            &quot;cover&quot;: &quot;http://img-tailor.11222.cn/bcv/big/201803161219417395.jpg&quot;,
-            &quot;desc&quot;: &quot;寻龙图最初为商周时期一位名叫阴阳子的风水大师所著，记载了当时商周时期两座大墓和一座古遗迹祭坛所在的位置，后又加以推演，得三处真龙宝地，留言，得三可得天下之说，后被明代道士阳炎子所研究续写，后该道士改姓柳，为一权贵师爷，利用此权利之便，推演出九处真龙宝地，序言，得九为至尊，则不死，该图后因不明原因失踪，柳姓后人得知一二线索，而追查数百年并无得到，为一谜团。主人公退伍前的一场神秘任务而引发的一系列事件，退伍后，虽时隔多年，仍然耿耿于怀，于是展开了查明真相之路，不断的探索，找寻，使这件事越来越扑朔迷离，他发现，这里面竟然隐藏着惊天秘密，一座座古墓，一座座古遗迹中，不仅藏着惊天之谜，还有着危险重重。&quot;,
-            &quot;latest_chapter&quot;: {
-                &quot;cid&quot;: &quot;968030&quot;,
-                &quot;cname&quot;: &quot;第201章暂时平静的日子（大结局）&quot;,
-                &quot;ctime&quot;: 1522813934
-            },
-            &quot;first_chapter&quot;: {
-                &quot;cid&quot;: &quot;967830&quot;,
-                &quot;cname&quot;: &quot;第1章紧急任务&quot;,
-                &quot;ctime&quot;: 1522813243
-            }
-        },
-        &quot;data&quot;: [
-            {
-                &quot;title&quot;: &quot;盗墓笔记续9&quot;,
-                &quot;author&quot;: &quot;邪灵一把刀&quot;,
-                &quot;category&quot;: &quot;悬疑探险&quot;,
-                &quot;tags&quot;: &quot;探险,现代,诡异,盗墓,盗墓笔记&quot;,
-                &quot;hh_hot&quot;: 9681,
-                &quot;words&quot;: 1435277,
-                &quot;host&quot;: &quot;shuqi.com&quot;,
-                &quot;base&quot;: 0,
-                &quot;bid&quot;: 3141966,
-                &quot;mgbid&quot;: 0,
-                &quot;authorid&quot;: 1631858,
-                &quot;status&quot;: 1,
-                &quot;top_class&quot;: &quot;502&quot;,
-                &quot;formats&quot;: 1,
-                &quot;first_cid&quot;: 356518,
-                &quot;first_chapter&quot;: &quot;国庆贺文，非盗墓笔记，免费奉送。&quot;,
-                &quot;cover&quot;: &quot;http://img-tailor.11222.cn/bcv/middle/201603021215445850.jpg&quot;,
-                &quot;desc&quot;: &quot;张家古楼事件以后，闷油瓶去了青铜门，而我回了杭州继续经营三叔的产业，本以为事件到此为止，谁知一切都没有结束。陈文锦再次出现，霍老太的遗物中夹杂着的神秘地图，第三枚鬼玺问世，或许用不着十年，终极的秘密近在眼前。&quot;
-            },
-            {
-                &quot;title&quot;: &quot;盗墓笔记续&quot;,
-                &quot;author&quot;: &quot;夜初落&quot;,
-                &quot;category&quot;: &quot;小说同人&quot;,
-                &quot;tags&quot;: &quot;盗墓,悬疑推理,风水异术,小说&quot;,
-                &quot;hh_hot&quot;: 61,
-                &quot;words&quot;: 173198,
-                &quot;host&quot;: &quot;shuqi.com&quot;,
-                &quot;base&quot;: 0,
-                &quot;bid&quot;: 3473400,
-                &quot;mgbid&quot;: 0,
-                &quot;authorid&quot;: 1646356,
-                &quot;status&quot;: 1,
-                &quot;top_class&quot;: &quot;502&quot;,
-                &quot;formats&quot;: 1,
-                &quot;first_cid&quot;: 787111,
-                &quot;first_chapter&quot;: &quot;第一章十年后，变了的是什么&quot;,
-                &quot;cover&quot;: &quot;http://img-tailor.11222.cn/bcv/big/201706131159107399.jpg&quot;,
-                &quot;desc&quot;: &quot;十年之后，闷油瓶从青铜门里出来，已经恢复齐羽记忆的吴邪，为了销毁云顶天空的秘密，结束闷油瓶的宿命，毅然踏上了一条崎岖又充满危险的道路...麒麟红是谁？十年之后，“它”又出现了！我的最终目的是终极。可能是因为老不更的原因等，网站要求先申请完结了，据说申请成功就不能改了，我今年大五，还有三个来月考研，虽说希望不大，，，要是考完了有时间了我可能会接着写点，但是估计应该会更不正式，，，，&quot;
-            },
-            {
-                &quot;title&quot;: &quot;盗墓笔记续集&quot;,
-                &quot;author&quot;: &quot;盗墓博物馆&quot;,
-                &quot;category&quot;: &quot;灵异鬼怪&quot;,
-                &quot;tags&quot;: &quot;盗墓笔记,小说&quot;,
-                &quot;hh_hot&quot;: 1237,
-                &quot;words&quot;: 498030,
-                &quot;host&quot;: &quot;shuqi.com&quot;,
-                &quot;base&quot;: 0,
-                &quot;bid&quot;: 177502,
-                &quot;mgbid&quot;: 0,
-                &quot;authorid&quot;: 187984,
-                &quot;status&quot;: 1,
-                &quot;top_class&quot;: &quot;502&quot;,
-                &quot;formats&quot;: 1,
-                &quot;first_cid&quot;: 358521,
-                &quot;first_chapter&quot;: &quot;版本0第一章行动&quot;,
-                &quot;cover&quot;: &quot;http://img-tailor.11222.cn/bcv/big/201604111640294541.jpg&quot;,
-                &quot;desc&quot;: &quot;原本，我只意识到自己还不能停，我还必须走下去，因为还有一个十年。可是现在，我意识到其他人都没有停过，计划和阴谋还在继续！我必须行动了！胖子、阿宁、小哥，我来了！终极？闷油瓶你愿让陈文锦和老九门其他人进去，可为何偏不让我这最想进去的人守护？还有那个领走我邮件的“我”难道了解三叔鬼域所有的秘密？难道张起灵跟霍老太进入张家楼只是为了给裘德考弄到那两个环？盗墓笔记留下了太多谜团，来读续集解谜吧！&quot;
-            }
-        ],
-        &quot;spend&quot;: {
-            &quot;total&quot;: 0.3841
-        }
-    }
-}
-小说内容接口
-由于内容加密，这边无法解析，所以需要用上面详情ID去请求内容，内容地址：
-
-http://t.shuqi.com/route.php?pagename=#!/bid/177502/ct/read
-2018-03-30 更新：
-随机推荐热门段子【神评版本】
-https://www.apiopen.top/satinGodApi?type=1&amp;page=1
-接口传参说明：
-type=1 : 全部
-
-type=2 : 文字
-
-type=3 : 图片
-
-type=4 : gif
-
-type=5 : 视频
-
-page=1:页码
-
-当page=0时，会随机返回一页数据，page&gt;=1时会返回相应页码的数据。
-返回type备注：
-type=text : 文字
-type=image : 图片
-type=gif : Gif
-type=video: 视频
-
-返回值：
-{
-    &quot;code&quot;: 200,
-    &quot;msg&quot;: &quot;成功!&quot;,
-    &quot;data&quot;: [
-        {
-            &quot;type&quot;: &quot;image&quot;,
-            &quot;text&quot;: &quot;朝鲜美女集体露面，世界人民都看傻了&quot;,
-            &quot;username&quot;: &quot;黑皮咪咪眼 [黑皮住口]&quot;,
-            &quot;uid&quot;: &quot;18682920&quot;,
-            &quot;header&quot;: &quot;http://wimg.spriteapp.cn/profile/large/2016/06/27/577119b7d372e_mini.jpg&quot;,
-            &quot;comment&quot;: 267,
-            &quot;top_commentsVoiceuri&quot;: null,
-            &quot;top_commentsContent&quot;: &quot;大爷的，一共就俩运动员。整几百号啦啦队， 去棒子国混吃混喝，三胖儿也太狠了&quot;,
-            &quot;top_commentsHeader&quot;: &quot;http://wimg.spriteapp.cn/profile&quot;,
-            &quot;top_commentsName&quot;: &quot;用户983787&quot;,
-            &quot;passtime&quot;: &quot;2018-03-30 11:00:35&quot;,
-            &quot;soureid&quot;: 27312135,
-            &quot;up&quot;: 575,
-            &quot;down&quot;: 107,
-            &quot;forward&quot;: 7,
-            &quot;image&quot;: &quot;http://wimg.spriteapp.cn/ugc/2018/03/12/5aa5fa6cf1e8f_1.jpg&quot;,
-            &quot;gif&quot;: null,
-            &quot;thumbnail&quot;: &quot;http://wimg.spriteapp.cn/ugc/2018/03/12/5aa5fa6cf1e8f_1.jpg&quot;,
-            &quot;video&quot;: null
-        },
-        {
-            &quot;type&quot;: &quot;video&quot;,
-            &quot;text&quot;: &quot;来自一位90后的内心独白！ &quot;,
-            &quot;username&quot;: &quot;YXDDDD&quot;,
-            &quot;uid&quot;: &quot;13347954&quot;,
-            &quot;header&quot;: &quot;http://wimg.spriteapp.cn/profile/picture1/M00/11/81/wKiFR1THDUSADMvAAAAZItE7DD4.cn_238&quot;,
-            &quot;comment&quot;: 409,
-            &quot;top_commentsVoiceuri&quot;: null,
-            &quot;top_commentsContent&quot;: &quot;要不，咱们反了吧！&quot;,
-            &quot;top_commentsHeader&quot;: &quot;http://wimg.spriteapp.cn/profile/large/2016/10/01/57ef726724bef_mini.jpg&quot;,
-            &quot;top_commentsName&quot;: &quot;百思绿帽帮&quot;,
-            &quot;passtime&quot;: &quot;2018-03-29 20:53:01&quot;,
-            &quot;soureid&quot;: 27368200,
-            &quot;up&quot;: 1738,
-            &quot;down&quot;: 37,
-            &quot;forward&quot;: 462,
-            &quot;image&quot;: null,
-            &quot;gif&quot;: null,
-            &quot;thumbnail&quot;: &quot;http://wimg.spriteapp.cn/picture/2018/0328/27368200_565_66.jpg&quot;,
-            &quot;video&quot;: &quot;http://wvideo.spriteapp.cn/video/2018/0328/491f7b24325911e89496842b2b4c75ab_wpd.mp4&quot;
-        },
-        {
-            &quot;type&quot;: &quot;video&quot;,
-            &quot;text&quot;: &quot;听说舌头能这么玩……我想试试！&quot;,
-            &quot;username&quot;: &quot;YXDDDD&quot;,
-            &quot;uid&quot;: &quot;13347954&quot;,
-            &quot;header&quot;: &quot;http://wimg.spriteapp.cn/profile/picture1/M00/11/81/wKiFR1THDUSADMvAAAAZItE7DD4.cn_238&quot;,
-            &quot;comment&quot;: 292,
-            &quot;top_commentsVoiceuri&quot;: null,
-            &quot;top_commentsContent&quot;: &quot;手机:啊……哦……喔……嘶……&quot;,
-            &quot;top_commentsHeader&quot;: &quot;http://wimg.spriteapp.cn/profile/large/2015/06/21/55869b8e0c704_mini.jpg&quot;,
-            &quot;top_commentsName&quot;: &quot;寻幻作乐&quot;,
-            &quot;passtime&quot;: &quot;2018-03-29 10:47:01&quot;,
-            &quot;soureid&quot;: 27368921,
-            &quot;up&quot;: 1141,
-            &quot;down&quot;: 45,
-            &quot;forward&quot;: 286,
-            &quot;image&quot;: null,
-            &quot;gif&quot;: null,
-            &quot;thumbnail&quot;: &quot;http://wimg.spriteapp.cn/picture/2018/0328/27368921_754.jpg&quot;,
-            &quot;video&quot;: &quot;http://wvideo.spriteapp.cn/video/2018/0328/9e55f240325811e8b666842b2b4c75ab_wpd.mp4&quot;
-        },
-        {
-            &quot;type&quot;: &quot;image&quot;,
-            &quot;text&quot;: &quot;“月薪一万是讨饭！”上海公园相亲角又出惊句，你又拖后腿了么？&quot;,
-            &quot;username&quot;: &quot;这又神马情况 [有容乃悦]&quot;,
-            &quot;uid&quot;: &quot;19794323&quot;,
-            &quot;header&quot;: &quot;http://wimg.spriteapp.cn/profile/large/2017/11/23/5a16a76c2ceeb_mini.jpg&quot;,
-            &quot;comment&quot;: 254,
-            &quot;top_commentsVoiceuri&quot;: null,
-            &quot;top_commentsContent&quot;: &quot;月薪1500的那些是不是就是丐帮的基层人员了？&quot;,
-            &quot;top_commentsHeader&quot;: &quot;http://qzapp.qlogo.cn/qzapp/100336987/829C2E05237C4F9753FA07D0C0AEDA53/100&quot;,
-            &quot;top_commentsName&quot;: &quot;loners&quot;,
-            &quot;passtime&quot;: &quot;2018-03-29 10:38:01&quot;,
-            &quot;soureid&quot;: 27369591,
-            &quot;up&quot;: 571,
-            &quot;down&quot;: 95,
-            &quot;forward&quot;: 63,
-            &quot;image&quot;: &quot;http://wimg.spriteapp.cn/ugc/2018/03/28/5abb6d90d1556_1.jpg&quot;,
-            &quot;gif&quot;: null,
-            &quot;thumbnail&quot;: &quot;http://wimg.spriteapp.cn/ugc/2018/03/28/5abb6d90d1556_1.jpg&quot;,
-            &quot;video&quot;: null
-        }
-    ]
-}
-</code></pre>
-<p>2018-03-18 更新：<br>
-用户模块<br>
-使用用户模块需要先申请appKey<br>
-1.用户注册接口：<br>
-https://www.apiopen.top/createUser?key=00d91e8e0cca2b76f515926a36db68f5&amp;phone=13594347817&amp;passwd=123654<br>
-接口说明(如需上传头像，请使用POST)：<br>
-key=00d91e8e0cca2b76f515926a36db68f5 应用Key<br>
-phone=13594347817 用户名/ID 唯一<br>
-passwd=123654 密码<br>
-image=File文件 头像<br>
-name=peakchao 昵称/名字<br>
-text= 这是我的签名。 签名/备注<br>
-other=这是我的备注信息1 开发者需要使用的其他字段<br>
-other2=这是我的备注信息2 开发者需要使用的其他字段<br>
-以上参数必填项：key+phone+passwd<br>
-返回值(注册成功)：</p>
-<pre><code>{
-    &quot;code&quot;: 200,
-    &quot;msg&quot;: &quot;成功!&quot;,
-    &quot;data&quot;: {
-        &quot;key&quot;: &quot;00d91e8e0cca2b76f515926a36db68f5&quot;,
-        &quot;phone&quot;: &quot;13594347817&quot;,
-        &quot;name&quot;: &quot;peakchao&quot;,
-        &quot;passwd&quot;: &quot;123456&quot;,
-        &quot;text&quot;: &quot;这是我的签名。&quot;,
-        &quot;img&quot;: &quot;https://res.apiopen.top/2018031817571995.key.png&quot;,
-        &quot;other&quot;: &quot;这是我的备注信息1&quot;,
-        &quot;other2&quot;: &quot;这是我的备注信息2&quot;,
-        &quot;createTime&quot;: &quot;2018-03-18 17:57:20&quot;
-    }
-}
-2.用户登陆接口：
-https://www.apiopen.top/login?key=00d91e8e0cca2b76f515926a36db68f5&amp;phone=13594347817&amp;passwd=123456
-key=00d91e8e0cca2b76f515926a36db68f5 应用Key
-phone=13594347817 用户名/ID 唯一
-passwd=123654 密码
-返回值(登陆成功)：
-{
-    &quot;code&quot;: 200,
-    &quot;msg&quot;: &quot;成功!&quot;,
-    &quot;data&quot;: {
-        &quot;key&quot;: &quot;00d91e8e0cca2b76f515926a36db68f5&quot;,
-        &quot;phone&quot;: &quot;13594347817&quot;,
-        &quot;name&quot;: &quot;peakchao&quot;,
-        &quot;passwd&quot;: &quot;123456&quot;,
-        &quot;text&quot;: &quot;这是我的签名。&quot;,
-        &quot;img&quot;: &quot;https://res.apiopen.top/2018031817571995.key.png&quot;,
-        &quot;other&quot;: &quot;这是我的备注信息1&quot;,
-        &quot;other2&quot;: &quot;这是我的备注信息2&quot;,
-        &quot;createTime&quot;: &quot;2018-03-18 17:57:20&quot;
-    }
-}
-2018-02-06 更新：
-ContentType定义为JSON省去前端转换JSON过程，配置允许跨域。
-2018-02-04 更新：
-协议升级HTTPS，无需配置端口号，兼容老接口，以前所有旧接口将会自动重定向到新地址。
-2018-01-19 更新：
-应用统计相关接口
-1.创建应用接口
-https://www.apiopen.top/createUserKey?appId=com.chat.peakchao&amp;passwd=123456
-接口说明：
-appId=com.chat.peakchao 应用包名或者唯一ID
-passwd=123456 设置对应ID的密码
-返回值(创建成功/ID和密码对应即是查询)：
-{
-    &quot;code&quot;: 200,
-    &quot;msg&quot;: &quot;成功!&quot;,
-    &quot;data&quot;: {
-        &quot;appId&quot;: &quot;com.chat.peakchao&quot;,
-        &quot;appkey&quot;: &quot;00d91e8e0cca2b76f515926a36db68f5&quot;
-    }
-}
-返回值(已经使用)：
-{
-    &quot;code&quot;: 204,
-    &quot;msg&quot;: &quot;该AppId已经被注册!&quot;,
-    &quot;data&quot;: null
-}
-2.增加统计信息接口
-https://www.apiopen.top/addStatistics?appKey=00d91e8e0cca2b76f515926a36db68f5&amp;type=点击统计&amp;typeId=1&amp;count=2
-接口说明：
-appKey=00d91e8e0cca2b76f515926a36db68f5 你应用创建的Key
-type=点击统计 统计的别名备注
-typeId=1 统计分类ID
-count=2 统计次数，服务器后台自动累加
-返回值：
-{
-    &quot;code&quot;: 200,
-    &quot;msg&quot;: &quot;统计成功!&quot;,
-    &quot;data&quot;: null
-}
-3.查询统计信息接口
-https://www.apiopen.top/findStatistics?appKey=00d91e8e0cca2b76f515926a36db68f5
-接口说明：
-appKey=00d91e8e0cca2b76f515926a36db68f5 你应用创建的Key
-返回值：
-{
-    &quot;code&quot;: 200,
-    &quot;msg&quot;: &quot;成功!&quot;,
-    &quot;data&quot;: [
-        {
-            &quot;type&quot;: &quot;点击统计&quot;,
-            &quot;typeId&quot;: 1,
-            &quot;count&quot;: 2
-        },
-        {
-            &quot;type&quot;: &quot;注册统计&quot;,
-            &quot;typeId&quot;: 0,
-            &quot;count&quot;: 1
-        }
-    ]
-}
-2017-11-25 更新：
-女性个性网名获取接口
-https://www.apiopen.top/femaleNameApi?page=1
-接口说明：
-page=1: 页码
-备注:
-当page=0时，会随机返回一页数据，page&gt;=1时会返回相应页码的数据。
-返回值：
-{
-    &quot;code&quot;: 200,
-    &quot;msg&quot;: &quot;成功!&quot;,
-    &quot;data&quot;: [
-        {
-            &quot;femalename&quot;: &quot;花花世界丶小风流&quot;
-        },
-        {
-            &quot;femalename&quot;: &quot;回忆似风不可追&quot;
-        },
-        {
-            &quot;femalename&quot;: &quot;向阳花.永不低头&quot;
-        },
-        {
-            &quot;femalename&quot;: &quot;纠结需要的心痛゛&quot;
-        },
-        {
-            &quot;femalename&quot;: &quot;九片棱角的灬回忆&quot;
-        },
-        {
-            &quot;femalename&quot;: &quot;斑马线上的妖精&quot;
-        },
-        {
-            &quot;femalename&quot;: &quot;各种高潮各种飘&quot;
-        },
-        {
-            &quot;femalename&quot;: &quot;舊城舊事就回憶ず&quot;
-        },
-        {
-            &quot;femalename&quot;: &quot;有打有闹有情调づ&quot;
-        },
-        {
-            &quot;femalename&quot;: &quot;如果你還不明白。&quot;
-        },
-        {
-            &quot;femalename&quot;: &quot;泼墨挥笔画中仙&quot;
-        },
-        {
-            &quot;femalename&quot;: &quot;迷途在北极的鱼&quot;
-        },
-        {
-            &quot;femalename&quot;: &quot;猴子死了谁偷桃丶&quot;
-        },
-        {
-            &quot;femalename&quot;: &quot;今夕何处觅良人&quot;
-        },
-        {
-            &quot;femalename&quot;: &quot;只想陪在你身边&quot;
-        },
-        {
-            &quot;femalename&quot;: &quot;十里长亭花落尽&quot;
-        },
-        {
-            &quot;femalename&quot;: &quot;丶秋雨萌萌入凉意&quot;
-        },
-        {
-            &quot;femalename&quot;: &quot;海岛陌安逝暮梦&quot;
-        },
-        {
-            &quot;femalename&quot;: &quot;上帝是一种信仰&quot;
-        },
-        {
-            &quot;femalename&quot;: &quot;我的男人请尊重&quot;
-        }
-    ]
-}
-美图获取接口
-https://www.apiopen.top/meituApi?page=1
-接口说明：
-page=1: 页码
-备注:
-当page=0时，会随机返回一页数据，page&gt;=1时会返回相应页码的数据。
-返回值：
-{
-    &quot;code&quot;: 200,
-    &quot;msg&quot;: &quot;成功!&quot;,
-    &quot;data&quot;: [
-        {
-            &quot;createdAt&quot;: &quot;2017-11-23T08:32:29.546Z&quot;,
-            &quot;publishedAt&quot;: &quot;2017-11-24T11:08:03.624Z&quot;,
-            &quot;type&quot;: &quot;美图&quot;,
-            &quot;url&quot;: &quot;http://7xi8d6.com1.z0.glb.clouddn.com/20171123083218_5mhRLg_sakura.gun_23_11_2017_8_32_9_312.jpeg&quot;
-        },
-        {
-            &quot;createdAt&quot;: &quot;2017-11-20T07:49:41.797Z&quot;,
-            &quot;publishedAt&quot;: &quot;2017-11-20T12:42:06.454Z&quot;,
-            &quot;type&quot;: &quot;美图&quot;,
-            &quot;url&quot;: &quot;http://7xi8d6.com1.z0.glb.clouddn.com/20171120074925_ZXDh6l_joanne_722_20_11_2017_7_49_16_336.jpeg&quot;
-        },
-        {
-            &quot;createdAt&quot;: &quot;2017-11-17T10:31:41.155Z&quot;,
-            &quot;publishedAt&quot;: &quot;2017-11-17T12:39:48.189Z&quot;,
-            &quot;type&quot;: &quot;美图&quot;,
-            &quot;url&quot;: &quot;http://7xi8d6.com1.z0.glb.clouddn.com/2017-11-17-22794158_128707347832045_9158114204975104000_n.jpg&quot;
-        },
-        {
-            &quot;createdAt&quot;: &quot;2017-11-16T11:57:11.4Z&quot;,
-            &quot;publishedAt&quot;: &quot;2017-11-16T12:01:05.619Z&quot;,
-            &quot;type&quot;: &quot;美图&quot;,
-            &quot;url&quot;: &quot;http://7xi8d6.com1.z0.glb.clouddn.com/20171116115656_vnsrab_Screenshot.jpeg&quot;
-        },
-        {
-            &quot;createdAt&quot;: &quot;2017-11-14T10:13:21.137Z&quot;,
-            &quot;publishedAt&quot;: &quot;2017-11-14T10:43:36.180Z&quot;,
-            &quot;type&quot;: &quot;美图&quot;,
-            &quot;url&quot;: &quot;http://7xi8d6.com1.z0.glb.clouddn.com/20171114101305_NIAzCK_rakukoo_14_11_2017_10_12_58_703.jpeg&quot;
-        },
-        {
-            &quot;createdAt&quot;: &quot;2017-11-13T08:42:35.306Z&quot;,
-            &quot;publishedAt&quot;: &quot;2017-11-13T12:10:58.643Z&quot;,
-            &quot;type&quot;: &quot;美图&quot;,
-            &quot;url&quot;: &quot;http://7xi8d6.com1.z0.glb.clouddn.com/20171113084220_LuJgqv_sakura.gun_13_11_2017_8_42_12_311.jpeg&quot;
-        },
-        {
-            &quot;createdAt&quot;: &quot;2017-11-09T09:53:06.802Z&quot;,
-            &quot;publishedAt&quot;: &quot;2017-11-10T08:10:02.838Z&quot;,
-            &quot;type&quot;: &quot;美图&quot;,
-            &quot;url&quot;: &quot;http://7xi8d6.com1.z0.glb.clouddn.com/20171109095254_dOw5qh_bluenamchu_9_11_2017_9_52_47_256.jpeg&quot;
-        },
-        {
-            &quot;createdAt&quot;: &quot;2017-11-07T10:02:58.73Z&quot;,
-            &quot;publishedAt&quot;: &quot;2017-11-08T11:00:50.559Z&quot;,
-            &quot;type&quot;: &quot;美图&quot;,
-            &quot;url&quot;: &quot;http://7xi8d6.com1.z0.glb.clouddn.com/20171107100244_0fbENB_yyannwong_7_11_2017_10_2_5_982.jpeg&quot;
-        },
-        {
-            &quot;createdAt&quot;: &quot;2017-11-02T09:23:05.497Z&quot;,
-            &quot;publishedAt&quot;: &quot;2017-11-06T12:40:39.976Z&quot;,
-            &quot;type&quot;: &quot;美图&quot;,
-            &quot;url&quot;: &quot;http://7xi8d6.com1.z0.glb.clouddn.com/20171102092251_AY0l4b_alrisaa_2_11_2017_9_22_44_335.jpeg&quot;
-        },
-        {
-            &quot;createdAt&quot;: &quot;2017-11-01T14:18:52.937Z&quot;,
-            &quot;publishedAt&quot;: &quot;2017-11-01T14:20:59.209Z&quot;,
-            &quot;type&quot;: &quot;美图&quot;,
-            &quot;url&quot;: &quot;http://7xi8d6.com1.z0.glb.clouddn.com/20171101141835_yQYTXc_enakorin_1_11_2017_14_16_45_351.jpeg&quot;
-        },
-        {
-            &quot;createdAt&quot;: &quot;2017-10-31T10:56:55.988Z&quot;,
-            &quot;publishedAt&quot;: &quot;2017-10-31T12:25:55.217Z&quot;,
-            &quot;type&quot;: &quot;美图&quot;,
-            &quot;url&quot;: &quot;http://7xi8d6.com1.z0.glb.clouddn.com/2017-10-31-nozomisasaki_official_31_10_2017_10_49_17_24.jpg&quot;
-        },
-        {
-            &quot;createdAt&quot;: &quot;2017-10-27T11:40:43.793Z&quot;,
-            &quot;publishedAt&quot;: &quot;2017-10-27T12:02:30.376Z&quot;,
-            &quot;type&quot;: &quot;美图&quot;,
-            &quot;url&quot;: &quot;http://7xi8d6.com1.z0.glb.clouddn.com/20171027114026_v8VFwP_joanne_722_27_10_2017_11_40_17_370.jpeg&quot;
-        },
-        {
-            &quot;createdAt&quot;: &quot;2017-10-25T11:30:18.697Z&quot;,
-            &quot;publishedAt&quot;: &quot;2017-10-25T11:39:10.950Z&quot;,
-            &quot;type&quot;: &quot;美图&quot;,
-            &quot;url&quot;: &quot;http://7xi8d6.com1.z0.glb.clouddn.com/20171025112955_lmesMu_katyteiko_25_10_2017_11_29_43_270.jpeg&quot;
-        },
-        {
-            &quot;createdAt&quot;: &quot;2017-10-24T08:35:43.61Z&quot;,
-            &quot;publishedAt&quot;: &quot;2017-10-24T11:50:49.1Z&quot;,
-            &quot;type&quot;: &quot;美图&quot;,
-            &quot;url&quot;: &quot;http://7xi8d6.com1.z0.glb.clouddn.com/20171024083526_Hq4gO6_bluenamchu_24_10_2017_8_34_28_246.jpeg&quot;
-        },
-        {
-            &quot;createdAt&quot;: &quot;2017-10-23T12:31:32.639Z&quot;,
-            &quot;publishedAt&quot;: &quot;2017-10-23T12:44:23.660Z&quot;,
-            &quot;type&quot;: &quot;美图&quot;,
-            &quot;url&quot;: &quot;https://img.gank.io/anri.kumaki_23_10_2017_12_27_30_151.jpg&quot;
-        },
-        {
-            &quot;createdAt&quot;: &quot;2017-10-18T09:14:07.966Z&quot;,
-            &quot;publishedAt&quot;: &quot;2017-10-20T10:26:24.673Z&quot;,
-            &quot;type&quot;: &quot;美图&quot;,
-            &quot;url&quot;: &quot;http://7xi8d6.com1.z0.glb.clouddn.com/20171018091347_Z81Beh_nini.nicky_18_10_2017_9_13_35_727.jpeg&quot;
-        },
-        {
-            &quot;createdAt&quot;: &quot;2017-10-12T07:32:28.644Z&quot;,
-            &quot;publishedAt&quot;: &quot;2017-10-17T13:10:43.731Z&quot;,
-            &quot;type&quot;: &quot;美图&quot;,
-            &quot;url&quot;: &quot;http://7xi8d6.com1.z0.glb.clouddn.com/20171012073213_p4H630_joycechu_syc_12_10_2017_7_32_7_433.jpeg&quot;
-        },
-        {
-            &quot;createdAt&quot;: &quot;2017-10-12T07:31:27.363Z&quot;,
-            &quot;publishedAt&quot;: &quot;2017-10-16T12:19:20.311Z&quot;,
-            &quot;type&quot;: &quot;美图&quot;,
-            &quot;url&quot;: &quot;http://7xi8d6.com1.z0.glb.clouddn.com/20171012073108_0y12KR_anri.kumaki_12_10_2017_7_30_58_141.jpeg&quot;
-        },
-        {
-            &quot;createdAt&quot;: &quot;2017-10-11T08:49:21.485Z&quot;,
-            &quot;publishedAt&quot;: &quot;2017-10-11T12:40:42.545Z&quot;,
-            &quot;type&quot;: &quot;美图&quot;,
-            &quot;url&quot;: &quot;http://7xi8d6.com1.z0.glb.clouddn.com/20171011084856_0YQ0jN_joanne_722_11_10_2017_8_39_5_505.jpeg&quot;
-        },
-        {
-            &quot;createdAt&quot;: &quot;2017-10-10T12:38:25.180Z&quot;,
-            &quot;publishedAt&quot;: &quot;2017-10-10T12:41:34.882Z&quot;,
-            &quot;type&quot;: &quot;美图&quot;,
-            &quot;url&quot;: &quot;http://7xi8d6.com1.z0.glb.clouddn.com/2017-10-10-sakura.gun_10_10_2017_12_33_34_751.jpg&quot;
-        }
-    ]
-}
-2017-11-21 更新：
-天气获取接口
-https://www.apiopen.top/weatherApi?city=成都
-接口说明：
-city=成都 : 需要获取的地名
-返回值：
-{
-    &quot;code&quot;: 200,
-    &quot;msg&quot;: &quot;成功!&quot;,
-    &quot;data&quot;: {
-        &quot;yesterday&quot;: {
-            &quot;date&quot;: &quot;20日星期一&quot;,
-            &quot;high&quot;: &quot;高温 14℃&quot;,
-            &quot;fx&quot;: &quot;无持续风向&quot;,
-            &quot;low&quot;: &quot;低温 8℃&quot;,
-            &quot;fl&quot;: &quot;&lt;![CDATA[&lt;3级]]&gt;&quot;,
-            &quot;type&quot;: &quot;多云&quot;
-        },
-        &quot;city&quot;: &quot;成都&quot;,
-        &quot;aqi&quot;: &quot;55&quot;,
-        &quot;forecast&quot;: [
-            {
-                &quot;date&quot;: &quot;21日星期二&quot;,
-                &quot;high&quot;: &quot;高温 11℃&quot;,
-                &quot;fengli&quot;: &quot;&lt;![CDATA[&lt;3级]]&gt;&quot;,
-                &quot;low&quot;: &quot;低温 7℃&quot;,
-                &quot;fengxiang&quot;: &quot;无持续风向&quot;,
-                &quot;type&quot;: &quot;阴&quot;
-            },
-            {
-                &quot;date&quot;: &quot;22日星期三&quot;,
-                &quot;high&quot;: &quot;高温 13℃&quot;,
-                &quot;fengli&quot;: &quot;&lt;![CDATA[&lt;3级]]&gt;&quot;,
-                &quot;low&quot;: &quot;低温 6℃&quot;,
-                &quot;fengxiang&quot;: &quot;无持续风向&quot;,
-                &quot;type&quot;: &quot;阴&quot;
-            },
-            {
-                &quot;date&quot;: &quot;23日星期四&quot;,
-                &quot;high&quot;: &quot;高温 11℃&quot;,
-                &quot;fengli&quot;: &quot;&lt;![CDATA[&lt;3级]]&gt;&quot;,
-                &quot;low&quot;: &quot;低温 5℃&quot;,
-                &quot;fengxiang&quot;: &quot;无持续风向&quot;,
-                &quot;type&quot;: &quot;阴&quot;
-            },
-            {
-                &quot;date&quot;: &quot;24日星期五&quot;,
-                &quot;high&quot;: &quot;高温 12℃&quot;,
-                &quot;fengli&quot;: &quot;&lt;![CDATA[&lt;3级]]&gt;&quot;,
-                &quot;low&quot;: &quot;低温 5℃&quot;,
-                &quot;fengxiang&quot;: &quot;无持续风向&quot;,
-                &quot;type&quot;: &quot;多云&quot;
-            },
-            {
-                &quot;date&quot;: &quot;25日星期六&quot;,
-                &quot;high&quot;: &quot;高温 13℃&quot;,
-                &quot;fengli&quot;: &quot;&lt;![CDATA[&lt;3级]]&gt;&quot;,
-                &quot;low&quot;: &quot;低温 6℃&quot;,
-                &quot;fengxiang&quot;: &quot;无持续风向&quot;,
-                &quot;type&quot;: &quot;多云&quot;
-            }
-        ],
-        &quot;ganmao&quot;: &quot;天凉，昼夜温差较大，较易发生感冒，请适当增减衣服，体质较弱的朋友请注意适当防护。&quot;,
-        &quot;wendu&quot;: &quot;10&quot;
-    }
-}
-</code></pre>
-<p>2017-11-19 更新：<br>
-此次更新删除以前所有老接口，重新编写接口。</p>
-<p>新购服务器和域名，配置升级，提高接口稳定性，绑定域名，由于备案非常麻烦，没有备案，所以不能通过80端口直接访问。</p>
-<p>由于更换新服务器，为了优化性能，本服务器只运行这一个项目，近期准备抽点时间，重新写接口，各位有需要的朋友们，有什么需求可以在留言区提出来。</p>
-<p>以下是新服务器开放的Api：<br>
-随机推荐段子（包含文字、图片、GIF、视频）：<br>
-https://www.apiopen.top/satinApi?type=1&amp;page=1<br>
-接口传参说明：<br>
-type=1 : 全部<br>
-type=2 : 文字<br>
-type=3 : 图片<br>
-type=4 : 视频<br>
-page=1:页码<br>
-当page=0时，会随机返回一页数据，page&gt;=1时会返回相应页码的数据，图片包含GIF，is_gif 字段判断。<br>
-返回type备注：<br>
-type=1 : 全部<br>
-type=41 : 视频<br>
-type=10 : 图片<br>
-type=29 : 段子<br>
-type=31 : 声音</p>
-<p>返回值：</p>
-<pre><code>{
-    &quot;code&quot;: 200,
-    &quot;msg&quot;: &quot;成功!&quot;,
-    &quot;data&quot;: [
-     {
-            &quot;type&quot;: &quot;41&quot;,
-            &quot;text&quot;: &quot;2017版狂人日记，单身狗的妄想症，都是没有女朋友惹的祸&quot;,
-            &quot;user_id&quot;: &quot;15012957&quot;,
-            &quot;name&quot;: &quot;北京郑云影视工作室&quot;,
-            &quot;screen_name&quot;: &quot;北京郑云影视工作室&quot;,
-            &quot;profile_image&quot;: &quot;http://tp4.sinaimg.cn/2665846363/50/5650083915/1&quot;,
-            &quot;created_at&quot;: &quot;2017-10-14 11:57:01&quot;,
-            &quot;create_time&quot;: null,
-            &quot;passtime&quot;: &quot;2017-10-14 11:57:01&quot;,
-            &quot;love&quot;: &quot;99&quot;,
-            &quot;hate&quot;: &quot;5&quot;,
-            &quot;comment&quot;: &quot;7&quot;,
-            &quot;repost&quot;: &quot;6&quot;,
-            &quot;bookmark&quot;: &quot;1&quot;,
-            &quot;bimageuri&quot;: &quot;http://wimg.spriteapp.cn/picture/2017/1013/26581410_188.jpg&quot;,
-            &quot;voiceuri&quot;: null,
-            &quot;voicetime&quot;: null,
-            &quot;voicelength&quot;: null,
-            &quot;status&quot;: &quot;4&quot;,
-            &quot;theme_id&quot;: &quot;58191&quot;,
-            &quot;theme_name&quot;: &quot;搞笑视频&quot;,
-            &quot;theme_type&quot;: &quot;1&quot;,
-            &quot;videouri&quot;: &quot;http://wvideo.spriteapp.cn/video/2017/1013/59e029b7ddb34_wpd.mp4&quot;,
-            &quot;videotime&quot;: 301,
-            &quot;original_pid&quot;: &quot;0&quot;,
-            &quot;cache_version&quot;: 2,
-            &quot;playcount&quot;: &quot;1760&quot;,
-            &quot;playfcount&quot;: &quot;37&quot;,
-            &quot;cai&quot;: &quot;5&quot;,
-            &quot;weixin_url&quot;: null,
-            &quot;image1&quot;: &quot;http://wimg.spriteapp.cn/picture/2017/1013/26581410_188.jpg&quot;,
-            &quot;image2&quot;: &quot;http://wimg.spriteapp.cn/picture/2017/1013/26581410_188.jpg&quot;,
-            &quot;is_gif&quot;: false,
-            &quot;image0&quot;: &quot;http://wimg.spriteapp.cn/picture/2017/1013/26581410_188.jpg&quot;,
-            &quot;image_small&quot;: &quot;http://wimg.spriteapp.cn/picture/2017/1013/26581410_188.jpg&quot;,
-            &quot;cdn_img&quot;: &quot;http://wimg.spriteapp.cn/picture/2017/1013/26581410_188.jpg&quot;,
-            &quot;width&quot;: &quot;1066&quot;,
-            &quot;height&quot;: &quot;600&quot;,
-            &quot;tag&quot;: &quot;&quot;,
-            &quot;t&quot;: 1507953421,
-            &quot;ding&quot;: &quot;99&quot;,
-            &quot;favourite&quot;: &quot;1&quot;,
-            &quot;top_cmt&quot;: null,
-            &quot;themes&quot;: null
-        },
-        {
-            &quot;type&quot;: &quot;10&quot;,
-            &quot;text&quot;: &quot;用你老家的方言“膝盖”怎么讲？我先说：葛啦半儿&quot;,
-            &quot;user_id&quot;: &quot;19531820&quot;,
-            &quot;name&quot;: &quot;臭宝蛋蛋&quot;,
-            &quot;screen_name&quot;: &quot;臭宝蛋蛋&quot;,
-            &quot;profile_image&quot;: &quot;http://tva4.sinaimg.cn/crop.0.0.996.996.50/e7f9e94djw8f6ursgyso3j20ro0rp0wy.jpg&quot;,
-            &quot;created_at&quot;: &quot;2017-10-14 11:56:02&quot;,
-            &quot;create_time&quot;: null,
-            &quot;passtime&quot;: &quot;2017-10-14 11:56:02&quot;,
-            &quot;love&quot;: &quot;75&quot;,
-            &quot;hate&quot;: &quot;7&quot;,
-            &quot;comment&quot;: &quot;90&quot;,
-            &quot;repost&quot;: &quot;0&quot;,
-            &quot;bookmark&quot;: &quot;0&quot;,
-            &quot;bimageuri&quot;: &quot;&quot;,
-            &quot;voiceuri&quot;: null,
-            &quot;voicetime&quot;: null,
-            &quot;voicelength&quot;: null,
-            &quot;status&quot;: &quot;4&quot;,
-            &quot;theme_id&quot;: &quot;56779&quot;,
-            &quot;theme_name&quot;: &quot;都是大奇葩&quot;,
-            &quot;theme_type&quot;: &quot;1&quot;,
-            &quot;videouri&quot;: &quot;&quot;,
-            &quot;videotime&quot;: 0,
-            &quot;original_pid&quot;: &quot;0&quot;,
-            &quot;cache_version&quot;: 2,
-            &quot;playcount&quot;: null,
-            &quot;playfcount&quot;: null,
-            &quot;cai&quot;: &quot;7&quot;,
-            &quot;weixin_url&quot;: null,
-            &quot;image1&quot;: &quot;http://wimg.spriteapp.cn/ugc/2017/10/13/59e0a54731626_1.jpg&quot;,
-            &quot;image2&quot;: &quot;http://wimg.spriteapp.cn/ugc/2017/10/13/59e0a54731626_1.jpg&quot;,
-            &quot;is_gif&quot;: false,
-            &quot;image0&quot;: &quot;http://wimg.spriteapp.cn/ugc/2017/10/13/59e0a54731626_1.jpg&quot;,
-            &quot;image_small&quot;: null,
-            &quot;cdn_img&quot;: &quot;http://wimg.spriteapp.cn/ugc/2017/10/13/59e0a54731626_1.jpg&quot;,
-            &quot;width&quot;: &quot;750&quot;,
-            &quot;height&quot;: &quot;3024&quot;,
-            &quot;tag&quot;: &quot;&quot;,
-            &quot;t&quot;: 1507953362,
-            &quot;ding&quot;: &quot;75&quot;,
-            &quot;favourite&quot;: &quot;0&quot;,
-            &quot;top_cmt&quot;: null,
-            &quot;themes&quot;: null
-        }
-    ]
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Flask获取访问者 IP和User-Agent]]></title>
-        <id>https://mliank.github.io/flask-huo-qu-fang-wen-zhe-ip-he-user-agent/</id>
-        <link href="https://mliank.github.io/flask-huo-qu-fang-wen-zhe-ip-he-user-agent/">
-        </link>
-        <updated>2019-09-23T07:13:49.000Z</updated>
-        <content type="html"><![CDATA[<p>ip采用<code>request.remote_addr</code>获取<br>
-User-Agent采用<code>request.headers.get('User-Agent')</code>获取<br>
-代码如下</p>
-<pre><code># -*- coding: utf8 -*-   
-
-from flask import Flask, request
-app = Flask(__name__)
-@app.route('/')
-def index():
-    ua = request.headers.get('User-Agent')
-    ip = request.remote_addr
-    return ua,ip
-if __name__ == '__main__':
-    app.run(host=&quot;0.0.0.0&quot;,port=int(&quot;80&quot;))
-
-</code></pre>
-<p>API接口</p>
-<pre><code># -*- coding: utf8 -*-   
-
-from flask import Flask, request,Response,jsonify
-from datetime import datetime
-
-app = Flask(__name__)
-@app.route('/')
-def index():
-    now = datetime.now()
-    ua = request.headers.get('User-Agent')
-    ip = request.remote_addr
-    data={
-        'ip':ip,
-        'User-Agent':ua,
-        'time':now,
-    }
-    return jsonify(data)
-
-if __name__ == '__main__':
-    app.run(host=&quot;0.0.0.0&quot;,port=int(&quot;80&quot;),debug=True)
-</code></pre>
-<p>运行结果<br>
-<img src="https://mliank.github.io//post-images/1569225976018.png" alt="运行结果" loading="lazy"></p>
 ]]></content>
     </entry>
 </feed>

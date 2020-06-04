@@ -1,0 +1,268 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Django2.0:MVC与MTV开发模式 | Super Lee</title>
+<link rel="shortcut icon" href="https://mliank.github.io//favicon.ico?v=1591271446293">
+<link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css" rel="stylesheet">
+<link rel="stylesheet" href="https://mliank.github.io//styles/main.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/go.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Super Lee
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="https://mliank.github.io/links" class="menu gt-a-link">
+                            友链
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+        </div>
+    </div>
+</nav>
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    Django2.0:MVC与MTV开发模式
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2020-06-04 ·
+                    </time>
+                    
+                </div>
+                <div class="post-content">
+                    <p>了解了，Django的请求与响应这个流程，下面我们一起来做一个简单的Blog文章发布系统：</p>
+<p>一、先设计一个简单的数据库，里面只放标题(title)、内容(body)、发布时间(created_time)三个字段。在原来的项目里，我们打开blog/models.py，输入如下代码：</p>
+<pre><code>from django.db import models
+
+class Article(models.Model):
+    title = models.CharField('标题',max_length=70)
+    body = models.TextField('内容', max_length=200, blank=True)
+    created_time = models.DateTimeField('发布时间')
+    
+    class Meta:
+        verbose_name = '文章'
+        verbose_name_plural = '文章'
+        
+    def __str__(self):
+        return self.title
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://i.loli.net/2020/06/04/JfTy6WiBRHFoaxq.png" alt="" loading="lazy"></figure>
+<p>之后在Pycharm底部Terminal里输入下面的命令进行数据库迁移：</p>
+<pre><code>python manage.py makemigrations
+python manage.py migrate
+</code></pre>
+<p>我们打开blog/admin.py 文件，在里面输入：</p>
+<pre><code>from django.contrib import admin
+from .models import Article
+
+class ArticleAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title', 'created_time',)
+    list_display_links = ('title',)
+    
+admin.site.register(Article,ArticleAdmin)
+</code></pre>
+<p>然后我们通过下面的命令创建一个管理员：</p>
+<p><code>python manage.py createsuperuser</code><br>
+创建管理员的时候，会提示你输入管理员帐号、密码、邮箱。注意，密码不能输入太简单，不然没法通过校检。会提示重新来一次。</p>
+<h1 id="运行">运行</h1>
+<p><code>python manage.py runserver</code><br>
+启动成功，然后我们在浏览器里输入网址：http://127.0.0.1:8000/admin/ 回车，我们就能看到网站管理后台界面。<br>
+<img src="https://i.loli.net/2020/06/04/EJTHMjO18xwoNYU.png" alt="" loading="lazy"></p>
+<p>二、添加一个URL和添加一个和URL对应的视图函数</p>
+<p>文章增加好了，现在我们需要做的是通过输入网址，就能在浏览器里查看到我们增加的文章。</p>
+<p>打开项目目录里mysite/urls.py的文件，我们增加一个新的URL，在urlpatterns列表里面增加：</p>
+<pre><code>urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('index', views.hello),
+    path('', views.index, name='index'), #+ 新增一个新的URL
+    ]
+</code></pre>
+<p>打开blog/views.py文件，为对应的网址，增加一个响应函数。代码如下：</p>
+<pre><code>from django.shortcuts import render
+from django.http import HttpResponse
+from blog import models
+
+def hello(request):
+    return HttpResponse('Hello,world')
+    
+#下面的代码是新增加的，这个函数主要是把查询的内容渲染到 index.html页面去    
+def index(request):
+    blog_index = models.Article.objects.all().order_by('-id')
+    context = {
+        'blog_index':blog_index,
+    }
+    return render(request, 'index.html',context)
+</code></pre>
+<p>三、然后在项目目录里的templates文件夹里，新建立一个index.html文件，并输入如下代码：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;博客首页&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div&gt;
+    &lt;ul&gt;
+    &lt;h3&gt;最新文章&lt;/h3&gt;
+        {% for x in blog_index %}
+        &lt;li&gt;{{ x.title }}&lt;/li&gt;
+        {% endfor %}
+    &lt;/ul&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>打开mysite/settins.py文件，找到TEMPLATES，在'DIRS': [ ],的括号里，把templates添加路径添加进去。</p>
+<p><code>os.path.join(BASE_DIR, 'templates'),</code><br>
+<img src="https://i.loli.net/2020/06/04/av6IWh1bEtLFs9T.png" alt="" loading="lazy"></p>
+<p>注意：如果你的项目是用Pycharm创建的话，这里已经添加过了，不需要重复添加。</p>
+<p>现在我们重启Django服务，在浏览器器里，输入网址：http://127.0.0.1:8000/</p>
+<figure data-type="image" tabindex="2"><img src="https://i.loli.net/2020/06/04/eHgf5Nwqt16LzjP.png" alt="" loading="lazy"></figure>
+<p>回车之后，就能在浏览器里看到刚才我们在后台增加的文章。</p>
+<p>在上面的例子里，我着重提示了三个地方的操作：models.py文件编辑、views.py文件编辑、templates下的模板文件编辑。那么这个三操作，具体有什么作用呢？</p>
+<p>1、models，数据模型：这是一个抽象层，用来构建和操作你的web应用中的数据，模型是你的数据的唯一的、权威的信息源。它包含你所储存数据的必要字段和行为。通常，每个模型对应数据库中唯一的一张表。</p>
+<p>2、templates，模板：模板层，负责怎么样显示数据，说白了，就是利用一些格式化的html文件，使数据按照要求显示（显示在哪里，怎么显示等等）。</p>
+<p>3、views，视图：用于封装负责处理用户请求及返回响应的逻辑。视图可以看作是前端与数据库的中间人，它会将前端想要的数据从数据库中读出来给前端。他也会将用户要想保存的数据写到数据库。</p>
+<p>之后的DjangoWeb开发之后，我们都要按这样的流程，或者说是按照这样的开发模式进行开发。这样的开发模式我们把它叫MVC开发模式。</p>
+<p>以下是 Django 中 M、V 和 C 各自的含义：<br>
+M ：数据存取部分，由django数据库层处理，本章要讲述的内容。<br>
+V：选择显示哪些数据要显示以及怎样显示的部分，由视图和模板处理。<br>
+C：根据用户输入委派视图的部分，由 Django 框架根据 URLconf 设置，对给定 URL 调用适当的 Python 函数。</p>
+<p>在Django里，由于 C层由框架自行处理，而 Django 里更关注的是模型（Model）、模板(Template)和视图（Views），所以Django 也被称为 MTV框架 。在MTV开发模式中：<br>
+M ：代表模型（Model），即数据存取层。 该层处理与数据相关的所有事务： 如何存取、如何验证有效<br>
+T ：代表模板(Template)，即表现层。 该层处理与表现相关的决定： 如何在页面或其他类型文档中进行显示。<br>
+V ：代表视图（View），即业务逻辑层。 该层包含存取模型及调取恰当模板的相关逻辑。 你可以把它看作模型与模板之间的桥梁。</p>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://mliank.github.io/pLIYuFMwj/" class="post-title gt-a-link">
+                    Django2.0入门教程:请求与响应
+                </a>
+            </div>
+        
+
+        
+		
+		
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">温故而知新</div>
+    <div class="social-container">
+        
+            
+                <a href="https://github.com/mliank/" target="_blank">
+                    <i class="fab fa-github gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+                <a href="https://weibo.com/lixinru7726/" target="_blank">
+                    <i class="fab fa-weibo gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://mliank.github.io/" target="_blank">Super Lee</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://mliank.github.io//atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+    hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

@@ -3,7 +3,7 @@
     <meta charset="utf-8"/>
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>效率工具 | Super Lee</title>
+<title>Django2.0入门教程:请求与响应 | Super Lee</title>
 <link rel="shortcut icon" href="https://mliank.github.io//favicon.ico?v=1591271446293">
 <link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css" rel="stylesheet">
 <link rel="stylesheet" href="https://mliank.github.io//styles/main.css">
@@ -95,67 +95,34 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    效率工具
+                    Django2.0入门教程:请求与响应
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2019-09-23 ·
+                        · 2020-06-04 ·
                     </time>
-                    
-                        <a href="https://mliank.github.io/tag/RO6mgJbH7/" class="post-tags">
-                            # 分享
-                        </a>
                     
                 </div>
                 <div class="post-content">
-                    <p>万彩办公大师</p>
-<p>PDF转换、图片编辑、文档处理、录屏截取...站长推荐办公必备！<br>
-http://www.wofficebox.com/</p>
-<p>DBP-数据管理分析工具<br>
-快速搭建一站式的数据管理和分析平台<br>
-https://www.bdp.cn/home.html</p>
-<p>TRELLO项目协同<br>
-国外老牌的项目协同工具，贴纸化管理。国内大多数协同软件的鼻祖<br>
-https://trello.com/</p>
-<p>奇妙清单<br>
-与你生活同步，支持多客户端<br>
-https://www.wunderlist.com/zh/</p>
-<p>禅道<br>
-国产的开源项目管理软件,专注研发项目管理,实现软件的完整生命周期管理<br>
-http://www.zentao.net/</p>
-<p>滴答清单<br>
-轻便的待办事项应用<br>
-http://www.dida365.com/</p>
-<p>TAPD-腾讯敏捷平台<br>
-腾讯敏捷产品研发平台,它支持主流的敏捷产品研发模式和方法论<br>
-https://www.tapd.cn/</p>
-<p>TOWER<br>
-很细致的团队协作工具，支持手机端，支持钉钉应用<br>
-http://tower.im</p>
-<p>石墨文档<br>
-可多人实时协作的云端文档与表格，支持钉钉应用<br>
-http://shimo.im</p>
-<p>Teambition<br>
-支持多场景的团队协作工具，支持移动端，钉钉应用<br>
-https://www.teambition.com</p>
-<p>worktile<br>
-协同办公工具，10人以下<br>
-https://worktile.com/</p>
-<p>风车<br>
-强大的任务管理工具，支持多种客户端<br>
-https://fengche.co</p>
-<p>redmine<br>
-开源的项目管理系统，RUBY开发，无商用限制<br>
-http://www.redmine.org.cn</p>
-<p>一起写<br>
-文档协同工具，支持多种类型<br>
-https://yiqixie.com</p>
-<p>伙伴云表格<br>
-电脑手机实时同步 随时随地增删改查<br>
-https://www.huoban.com/</p>
-<p>超级表格<br>
-多人共享的&quot;在线Excel<br>
-http://chaojibiaoge.com/</p>
+                    <p><img src="https://i.loli.net/2020/06/04/NeQhStqRx91lmD3.png" alt="访问的网站的流程图" loading="lazy"><br>
+用户在浏览器里输入网址（URL），回车之后就会向目标网址发送一个HTTP请求，服务器收到请求之后就会做出一个响应，把内容通过浏览器渲染出来，呈现给用户看。</p>
+<p>下图，就是请求响应的过程。<br>
+<img src="https://i.loli.net/2020/06/04/YHjiGPRvskhSqIm.png" alt="请求响应的过程" loading="lazy"></p>
+<p>我们在浏览器里输入网址http://127.0.0.1:8000/index，得到了Hello，world。Hello，world就是服务器对这个网址(URL)做出的响应。</p>
+<p>这个网址(URL)是从哪得来的呢？这个网址(URL)就是我们自己设置的，就是在项目里的mysite文件夹下的urls.py中。</p>
+<pre><code>urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('index', views.hello),
+]
+</code></pre>
+<p>其中<code>path('index', views.hello),</code>对应的就是URL就是<code>http://127.0.0.1:8000/index</code></p>
+<p>URL我们都集中写在一个文件中，每个URL函数都以path、re_path（2.0的写法）的形式写出来，放在urlpatterns列表里，每个URL函数包含三个参数：URL(正规表达式)、对应方法、名称。</p>
+<p>这个URL对应的方法是views.hello，这个会给我们返回响应，也就是Hello，world，我们把这个方法方法写在了blog下的views.py文件里。这个方法其实是一个函数，这个函数通过HttpResponse，返回一个字符串'Hello,world'。</p>
+<pre><code>def hello(request):
+    return HttpResponse('Hello,world')
+</code></pre>
+<p>每一个URL都会对应一个函数，函数必须存在一个参数，一般约定为request,每个响应(函数)，都对应着一个URL。URL发出请求之后，这个函数就作出相对的响应，把'Hello,world'这个字符串渲染成HTML页面，在浏览器里呈现给用户。这个流程，就是请求与响应的流程，也是Django的处理流程。下面通过一张图片，更形象的的让你了解DJango的处理流程。<br>
+<img src="https://i.loli.net/2020/06/04/rAevcfKHUFzQmMs.png" alt="具体流程" loading="lazy"></p>
 
                 </div>
             </article>
@@ -164,8 +131,8 @@ http://chaojibiaoge.com/</p>
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://mliank.github.io/da-qi-ye-nei-bu-de-jiao-hu-she-ji-tuan-dui-bo-ke/" class="post-title gt-a-link">
-                    大企业内部的交互设计团队博客
+                <a href="https://mliank.github.io/1cu9hwCAn/" class="post-title gt-a-link">
+                    Django 2.0
                 </a>
             </div>
         

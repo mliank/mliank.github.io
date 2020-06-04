@@ -3,8 +3,8 @@
     <meta charset="utf-8"/>
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Django 2 | Super Lee</title>
-<link rel="shortcut icon" href="https://mliank.github.io//favicon.ico?v=1590729099190">
+<title>Django 2.0 | Super Lee</title>
+<link rel="shortcut icon" href="https://mliank.github.io//favicon.ico?v=1591271446293">
 <link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css" rel="stylesheet">
 <link rel="stylesheet" href="https://mliank.github.io//styles/main.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -95,7 +95,7 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    Django 2
+                    Django 2.0
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
@@ -105,11 +105,85 @@
                 </div>
                 <div class="post-content">
                     <p>to do</p>
-<ol>
-<li>打开冰箱门</li>
-<li>把大象装冰箱</li>
-<li>关上冰箱门</li>
-</ol>
+<h1 id="安装">安装</h1>
+<h2 id="pip安装">pip安装</h2>
+<pre><code>pip install django #安装最新Django
+pip install django==2.0.7 #指定版本安装
+</code></pre>
+<h2 id="检查">检查</h2>
+<p><code>pip list</code><br>
+或者</p>
+<pre><code>import django
+print(django.VERSION)
+</code></pre>
+<h1 id="创建项目">创建项目</h1>
+<p>使用 django-admin.py 来创建 HelloWorld 项目：<br>
+<code>django-admin.py startproject HelloWorld</code></p>
+<h2 id="目录说明">目录说明：</h2>
+<ul>
+<li>HelloWorld: 项目的容器。</li>
+<li>manage.py: 一个实用的命令行工具，可让你以各种方式与该 Django 项目进行交互。</li>
+<li>HelloWorld/<strong>init</strong>.py: 一个空文件，告诉 Python 该目录是一个 Python 包。</li>
+<li>HelloWorld/asgi.py: 一个 ASGI 兼容的 Web 服务器的入口，以便运行你的项目。</li>
+<li>HelloWorld/settings.py: 该 Django 项目的设置/配置。</li>
+<li>HelloWorld/urls.py: 该 Django 项目的 URL 声明; 一份由 Django 驱动的网站&quot;目录&quot;。</li>
+<li>HelloWorld/wsgi.py: 一个 WSGI 兼容的 Web 服务器的入口，以便运行你的项目。</li>
+</ul>
+<h2 id="运行">运行</h2>
+<p><code>python3 manage.py runserver 0.0.0.0:8000</code><br>
+<img src="https://i.loli.net/2020/06/04/sUZTzqD1kde4wSl.png" alt="运行" loading="lazy"></p>
+<h1 id="创建app">创建app</h1>
+<p>使用 manage.py 来创建blog：<br>
+<code>python manage.py startapp blog</code><br>
+<img src="https://i.loli.net/2020/06/04/skORWuzFLbyh8J9.png" alt="结构" loading="lazy"></p>
+<pre><code>blog                 #应用目录
+│  admin.py        #对应应用后台管理配置文件。
+│  apps.py         #对应应用的配置文件。
+│  models.py       #数据模块，数据库设计就在此文件中设计。后面重点讲解
+│  tests.py        #自动化测试模块，可在里面编写测试脚本自动化测试
+│  views.py        #视图文件，用来执行响应代码的。你在浏览器所见所得都是它处理的。
+│  __init__.py
+│
+├─migrations        #数据迁移、移植文目录，记录数据库操作记录，内容自动生成。
+│  │  __init__.py
+</code></pre>
+<p>应用创建好了，我们需要在项目目录下的mysite文件夹下的settings.py配置文件里的INSTALLED_APPS选项里注册应用。申明blog这个文件夹是一个APP应用。</p>
+<figure data-type="image" tabindex="1"><img src="https://i.loli.net/2020/06/04/7OlR3yiZWuFSGcN.png" alt="注册应用" loading="lazy"></figure>
+<h2 id="修改配置文件">修改配置文件</h2>
+<p>在这之前，我们需要设置一下我们的项目文件夹里的mysite目录下的settings.py配置文件，我们需要把语言设置为中文和时区修改为中国时区。<br>
+<code>LANGUAGE_CODE = 'zh-hans'</code>和<code>TIME_ZONE = 'Asia/Shanghai'</code><br>
+我们在文件尾部：</p>
+<pre><code>mysite/mysite/settings.py
+
+# 把语言改为中文
+# LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-hans'
+# 把国际时区改为中国时区
+# TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
+</code></pre>
+<p>打开 blog 目录下 view.py 文件，在里面输入:</p>
+<pre><code>#mysite/blog/views.py
+from django.http import HttpResponse
+
+def hello(request):
+    return HttpResponse('Hello,world')
+</code></pre>
+<p>再打开mysite目录下的urls.py文件：</p>
+<pre><code>mysite/mysite/urls.py
+
+from django.contrib import admin
+from django.urls import path
+from blog import views         #+ 
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('index', views.hello),   #+
+]
+</code></pre>
+<h2 id="启动">启动</h2>
+<p>使用命令<code>python manage.py runserver</code></p>
+<p>在浏览器里输入 http://127.0.0.1:8000/index 回车！<br>
+<img src="https://i.loli.net/2020/06/04/8FEvQmD7THJsBcX.png" alt="看到了我们期待已久的Hello world. " loading="lazy"></p>
 
                 </div>
             </article>

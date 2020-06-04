@@ -3,8 +3,8 @@
     <meta charset="utf-8"/>
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Django | Super Lee</title>
-<link rel="shortcut icon" href="https://mliank.github.io//favicon.ico?v=1590729099190">
+<title>Django常用命令和设置 | Super Lee</title>
+<link rel="shortcut icon" href="https://mliank.github.io//favicon.ico?v=1591271446293">
 <link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css" rel="stylesheet">
 <link rel="stylesheet" href="https://mliank.github.io//styles/main.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -95,7 +95,7 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    Django
+                    Django常用命令和设置
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
@@ -109,7 +109,7 @@ django項目提供給你的一个后台数据库管理界面<br>
 数据库生成命令:<br>
 makemigrations:执行检查数据库差异，生成迁移文件<br>
 migrate :根据迁移文件生成対座的SQL悟句<br>
-django默人的自带了一些数据库内容<br>
+django默任的自带了一些数据库内容<br>
 python manage.py migrate<br>
 创建管理界面的超級用戸:<br>
 python manage.py createsuperuser<br>
@@ -124,6 +124,21 @@ TIME_ ZONE = ' Asia/ Shanghai<br>
 - models 创建该APP下可能使用到的数据库<br>
 -test 实现某些測試駆幼I<br>
 -views实现対座功能的</p>
+<h1 id="django常用命令">Django常用命令</h1>
+<p>一些Django常用的命令。</p>
+<p>安装Django： pip install django  指定版本 pip3 install django==2.0</p>
+<p>新建项目： django-admin.py startproject mysite</p>
+<p>新建APP : python manage.py startapp blog</p>
+<p>启动：python manage.py runserver 8080</p>
+<p>同步或者更改生成 数据库：</p>
+<p>python manage.py makemigrations</p>
+<p>python manage.py migrate</p>
+<p>清空数据库： python manage.py flush</p>
+<p>创建管理员： python manage.py createsuperuser</p>
+<p>修改用户密码： python manage.py changepassword username</p>
+<p>Django项目环境终端： python manage.py shell</p>
+<p>这个命令和 直接运行 python 进入 shell 的区别是：你可以在这个 shell 里面调用当前项目的 models.py 中的 API，对于操作数据的测试非常方便。</p>
+<p>更多关于Django的命令在终端输入：python manage.py 查看</p>
 
                 </div>
             </article>

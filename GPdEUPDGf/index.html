@@ -1,0 +1,537 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Django2.0:全局配置settings详解 | Super Lee</title>
+<link rel="shortcut icon" href="https://mliank.github.io//favicon.ico?v=1591271446293">
+<link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css" rel="stylesheet">
+<link rel="stylesheet" href="https://mliank.github.io//styles/main.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/go.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Super Lee
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="https://mliank.github.io/links" class="menu gt-a-link">
+                            友链
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+        </div>
+    </div>
+</nav>
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    Django2.0:全局配置settings详解
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2020-06-04 ·
+                    </time>
+                    
+                </div>
+                <div class="post-content">
+                    <p>Django设置文件包含你所有的Django安装配置。这个文件一般在你的项目文件夹里。比如我们创建了一个名为mysite的项目，那么这个配置文件setting.py就在项目里的mysite文件夹里。</p>
+<p>下面列表一些常用的settings配置供参考。</p>
+<p>1.配置静态文件</p>
+<pre><code>#STATIC_URL = '/static/'为静态文件别名
+STATIC_URL = '/static/'
+#静态文件地址拼接，后面'static'文件为自己建立的存放静态文件（JS，IMG，CSS）的文件名
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'), #主文件下静态文件
+    os.path.join(BASE_DIR,&quot;blog&quot;,&quot;statics&quot;),#项目blog文件下静态文件
+)
+</code></pre>
+<p>2、mysql数据库配置</p>
+<pre><code>########在setting原来默认的sqlite
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+############修改成mysql如下
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'test',    #你的数据库名称
+        'USER': 'root',   #你的数据库用户名
+        'PASSWORD': '19941028', #你的数据库密码
+        'HOST': '', #你的数据库主机，留空默认为localhost
+        'PORT': '3306', #你的数据库端口
+    }}
+#由于mysql默认引擎为MySQLdb，在__init__.py文件中添加下面代码
+#在python3中须替换为pymysql,可在主配置文件（和项目同名的文件下，不是app配置文件）中增加如下代码
+import pymysql
+pymysql.install_as_MySQLdb()
+#如果找不到pymysql板块，则通过pip install pymysql进行安装。
+</code></pre>
+<p>3、设置打印日志到屏幕</p>
+<pre><code>LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django.db.backends': {
+            'handlers': ['console'],
+            'propagate': True,
+            'level': 'DEBUG',
+        },
+    }
+}
+</code></pre>
+<p>4、语言</p>
+<pre><code>LANGUAGE_CODE = 'en-us'# 默认
+LANGUAGE_CODE = 'zh-hans'# 改为中文，主要针对admin页面
+</code></pre>
+<p>5、配置模板路径</p>
+<pre><code>TEMPLATE_DIRS = (
+        os.path.join(BASE_DIR,'templates'),
+    )
+#然后在项目根目录下添加templates文件夹
+</code></pre>
+<p>6、注册APP</p>
+<pre><code>INSTALLED_APPS = [
+ 'django.contrib.admin',
+ 'django.contrib.auth',
+ 'django.contrib.contenttypes',
+ 'django.contrib.sessions',
+ 'django.contrib.messages',
+ 'django.contrib.staticfiles',
+ 'app1.apps.App1Config', 
+ # 默认已有 如果没有只要添加app名称即可 例如： 'blog'
+ # 新建的应用都要在这里添加
+]
+</code></pre>
+<p>7、sql语句</p>
+<pre><code>LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django.db.backends': {
+            'handlers': ['console'],
+            'propagate': True,
+            'level': 'DEBUG',
+        },
+    }
+}　
+</code></pre>
+<p>当你的操作与数据库相关时 会将我们的写的语句翻译成sql语句在服务端打印。</p>
+<p>8、如果数据库中的UserInfo(用户表)继承django内置AbstractUser</p>
+<p>1）model需导入</p>
+<p><code>from django.contrib.auth.models import AbstractUser</code><br>
+2）Settings文件里添加</p>
+<p><code>AUTH_USER_MODEL = &quot;应用名.UserInfo&quot;</code><br>
+9、中间件，自己写的中间件，例如在项目中的md文件夹下md.py文件中的M1与M2两个中间件</p>
+<pre><code>MIDDLEWARE = [
+ 'django.middleware.security.SecurityMiddleware',
+ 'django.contrib.sessions.middleware.SessionMiddleware',
+ 'django.middleware.common.CommonMiddleware',
+ 'django.middleware.csrf.CsrfViewMiddleware',
+ 'django.contrib.auth.middleware.AuthenticationMiddleware',
+ 'django.contrib.messages.middleware.MessageMiddleware',
+ 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+ 'md.md.M1',
+ 'md.md.M2',
+]
+</code></pre>
+<p>需要注意的是自己写的中间件，配置要写在系统中的后面</p>
+<p>10、session存储的相关配置</p>
+<p>1）数据库配置（默认）</p>
+<pre><code>Django默认支持Session，并且默认是将Session数据存储在数据库中，即：django_session 表中。
+配置 settings.py
+ SESSION_ENGINE = 'django.contrib.sessions.backends.db' # 引擎（默认）
+ SESSION_COOKIE_NAME ＝ &quot;sessionid&quot;   # Session的cookie保存在浏览器上时的key，即：sessionid＝随机字符串（默认）
+ SESSION_COOKIE_PATH ＝ &quot;/&quot;    # Session的cookie保存的路径（默认）
+ SESSION_COOKIE_DOMAIN = None    # Session的cookie保存的域名（默认）
+ SESSION_COOKIE_SECURE = False    # 是否Https传输cookie（默认）
+ SESSION_COOKIE_HTTPONLY = True    # 是否Session的cookie只支持http传输（默认）
+ SESSION_COOKIE_AGE = 1209600    # Session的cookie失效日期（2周）（默认）
+ SESSION_EXPIRE_AT_BROWSER_CLOSE = False   # 是否关闭浏览器使得Session过期（默认）
+ SESSION_SAVE_EVERY_REQUEST = False   # 是否每次请求都保存Session，默认修改之后才保存（默认）
+</code></pre>
+<p>2）缓存配置</p>
+<pre><code>配置 settings.py
+ SESSION_ENGINE = 'django.contrib.sessions.backends.cache' # 引擎
+ SESSION_CACHE_ALIAS = 'default'    # 使用的缓存别名（默认内存缓存，也可以是memcache），此处别名依赖缓存的设置
+ SESSION_COOKIE_NAME ＝ &quot;sessionid&quot;   # Session的cookie保存在浏览器上时的key，即：sessionid＝随机字符串
+ SESSION_COOKIE_PATH ＝ &quot;/&quot;    # Session的cookie保存的路径
+ SESSION_COOKIE_DOMAIN = None    # Session的cookie保存的域名
+ SESSION_COOKIE_SECURE = False    # 是否Https传输cookie
+ SESSION_COOKIE_HTTPONLY = True    # 是否Session的cookie只支持http传输
+ SESSION_COOKIE_AGE = 1209600    # Session的cookie失效日期（2周）
+ SESSION_EXPIRE_AT_BROWSER_CLOSE = False   # 是否关闭浏览器使得Session过期
+ SESSION_SAVE_EVERY_REQUEST = False   # 是否每次请求都保存Session，默认修改之后才保存
+</code></pre>
+<p>3）默认配置</p>
+<pre><code>配置 settings.py
+ SESSION_ENGINE = 'django.contrib.sessions.backends.file' # 引擎
+ SESSION_FILE_PATH = None     # 缓存文件路径，如果为None，则使用tempfile模块获取一个临时地址tempfile.gettempdir() 
+ SESSION_COOKIE_NAME ＝ &quot;sessionid&quot;    # Session的cookie保存在浏览器上时的key，即：sessionid＝随机字符串
+ SESSION_COOKIE_PATH ＝ &quot;/&quot;     # Session的cookie保存的路径
+ SESSION_COOKIE_DOMAIN = None    # Session的cookie保存的域名
+ SESSION_COOKIE_SECURE = False    # 是否Https传输cookie
+ SESSION_COOKIE_HTTPONLY = True    # 是否Session的cookie只支持http传输
+ SESSION_COOKIE_AGE = 1209600    # Session的cookie失效日期（2周）
+ SESSION_EXPIRE_AT_BROWSER_CLOSE = False   # 是否关闭浏览器使得Session过期
+ SESSION_SAVE_EVERY_REQUEST = False    # 是否每次请求都保存Session，默认修改之后才保存
+</code></pre>
+<p>注意：<br>
+1）也可以自定义配置 但是自定义的配置都要写到配置文件最后 代码中使用时可以导入配置</p>
+<pre><code>from django.conf import settings
+settings.配置名
+</code></pre>
+<p>2）上面所有配置都是针对特定问题需要修改的，系统默认配置不做说明<br>
+3）上面配置只是前面django入门教程所遇到的常用配置 后续所遇配置都会逐步在此教程中持续添加跟新</p>
+<p>11、配置文件上传目录</p>
+<pre><code>#设置文件上传路径
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+</code></pre>
+<p>如果想在浏览器里访问自己上传的文件则需要在urls.py做如下设置：</p>
+<p>from django.views.static import serve<br>
+from django.conf import settings</p>
+<p>urlpatterns = [<br>
+...<br>
+re_path('^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),<br>
+]<br>
+下面看段django settings最佳配置实例代码，具体代码如下所示：</p>
+<p>import os<br>
+import socket<br>
+SITE_ID = 1</p>
+<h1 id="项目的根目录">项目的根目录</h1>
+<h1 id="简化后面的操作">简化后面的操作</h1>
+<p>PROJECT_ROOT = os.path.dirname(os.path.dirname(<strong>file</strong>))</p>
+<h1 id="加载应用">加载应用</h1>
+<h1 id="把应用添加到installed_apps中">把应用添加到INSTALLED_APPS中</h1>
+<p>from apps.kuser.mysetting import myapp as kuser_app<br>
+from apps.blog.mysetting import myapp as blog_app<br>
+MY_APPS = blog_app + kuser_app</p>
+<h1 id="加载静态文件">加载静态文件</h1>
+<p>from apps.blog.mysetting import my_staticfiles as blog_staticfiles<br>
+from apps.kuser.mysetting import my_staticfiles as kuser_staticfiles<br>
+MY_STATIC_DIRS = blog_staticfiles + kuser_staticfiles</p>
+<h1 id="加载模板文件">加载模板文件</h1>
+<p>from apps.blog.mysetting import my_templates as blog_templates<br>
+from apps.kuser.mysetting import my_templates as kuser_templates<br>
+MY_TEMPLATE_DIRS = blog_templates + kuser_templates</p>
+<h1 id="密钥配置">密钥配置</h1>
+<h1 id="适用于开发环境和部署环境">适用于开发环境和部署环境</h1>
+<h1 id="可以从系统环境中配置文件中和硬编码的配置中得到密钥">可以从系统环境中，配置文件中，和硬编码的配置中得到密钥</h1>
+<p>try:<br>
+SECRET_KEY = os.environ['SECRET_KEY']<br>
+except:<br>
+try:<br>
+with open(os.path.join(PROJECT_ROOT, 'db/secret_key').replace('\', '/')) as f:<br>
+SECRET_KEY = f.read().strip()<br>
+except:<br>
+SECRET_KEY = '*lk<sup>6@0l0(iulgar$j)faff&amp;</sup>(<sup>u+qk3j73d18@&amp;+ur</sup>xuTxY'</p>
+<h1 id="得到主机名">得到主机名</h1>
+<p>def hostname():<br>
+sys = os.name<br>
+if sys == 'nt':<br>
+hostname = os.getenv('computername')<br>
+return hostname<br>
+elif sys == 'posix':<br>
+host = os.popen('echo $HOSTNAME')<br>
+try:<br>
+hostname = host.read()<br>
+return hostname<br>
+finally:<br>
+host.close()<br>
+else:<br>
+raise RuntimeError('Unkwon hostname')<br>
+#调试和模板调试配置<br>
+#主机名相同则为开发环境，不同则为部署环境<br>
+#ALLOWED_HOSTS只在调试环境中才能为空<br>
+if socket.gethostname().lower() == hostname().lower():<br>
+DEBUG = TEMPLATE_DEBUG = True<br>
+ALLOWED_HOSTS = []<br>
+else:<br>
+ALLOWED_HOSTS = [<br>
+'baidu.com',<br>
+'0.0.0.0',<br>
+]<br>
+DEBUG = TEMPLATE_DEBUG = False<br>
+#数据库配置<br>
+MYDB = {<br>
+'mysql': {<br>
+'ENGINE': 'django.db.backends.mysql',<br>
+'NAME': 'books', #你的数据库名称<br>
+'USER': 'root', #你的数据库用户名<br>
+'PASSWORD': '', #你的数据库密码<br>
+'HOST': '', #你的数据库主机，留空默认为localhost<br>
+'PORT': '3306', #你的数据库端口<br>
+},<br>
+'sqlite': {<br>
+'ENGINE': 'django.db.backends.sqlite3',<br>
+'NAME': os.path.join(PROJECT_ROOT, 'db/db.sqlite3').replace('\', '/'),<br>
+}<br>
+}</p>
+<h1 id="给静态文件url一个后缀在templates里用到的">给静态文件url一个后缀，在templates里用到的。</h1>
+<h1 id="映射到静态文件的url">映射到静态文件的url</h1>
+<h1 id="static_url的含义与media_url类似">STATIC_URL的含义与MEDIA_URL类似</h1>
+<p>STATIC_URL = '/static/'</p>
+<h1 id="总的static目录">总的static目录</h1>
+<h1 id="可以使用命令-managepy-collectstatic-自动收集static文件">可以使用命令 manage.py collectstatic 自动收集static文件</h1>
+<h1 id="static_root-ospathjoinproject_root-staticreplace">STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static').replace('\', '/')</h1>
+<p>#放各个app的static目录及公共的static目录<br>
+#STATICFILES_DIRS：和TEMPLATE_DIRS的含义差不多，就是除了各个app的static目录以外还需要管理的静态文件设置，<br>
+#比如项目的公共文件差不多。然后给静态文件变量赋值，告诉Django，静态文件在哪里<br>
+#另外，Django提供了一个findstatic命令来查找指定的静态文件所在的目录，例如：D:\TestDjango&gt;python manage.py findstatic Chrome.jpg</p>
+<h1 id="默认情况下如果没有修改staticfiles_finders的话django首先会在staticfiles_dirs配置的文件夹中寻找静态文件然后再从每个app的static子目录下查找">默认情况下（如果没有修改STATICFILES_FINDERS的话），Django首先会在STATICFILES_DIRS配置的文件夹中寻找静态文件，然后再从每个app的static子目录下查找，</h1>
+<h1 id="并且返回找到的第一个文件-所以我们可以将全局的静态文件放在staticfiles_dirs配置的目录中将app独有的静态文件放在app的static子目录中">并且返回找到的第一个文件。所以我们可以将全局的静态文件放在STATICFILES_DIRS配置的目录中，将app独有的静态文件放在app的static子目录中。</h1>
+<h1 id="存放的时候按类别存放在static目录的子目录下如图片都放在images文件夹中所有的css都放在css文件夹中所有的js文件都放在js文件夹中">存放的时候按类别存放在static目录的子目录下，如图片都放在images文件夹中，所有的CSS都放在css文件夹中，所有的js文件都放在js文件夹中。</h1>
+<p>STATICFILES_DIRS = (<br>
+(&quot;downloads&quot;, os.path.join(PROJECT_ROOT, 'static/downloads').replace('\', '/')),<br>
+(&quot;uploads&quot;, os.path.join(PROJECT_ROOT, 'static/uploads').replace('\', '/')),<br>
+)</p>
+<h1 id="将app中的静态文件添加到静态文件配置列表中">将app中的静态文件添加到静态文件配置列表中</h1>
+<p>STATICFILES_DIRS += MY_STATIC_DIRS</p>
+<h1 id="最后关键的部分是staticfiles_dirs以下配置">最后关键的部分是STATICFILES_DIRS以下配置</h1>
+<h1 id="简要说一下static文件夹在项目里有css-js-images-三个文件夹看项目结构他们的路径分别是">简要说一下，static文件夹在项目里，有css js images 三个文件夹（看项目结构），他们的路径分别是：</h1>
+<h1 id="ospathjoinstatic_rootcssospathjoinstatic_rootjsospathjoinstatic_rootimages">os.path.join(STATIC_ROOT,'css')，os.path.join(STATIC_ROOT,'js')，os.path.join(STATIC_ROOT,'images')；</h1>
+<h1 id="我们分别给他们起三个别名cssjsimages你可以随意给不过为了易记我们原名称指定别名了">我们分别给他们起三个别名css，js，images（你可以随意给，不过为了易记，我们原名称指定别名了）</h1>
+<p>TEMPLATE_DIRS = (<br>
+os.path.join(PROJECT_ROOT, 'templates').replace('\', '/'),<br>
+)</p>
+<h1 id="配置应用的模板文件路径">配置应用的模板文件路径</h1>
+<p>TEMPLATE_DIRS += MY_TEMPLATE_DIRS</p>
+<h1 id="配置缓存">配置缓存</h1>
+<p>CACHES = {<br>
+'default': {<br>
+'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',<br>
+'LOCATION': 'unix:/tmp/memcached.sock',<br>
+'KEY_PREFIX': 'lcfcn',<br>
+'TIMEOUT': None<br>
+}<br>
+}<br>
+LOGIN_REDIRECT_URL = '/'<br>
+LOGIN_URL = '/auth/login/'<br>
+LOGOUT_URL = '/auth/logout/'</p>
+<h1 id="指用户上传的文件比如在model里面的filefieldimagefield上传的文件-如果你定义">指用户上传的文件，比如在Model里面的FileFIeld，ImageField上传的文件。如果你定义</h1>
+<h1 id="media_rootctempmedia那么filemodelsfilefieldupload_toabc上传的文件就会被保存到ctempmediaabc-media_root必须是本地路径的绝对路径">MEDIA_ROOT=c:\temp\media，那么File=models.FileField(upload_to=&quot;abc/&quot;)，上传的文件就会被保存到c:\temp\media\abc。MEDIA_ROOT必须是本地路径的绝对路径。</h1>
+<p>MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'static/uploads')</p>
+<h1 id="media_url是指从浏览器访问时的地址前缀">MEDIA_URL是指从浏览器访问时的地址前缀。</h1>
+<p>MEDIA_URL = '/uploads/'</p>
+<h1 id="应用注册列表">应用注册列表</h1>
+<p>INSTALLED_APPS = (<br>
+'django.contrib.admin',<br>
+'django.contrib.auth',<br>
+'django.contrib.contenttypes',<br>
+'django.contrib.sessions',<br>
+'django.contrib.messages',<br>
+'django.contrib.staticfiles',<br>
+'django.contrib.sites',<br>
+'django.contrib.sitemaps',<br>
+)<br>
+#为了不和系统应用混合，自己开发的应用放在这里</p>
+<h1 id="将自己写的app添加到应用列表中去">将自己写的app添加到应用列表中去</h1>
+<p>INSTALLED_APPS += MY_APPS</p>
+<h1 id="django-中间件">django 中间件</h1>
+<h1 id="django处理一个request的过程是首先通过django-中间件然后再通过默认的url方式进行的">django处理一个Request的过程是首先通过django 中间件，然后再通过默认的URL方式进行的。</h1>
+<h1 id="所以说我们要做的就是在django-中间件这个地方把所有request拦截住">所以说我们要做的就是在django 中间件这个地方把所有Request拦截住，</h1>
+<h1 id="用我们自己的方式完成处理以后直接返回response那么我们可以简化原来的设计思路">用我们自己的方式完成处理以后直接返回Response,那么我们可以简化原来的设计思路，</h1>
+<h1 id="把中间件不能处理的-request统统不管丢给django去处理">把中间件不能处理的 Request统统不管，丢给Django去处理。</h1>
+<p>MIDDLEWARE_CLASSES = (<br>
+'django.middleware.cache.UpdateCacheMiddleware',<br>
+'django.contrib.sessions.middleware.SessionMiddleware',<br>
+'django.middleware.common.CommonMiddleware',<br>
+'django.middleware.csrf.CsrfViewMiddleware',<br>
+'django.contrib.auth.middleware.AuthenticationMiddleware',</p>
+<h1 id="djangocontribauthmiddlewaresessionauthenticationmiddleware">'django.contrib.auth.middleware.SessionAuthenticationMiddleware',</h1>
+<p>'django.contrib.messages.middleware.MessageMiddleware',<br>
+'django.middleware.clickjacking.XFrameOptionsMiddleware',<br>
+'django.middleware.cache.FetchFromCacheMiddleware',<br>
+)<br>
+ROOT_URLCONF = 'lcforum.urls'<br>
+WSGI_APPLICATION = 'lcforum.wsgi.application'<br>
+#数据库配置<br>
+DATABASES = {<br>
+'default': MYDB.get('sqlite'),<br>
+}</p>
+<h1 id="语言">语言</h1>
+<p>LANGUAGE_CODE = 'zh-cn'</p>
+<h1 id="时区">时区</h1>
+<p>TIME_ZONE = 'Asia/Shanghai'<br>
+USE_TZ = True</p>
+<h1 id="在template中使用静态文件">在template中使用静态文件</h1>
+<h1 id="采用这种方式需要有一些额外配置打开settingspy确认template_context_processors中包含有djangocorecontext_processorsstatic">采用这种方式需要有一些额外配置，打开settings.py，确认TEMPLATE_CONTEXT_PROCESSORS中包含有'django.core.context_processors.static'</h1>
+<h1 id="template_context_processors">TEMPLATE_CONTEXT_PROCESSORS = (</h1>
+<h1 id="djangocorecontext_processorsdebug">'django.core.context_processors.debug',</h1>
+<h1 id="djangocorecontext_processorsi18n">'django.core.context_processors.i18n',</h1>
+<h1 id="djangocorecontext_processorsmedia">'django.core.context_processors.media',</h1>
+<h1 id="djangocorecontext_processorsstatic">'django.core.context_processors.static',</h1>
+<h1 id="djangocontribauthcontext_processorsauth">'django.contrib.auth.context_processors.auth',</h1>
+<h1 id="djangocontribmessagescontext_processorsmessages">'django.contrib.messages.context_processors.messages',</h1>
+<h1 id=""></h1>
+<h1 id="djangocorecontext_processorstz">'django.core.context_processors.tz',</h1>
+<h1 id="djangocontribmessagescontext_processorsmessages-2">'django.contrib.messages.context_processors.messages',</h1>
+<h1 id="blogcontext_processorscustom_proc自定义函数"># 'blog.context_processors.custom_proc',自定义函数</h1>
+<h1 id="-2">)</h1>
+<p>#from django.conf import settings<br>
+#gettext = lambda s: s<br>
+#getattr()</p>
+<h1 id="假设有个工程mysite有两个app为blog跟bbs">假设有个工程mysite，有两个app为blog跟bbs</h1>
+<h1 id="django处理static的方法是把各个app各自的static合并到一处">django处理static的方法是把各个app各自的static合并到一处</h1>
+<h1 id="比如">比如:</h1>
+<h1 id="mysitemysitestatic-放置公共静态文件">mysite/mysite/static 放置公共静态文件</h1>
+<h1 id="mysitebbsstatic-放置该app自己的静态文件">mysite/bbs/static 放置该app自己的静态文件</h1>
+<h1 id="mysiteblogstatic-放置该app自己的静态文件">mysite/blog/static 放置该app自己的静态文件</h1>
+<h1 id="可以这么设置">可以这么设置：</h1>
+<h1 id="static_root-wwwmysitemysitestatic">STATIC_ROOT = '/www/mysite/mysite/static '</h1>
+<h1 id="static_url-static">STATIC_URL = '/static/'</h1>
+<h1 id="staticfiles_dirs">STATICFILES_DIRS = (</h1>
+<h1 id="mysitestatic">'mysite/static',</h1>
+<h1 id="bbsstatic">'bbs/static/',</h1>
+<h1 id="blogstatic">'blog/static/',</h1>
+<h1 id="-3">)</h1>
+<h1 id="使用命令">使用命令</h1>
+<h1 id="managepy-collectstatic">manage.py collectstatic</h1>
+<h1 id="就会自动把所有静态文件全部复制到static_root中">就会自动把所有静态文件全部复制到STATIC_ROOT中</h1>
+<h1 id="如果开启了admin这一步是很必要的不然部署到生产环境的时候会找不到样式文件">如果开启了admin，这一步是很必要的，不然部署到生产环境的时候会找不到样式文件</h1>
+<h1 id="不要把你项目的静态文件放到这个目录-这个目录只有在运行python-managepy-collectstatic时才会用到">不要把你项目的静态文件放到这个目录。这个目录只有在运行python manage.py collectstatic时才会用到</h1>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://mliank.github.io/M6NbINsbb/" class="post-title gt-a-link">
+                    Django2.0:MVC与MTV开发模式
+                </a>
+            </div>
+        
+
+        
+		
+		
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">温故而知新</div>
+    <div class="social-container">
+        
+            
+                <a href="https://github.com/mliank/" target="_blank">
+                    <i class="fab fa-github gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+                <a href="https://weibo.com/lixinru7726/" target="_blank">
+                    <i class="fab fa-weibo gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://mliank.github.io/" target="_blank">Super Lee</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://mliank.github.io//atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+    hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>
